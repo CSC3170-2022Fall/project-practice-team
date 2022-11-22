@@ -18,7 +18,7 @@ Our team consists of the following members, listed in the table below (the team 
 
 | Student ID | Student Name | GitHub Account (in Email) |
 | ---------- | ------------ | ------------------------- |
-| 123010245  | 张三 🚩      | sanzhang@gmail.com        |
+| 120090326  | 房子皓 🚩      | fzh0424@outlook.com        |
 | 123010345  | 李四         | sili@outlook.com          |
 | 123030245  | 王五         | wuwang@foxmail.com        |
 | 123020245  | 陈六         | liuchen@qq.com            |
@@ -30,7 +30,7 @@ Our team consists of the following members, listed in the table below (the team 
 
 After thorough discussion, our team made the choice and the specification information is listed below:
 
-- Our option choice is: **Option 1**
+- Our option choice is: **Option 2**
 - Our branch choice is: **Branch 1**
 - The difficulty level is: **Normal**
 
