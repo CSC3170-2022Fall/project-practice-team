@@ -24,7 +24,7 @@ Our team consists of the following members, listed in the table below (the team 
 | 120090225  | 郑家豪         | 120090225@link.cuhk.edu.cn  |
 | 123020245  | 陈六         | liuchen@qq.com            |
 | 123010249  | 朱九         | jiuzhu@163.com            |
-
+| 119010423  | 章辰舸        | 1418457284@qq.com         |
 ## Project Specification
 
 <!-- You should remove the terms/sentence that is not necessary considering your option/branch/difficulty choice -->
