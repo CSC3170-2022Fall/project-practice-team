@@ -22,11 +22,9 @@ Our team consists of the following members, listed in the table below (the team 
 | 120090234  | 王森         | 120090234@link.cuhk.edu.cn|
 | 120090320  | 尹无非       | 120090320@link.cuhk.edu.cn|
 | 120090225  | 郑家豪         | 120090225@link.cuhk.edu.cn  |
-| 123010249  | 李子涵         | 120090188@link.cuhk.edu.cn|
+| 123010249  | 李子涵         | noah_822@163.com|
 | 119010423  | 章辰舸        | 1418457284@qq.com         |
 ## Project Specification
-
-<!-- You should remove the terms/sentence that is not necessary considering your option/branch/difficulty choice -->
 
 After thorough discussion, our team made the choice and the specification information is listed below:
 
@@ -36,6 +34,160 @@ After thorough discussion, our team made the choice and the specification inform
 
 As for Option 2, our topic background specification can be found in [background-specification.md](background-specification.md).
 
+
+
+#### TODO List
+
+$\bullet$ Frontend
+
+- [ ] TODO
+- [ ] TODO
+- [ ] TODO
+- [ ] TODO
+
+$\bullet$ Backend
+
+- [x] scrap data
+- [ ] create database
+- [ ] sql python api
+- [ ] url routing
+
+
+
 ## Project Abstract
 
-<!-- TODO -->
+#### Overview
+
+In this project, we hope to implement an advanced game distribution platform, where both the player, or say the consumer, and the saler, or say the game publisher can get involved.
+
+As a player, you can either purchase a game like you normally do on any game platform or barter for a game. Bartering is a new concept we try to introduce to our platform. One possible scenario where you may want to barter for a game is you would like to exchange a game, which you no longer want to play, for another game you interested in with somebody else.  Players can put the game to exchange and their wishlist on the platform, and then wait for others to make the deal.
+
+As a publisher, you can upload the game to sell and make purchases with the platform to determine where the sale info will be displayed on the webpage.
+
+In this project, we hope to incorporate as many aspects of database as possible, ranging from normal operations: select, insert, delete to more advanced topics: privilege granting, concurrency, etc. We really try to come up with a real world application instead of a toy model.
+
+
+
+### Database Schema
+
+$\vartriangleright$   **game**: table contains info of any game
+
+​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a game
+
+​      $\bullet$  name: name of the game
+
+​      $\bullet$  price: price of a game in US dollar
+
+​      $\bullet$  release_date: date when a game is offcially distributed, in format "DD MM YYYY"
+
+$\vartriangleright$  **consumer**: table contains info of any consumer/player
+
+​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a consumer
+
+​      $\bullet$  name: account name of a consumer
+
+$\vartriangleright$  **publisher**: table contains info of any seller/game publisher
+
+​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a game publisher
+
+​      $\bullet$  name: account name of a game publisher
+
+$\vartriangleright$   **developer**: table contains info of any game developer
+
+​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a game developer
+
+​      $\bullet$  name: name of a game developer
+
+$\vartriangleright$  **web_section**: table contains info of any section of a webpage, where the selling info of a game will be displayed
+
+​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a website section
+
+​      $\bullet$  position: where the section locates on the webpage
+
+​      $\bullet$  price: price of a section in US dollar
+
+$\vartriangleright$  **category**: table contains info of any category a game might belong to
+
+​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a category
+
+​      $\bullet$  name: name of a category, like PVP, MOBA
+
+$\vartriangleright$  **purchase**: table of any purchase of game a consumer ever made
+
+​      $\bullet$  <ins>con_id</ins>: ID of the cosumer who made the purchase
+
+​      $\bullet$ <ins>game_id</ins>: ID of the game the consumer purchased
+
+​      $\bullet$ date: date the purchase was made, in format "DD MM YYYY"
+
+$\vartriangleright$  **rate**:
+
+​      $\bullet$  <ins>con_id</ins>
+
+​      $\bullet$ <ins>game_id</ins>
+
+​      $\bullet$ score: 
+
+$\vartriangleright$  **barter**
+
+​      $\bullet$  <ins>con_id</ins>: ID of the consumer who wants to barter
+
+​      $\bullet$ <ins>sell_id</ins>: ID of the game the consumer hopes to sell
+
+​      $\bullet$ <ins>wish_id</ins>: ID of the game the consumer hopes to exchange for
+
+$\vartriangleright$  **promote**
+
+​      $\bullet$  <ins>pub_id</ins>: 
+
+​      $\bullet$ <ins>sec_id</ins>
+
+​      $\bullet$ <ins>game_id</ins>
+
+$\vartriangleright$  **release**
+
+​      $\bullet$  <ins>pub_id</ins>: 
+
+​      $\bullet$ <ins>game_id</ins>
+
+​      $\bullet$ date
+
+$\vartriangleright$  **develop**
+
+​      $\bullet$  <ins>dev_id</ins>: 
+
+​      $\bullet$ <ins>game_id</ins>
+
+$\vartriangleright$  **preference**
+
+​      $\bullet$  <ins>con_id</ins>: 
+
+​      $\bullet$ <ins>cate_id</ins>
+
+$\vartriangleright$  **game_type**
+
+​      $\bullet$  <ins>game_id</ins>: 
+
+​      $\bullet$ <ins>cate_id</ins>
+
+
+
+#### ER Diagram
+
+<img src="./pics/ER_diagram.png" alt="ER_diagram" style="zoom: 50%;" />
+
+#### Application Workflow
+
+
+
+
+
+
+
+
+
+
+
+
+
+- [ ] 
