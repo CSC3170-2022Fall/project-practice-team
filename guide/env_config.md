@@ -5,7 +5,7 @@ $\bullet$ Make sure you have installed conda
 To check whether conda installed or not
 
 ```
-$ conda version
+$ conda --version
 ```
 
 if not, you can refer to https://conda.io/projects/conda/en/latest/user-guide/install/index.html, which helps intall conda only
@@ -14,7 +14,7 @@ or, you can install anaconda https://docs.anaconda.com/anaconda/install/, which 
 
 
 
-$\bullet$ After completing conda installation, create a new enviroment and download the necessary dependcies, do
+$\bullet$ After completing conda installation, create a new enviroment and download the necessary dependencies, do
 
 You need to pull the git repo first to get the "requirements.txt" file for this project
 
