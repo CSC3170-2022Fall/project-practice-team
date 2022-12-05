@@ -22,7 +22,7 @@ Our team consists of the following members, listed in the table below (the team 
 | 120090234  | 王森         | 120090234@link.cuhk.edu.cn|
 | 120090320  | 尹无非       | 120090320@link.cuhk.edu.cn|
 | 120090225  | 郑家豪         | 120090225@link.cuhk.edu.cn  |
-| 123010249  | 李子涵         | noah_822@163.com|
+| 120090188 | 李子涵         | noah_822@163.com|
 | 119010423  | 章辰舸        | 1418457284@qq.com         |
 ## Project Specification
 
@@ -56,9 +56,9 @@ $\bullet$ Backend
 
 ## Project Abstract
 
-#### Overview
+### Overview
 
-In this project, we hope to implement an advanced game distribution platform, where both the player, or say the consumer, and the saler, or say the game publisher can get involved.
+In this project, we hope to implement an advanced game distribution platform, where both the consumer, or say the player, and the saler, or say the game publisher can get involved.
 
 As a player, you can either purchase a game like you normally do on any game platform or barter for a game. Bartering is a new concept we try to introduce to our platform. One possible scenario where you may want to barter for a game is you would like to exchange a game, which you no longer want to play, for another game you interested in with somebody else.  Players can put the game to exchange and their wishlist on the platform, and then wait for others to make the deal.
 
@@ -77,6 +77,8 @@ $\vartriangleright$   **game**: table contains info of any game
 ​      $\bullet$  name: name of the game
 
 ​      $\bullet$  price: price of a game in US dollar
+
+​      $\bullet$  pub_id: ID of the game publisher 
 
 ​      $\bullet$  release_date: date when a game is offcially distributed, in format "DD MM YYYY"
 
@@ -120,15 +122,15 @@ $\vartriangleright$  **purchase**: table of any purchase of game a consumer ever
 
 ​      $\bullet$ date: date the purchase was made, in format "DD MM YYYY"
 
-$\vartriangleright$  **rate**:
+$\vartriangleright$  **rate**: table of rating record of a consumer
 
-​      $\bullet$  <ins>con_id</ins>
+​      $\bullet$  <ins>con_id</ins>: ID of the consumer who rates the game
 
-​      $\bullet$ <ins>game_id</ins>
+​      $\bullet$ <ins>game_id</ins>: ID of the game rated
 
-​      $\bullet$ score: 
+​      $\bullet$ score: rating score, ranging from 0 to 5
 
-$\vartriangleright$  **barter**
+$\vartriangleright$  **barter**: table of game bartering records
 
 ​      $\bullet$  <ins>con_id</ins>: ID of the consumer who wants to barter
 
@@ -136,49 +138,41 @@ $\vartriangleright$  **barter**
 
 ​      $\bullet$ <ins>wish_id</ins>: ID of the game the consumer hopes to exchange for
 
-$\vartriangleright$  **promote**
+$\vartriangleright$  **promote**: table of the way a publisher promotes a game to sell
 
-​      $\bullet$  <ins>pub_id</ins>: 
+​      $\bullet$  <ins>pub_id</ins>: ID of the game publisher
 
-​      $\bullet$ <ins>sec_id</ins>
+​      $\bullet$  <ins>sec_id</ins>: ID of the web section, where the selling advertisment will be displayed
 
-​      $\bullet$ <ins>game_id</ins>
+​      $\bullet$  <ins>game_id</ins>: ID of the game to sell
 
-$\vartriangleright$  **release**
+$\vartriangleright$  **develop**: table contains info of the developer(s) of any game, a game may have multiple developer
 
-​      $\bullet$  <ins>pub_id</ins>: 
+​      $\bullet$  <ins>dev_id</ins>: ID of the game developer
 
-​      $\bullet$ <ins>game_id</ins>
+​      $\bullet$ <ins>game_id</ins>: ID of the game a developer develops
 
-​      $\bullet$ date
+$\vartriangleright$  **prefer**: table of preferences for a consumer, i.e categories of games he/she prefers
 
-$\vartriangleright$  **develop**
+​      $\bullet$  <ins>con_id</ins>: ID of the consumer
 
-​      $\bullet$  <ins>dev_id</ins>: 
+​      $\bullet$  <ins>cate_id</ins>: ID of the game category
 
-​      $\bullet$ <ins>game_id</ins>
+$\vartriangleright$  **game_type**: table of the category a game belongs to, a game may associate with multiple categories
 
-$\vartriangleright$  **preference**
+​      $\bullet$  <ins>game_id</ins>: ID of the game
 
-​      $\bullet$  <ins>con_id</ins>: 
-
-​      $\bullet$ <ins>cate_id</ins>
-
-$\vartriangleright$  **game_type**
-
-​      $\bullet$  <ins>game_id</ins>: 
-
-​      $\bullet$ <ins>cate_id</ins>
+​      $\bullet$  <ins>cate_id</ins>: ID of the category the game belongs to
 
 
 
-#### ER Diagram
+### ER Diagram
 
 <img src="./pics/ER_diagram.png" alt="ER_diagram" style="zoom: 50%;" />
 
-#### Application Workflow
+### Application Workflow
 
-
+<img src="./pics/workflow.png" alt="workflow" style="zoom: 50%;" />
 
 
 
