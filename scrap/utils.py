@@ -23,12 +23,20 @@ def parse_game_homepage(id):
 
     __name = page_source.xpath('//h1[@itemprop="name"]/text()')[0]
     __developer = page_source.xpath('//td[text()="Developer"]/following-sibling::td/a')
+    __publisher = page_source.xpath('//td[text()="Publisher"]/following-sibling::td/a')
     
     if len(__developer) == 1:
         __developer = __developer[0].xpath('text()')[0]
     else:
         __developer = [
             a.xpath('text()')[0] for a in __developer
+        ]
+        
+    if len(__publisher) == 1:
+        __publisher = __publisher[0].xpath('text()')[0]
+    else:
+        __publisher = [
+            a.xpath('text()')[0] for a in __publisher
         ]
     
     
@@ -51,7 +59,8 @@ def parse_game_homepage(id):
     
     return Game(
         id = id, name = __name,  
-        developer = __developer,  release_date = __release_date,
+        developer = __developer,  publisher = __publisher,
+        release_date = __release_date,
         price = __price,  pic_url = __pic_url,
         user_tag = __user_tag
     )

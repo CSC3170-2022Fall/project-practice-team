@@ -1,3 +1,4 @@
+import pickle
 from lxml import etree
 
 
@@ -8,7 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from utils import parse_game_homepage
 
-TOTAL_PAGE = 2
+TOTAL_PAGE = 4
 
 url = 'https://steamdb.info/stats/globaltopsellers/'
 
@@ -35,3 +36,5 @@ for _ in range(TOTAL_PAGE):
     )
 
 
+with open('game.pickle', 'wb') as handler:
+    pickle.dump(res, handler)
