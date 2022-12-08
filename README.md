@@ -18,12 +18,12 @@ Our team consists of the following members, listed in the table below (the team 
 
 | Student ID | Student Name | GitHub Account (in Email) | GitHub Username |
 | ---------- | ------------ | ------------------------- |-----------------|
-| 120090326  | 房子皓 🚩    | fzh0424@outlook.com       | @Adorable-Qin   |
-| 120090234  | 王森         | 120090234@link.cuhk.edu.cn| @TheKingOfForest |
-| 120090320  | 尹无非       | 120090320@link.cuhk.edu.cn| @Wuswufei  |
-| 120090225  | 郑家豪       | 120090225@link.cuhk.edu.cn | @Ayaaaka-zheng |
-| 120090188  | 李子涵       | noah_822@163.com          | @noah822 |
-| 119010423  | 章辰舸       | 1418457284@qq.com         | @cheanz |
+| 120090326  | 房子皓 🚩    | fzh0424@outlook.com       | [Adorable-Qin](https://github.com/Adorable-Qin)   |
+| 120090234  | 王森         | 120090234@link.cuhk.edu.cn| [TheKingOfForest](https://github.com/TheKingOfForest) |
+| 120090320  | 尹无非       | 120090320@link.cuhk.edu.cn| [Wuswufei](https://github.com/Wuswufei)  |
+| 120090225  | 郑家豪       | 120090225@link.cuhk.edu.cn | [Ayaaaka-zheng](https://github.com/Ayaaaka-zheng) |
+| 120090188  | 李子涵       | noah_822@163.com          | [noah822](https://github.com/noah822) |
+| 119010423  | 章辰舸       | 1418457284@qq.com         | [cheanz](https://github.com/cheanz) |
 ## Project Specification
 
 After thorough discussion, our team made the choice and the specification information is listed below:
