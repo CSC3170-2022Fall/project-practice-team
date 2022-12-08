@@ -100,6 +100,13 @@ TABLES['prefer'] = (
     "primary key (con_id, cate_id))"
 )
 
+TABLES['rate'] = (
+    "CREATE TABLE `rate` ("
+    "con_id     int(7) not null,"
+    "game_id    int(7) not null,"
+    "score      numeric(2,1) not null,"
+    "primary key (con_id, game_id))"
+)
 
 
 TABLES['purchase'] = (
@@ -144,6 +151,7 @@ db = mysql.connector.connect(
     host = 'localhost',
     user = 'root',
     password = 'root',
+    auth_plugin = 'mysql_native_password',
     port = 3306,
     database = 'AGDP'
 )
@@ -324,13 +332,76 @@ cursor.execute("DROP TABLE IF EXISTS `promote`;")
 db.commit()
 cursor.execute(TABLES["promote"])
 
+cursor.execute("DROP TABLE IF EXISTS `promote`;")
+db.commit()
+cursor.execute(TABLES["promote"])
+
+
+cursor.execute("DROP TABLE IF EXISTS `rate`")
+db.commit()
+cursor.execute(TABLES["rate"])
+
+db.commit()
+
+
+
+USER_MODE = ['consumer', 'saler', 'super']
+
+create_user_template = (
+    "CREATE USER `{0}`@`localhost` IDENTIFIED WITH mysql_native_password;"
+)
+
+for mode in USER_MODE:
+    cursor.execute("DROP USER IF EXISTS `{}`@`localhost`".format(mode))
+    db.commit()
+    cursor.execute(create_user_template.format(mode))
+
 
 
 db.commit()
+
+
+'''
+    privilege granting
+    
+    consumer:
+    INSERT: purchase, rate, barter
+    DELETE: barter
+    
+    saler:
+    UPDATE: promote
+    
+    super: all privilege
+
+'''
+
+    
+consumer_grant = (
+    "GRANT SELECT ON AGDP.barter TO `consumer`@`localhost`",
+    "GRANT INSERT ON AGDP.purchase TO `consumer`@`localhost`",
+    "GRANT INSERT ON AGDP.rate TO `consumer`@`localhost`",
+    "GRANT INSERT ON AGDP.barter TO `consumer`@`localhost`",
+    "GRANT SELECT ON AGDP.purchase TO `consumer`@`localhost`"
+)
+
+
+
+saler_grant = (
+    "GRANT INSERT ON AGDP.promote TO `saler`@`localhost` "
+)
+
+super_grant= (
+    "GRANT ALL PRIVILEGES ON AGDP.* TO `super`@`localhost` "
+)
+
+
+for script in consumer_grant:
+    cursor.execute(script)
+
+cursor.execute(saler_grant)
+cursor.execute(super_grant)
+db.commit()
+
 cursor.close()
-
-
-
-
 
 
