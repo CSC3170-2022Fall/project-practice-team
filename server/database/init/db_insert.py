@@ -41,7 +41,6 @@ TABLES['game'] = (
     "   `price`         numeric(5,2) not null,"
     "   `pub_id`        int(7) not null,"
     "   `release_date`  varchar(20) not null,"
-    "   `picture`        BLOB not null,   "
     "   primary key (ID) )"
 )
 
@@ -178,8 +177,7 @@ game_insert_template = (
     "'{1}',"
     "'{2}',"
     "'{3}',"
-    "'{4}',"
-    "`{5}`)"
+    "'{4}')"
 )
 
 for game in res:
@@ -188,11 +186,7 @@ for game in res:
         game.name if "'" not in game.name else game.name.replace("'", r"\'"),
         re.search(r'\$(\d*[.]\d*)', game.price).group(1),
         pub_name2id[game.publisher],
-        game.release_date,
-        base64.b64encode(
-            open(os.path.join(pics_folder, f'{game.id}.jpg')).read()
-        )
-        
+        game.release_date
     )
     try:
         cursor.execute(script)
