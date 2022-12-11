@@ -1,7 +1,5 @@
 {%extends 'layout.html'%}
 {%block body%}
-    <h>Game Search</h>    
-    <form action="/game" method="get">
         <!-- <input type="text" name="name" autocomplete="off" autofocus>
             <select id="" name="sports">
                 <option disabled selected value="sports">Sports</option>
@@ -9,8 +7,44 @@
                 <option value="{{sport}}">{{sport}}</option>
                 {%endfor%}
             </select> -->
-        <input type="text" name="game_id" autocomplete="off" autofocus>
-        <input type="submit">
-
-    </form>
+    <div id="container" style="height:100%; width:100%; position:absolute; margin:0; padding: 0;">
+        <!--header-->
+        <div id="header" style="width:80%; height:4%; background-color: #696969;float:left;">
+            <h2 style="margin-bottom:0;text-align:center">Advance Game Distribution Platform</h2></div>
+        <div style="width:6%; height:4%;float:left;background-color: #696969;border:0"></div>
+        <div style="width:4%; height:4%;float:left;text-align: right;background-color: #696969;border:0"><button style="width:100%;height:50%;background-color: #696969;border:0">Account:</button></div>
+        <div id="account" style="width:8%; height:4%;background-color: #696969;float:left;text-align: right;">
+            <input type="text" name="account" placeholder="please login" style="width:100%; height:50%;background-color: #696969;border:1">
+        </div>
+        <div style="width:2%;height:4%;background-color:#696969;float:left;">
+            <button onclick="startLogin()" style="width:100%;height:50%;background-color:#696969;border:1">login</button>
+        </div>
+        <!--content-->
+        <div id="menu" style="background-color:#2f4f4f;height:3%;width:100%;float:left;">
+            <!--button in menu-->
+            <button type="'button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="#" target="_top" style="text-decoration:none;"><b>menu</b></a></button>
+            <button type="'button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="game.html" target="_top" style="text-decoration:none;">game</a></button>
+            <button type="'button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="developer.html" target="_top" style="text-decoration:none;">developer</a></button>
+            <button type="'button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="publisher.html" target="_top" style="text-decoration:none;">publisher</a></button>
+            <button type="'button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="consumer.html" target="_top" style="text-decoration:none;">consumer</a></button>
+            <!--block for search-->
+            <div style="height:100%; width:20%;float:right;background-color:#2f4f4f;border:0; ">
+                <form action="/game">
+                    <input  type="text" name="game_id" autocomplete="off" placeholder="search game by name" style="width:75%;">
+                    <input type="submit" value="submit">
+                    <!--button onclick="startSearch()" style="width:20%;background-color:#2f4f4f;border:0;">Search</button-->
+                </form>
+            </div>
+        </div>
+        <!--image in content-->
+        <div id="content" style="background-color:#708090;height:90%;width:100%;float:left;">
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="1.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="7.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="8.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="4.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+        </div>
+        <!--footer-->
+        <div id="footer" style="background-color:#696969;clear:both;text-align:center;">
+        author: Practice Team</div>
+    </div>
 {%endblock%}
