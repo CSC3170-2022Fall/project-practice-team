@@ -14,6 +14,7 @@ Also reconfig root password type is required due to contraint of the mysql pytho
 
 ```
 $ mysql -u root -p
-$ ALTER USER '<user_name>'@'localhost' IDENTIFIED WITH mysql_native_password BY '<password>';
+$ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<password>';
+where <password> = root is suggested, which is compatible with our codes.
 ```
 
