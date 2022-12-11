@@ -157,6 +157,14 @@ def game_type_insert():
     )
     return script
 
+@handler('super')
+def game_select(id):
+    script = (
+        "SELECT * FROM game "
+        "WHERE id = {}"
+    ).format(id)
+    return script
+    
 
 
 

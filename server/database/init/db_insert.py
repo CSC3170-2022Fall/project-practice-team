@@ -2,10 +2,7 @@ from schema import Game
 import pickle
 import mysql.connector
 
-
-import base64
 import re
-import os
 
 
 game_pickle_file = '../../../scrap/game.pickle'
@@ -13,8 +10,6 @@ pub_dict_file    = '../../../scrap/dict/pub_dict.pickle'
 dev_dict_file    = '../../../scrap/dict/dev_dict.pickle'
 cate_dict_file   = '../../../scrap/dict/cate_dict.pickle'
 
-
-pics_folder = '../../pics'
 
 
 
@@ -393,7 +388,8 @@ consumer_grant = (
 
 
 saler_grant = (
-    "GRANT INSERT ON AGDP.promote TO `saler`@`localhost` "
+    "GRANT INSERT ON AGDP.promote TO `saler`@`localhost` ",
+    "GRANT INSERT ON AGDP.game TO `saler`@`localhost` "
 )
 
 super_grant= (
@@ -404,7 +400,9 @@ super_grant= (
 for script in consumer_grant:
     cursor.execute(script)
 
-cursor.execute(saler_grant)
+for script in saler_grant:
+    cursor.execute(script)
+
 cursor.execute(super_grant)
 db.commit()
 
