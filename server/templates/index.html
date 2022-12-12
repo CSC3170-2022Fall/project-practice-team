@@ -7,44 +7,102 @@
                 <option value="{{sport}}">{{sport}}</option>
                 {%endfor%}
             </select> -->
-    <div id="container" style="height:100%; width:100%; position:absolute; margin:0; padding: 0;">
+    <!--define the function-->
+    <script>
+        function startLogin(){
+            
+        }
+    </script>
+    <!--the rendered page-->
+    <div id="container" style="height:700%; width:100%; position:absolute; margin:0; padding: 0; ">
         <!--header-->
-        <div id="header" style="width:80%; height:4%; background-color: #696969;float:left;">
-            <h2 style="margin-bottom:0;text-align:center">Advance Game Distribution Platform</h2></div>
-        <div style="width:6%; height:4%;float:left;background-color: #696969;border:0"></div>
-        <div style="width:4%; height:4%;float:left;text-align: right;background-color: #696969;border:0"><button style="width:100%;height:50%;background-color: #696969;border:0">Account:</button></div>
-        <div id="account" style="width:8%; height:4%;background-color: #696969;float:left;text-align: right;">
-            <input type="text" name="account" placeholder="please login" style="width:100%; height:50%;background-color: #696969;border:1">
-        </div>
-        <div style="width:2%;height:4%;background-color:#696969;float:left;">
-            <button onclick="startLogin()" style="width:100%;height:50%;background-color:#696969;border:1">login</button>
-        </div>
-        <!--content-->
-        <div id="menu" style="background-color:#2f4f4f;height:3%;width:100%;float:left;">
+        <div id="menu" style="background-color:#2f4f4f;height:0.3%;width:97%;float:left;">
             <!--button in menu-->
-            <button type="'button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="#" target="_top" style="text-decoration:none;"><b>menu</b></a></button>
-            <button type="'button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="game.html" target="_top" style="text-decoration:none;">game</a></button>
-            <button type="'button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="developer.html" target="_top" style="text-decoration:none;">developer</a></button>
-            <button type="'button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="publisher.html" target="_top" style="text-decoration:none;">publisher</a></button>
-            <button type="'button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="consumer.html" target="_top" style="text-decoration:none;">consumer</a></button>
+            <button type="button" style="height:100%; width:10%;background-color: #2f4f4f; border:0; "><a href="#" target="_top" style="text-decoration:none; font-size: 15px;"><b>menu</b></a></button>
+            <button type="button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="game.html" target="_top" style="text-decoration:none; font-size: 15px;">game</a></button>
+            <button type="button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="developer.html" target="_top" style="text-decoration:none; font-size: 15px;">developer</a></button>
+            <button type="button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="publisher.html" target="_top" style="text-decoration:none; font-size: 15px;">publisher</a></button>
+            <button type="button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="consumer.html" target="_top" style="text-decoration:none; font-size: 15px;">consumer</a></button>
+        </div>
+        <div id="account" style="background-color:#2f4f4f;height:0.3%;width:3%;float:left;">
+            <button type="button" style="background-color: #2f4f4f; border:0;color: bisque;" target="_top"><a href="/login">login</a></button>
+        </div>
+        <div id="header" style="width:100%;height:5%;background-image: url('static/pics/background.png');background-repeat: no-repeat;background-size:cover;background-attachment: fixed;background-color: #131822;background-position: center;">
+            <div style="width:100%;height:10%; visibility: hidden;"></div>
+            <h1 style="text-align:center;color:#FFffFF;letter-spacing: 2px; font-size: 70px;">Advanced Game Distribution Platform</h1>
             <!--block for search-->
-            <div style="height:100%; width:20%;float:right;background-color:#2f4f4f;border:0; ">
+            <div style="width:100%;height:20%; visibility: hidden;"></div>
+            <div style="width:40%;height:10%;float:left; visibility:hidden;"></div>
+            <div style="height:10%; width:20%;float:left;backface-visibility: hidden;border:0;">
                 <form action="/game">
-                    <input  type="text" name="game_id" autocomplete="off" placeholder="search game by name" style="width:75%;">
-                    <input type="submit" value="submit">
+                    <input  type="text" name="game_id" autocomplete="off" placeholder="    search game by name" style="width:75%;height:40px;font-size: 15px; border: 0;padding: 0;margin: 0;">
+                    <input type="submit" value="Search" style="height: 42px; width:20%;padding: 0;margin:0;">
                     <!--button onclick="startSearch()" style="width:20%;background-color:#2f4f4f;border:0;">Search</button-->
                 </form>
             </div>
         </div>
         <!--image in content-->
-        <div id="content" style="background-color:#708090;height:90%;width:100%;float:left;">
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="1.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="7.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="8.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="4.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+        <div id="content1" style="background-color:#708090;height:10%;width:100%;float:left;">
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/3590.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/4000.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/4500.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/12210.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+        </div>
+        <div id="content2" style="background-color:#708090;height:10%;width:100%;float:left;">
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/24010.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/33230.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/39210.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/105600.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+        </div>
+        <div id="content3" style="background-color:#708090;height:10%;width:100%;float:left;">
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/107410.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/218620.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/219990.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/220200.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+        </div>
+        <div id="content4" style="background-color:#708090;height:10%;width:100%;float:left;">
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/221100.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/238090.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/242760.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/244210.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+        </div>
+        <div id="content5" style="background-color:#708090;height:10%;width:100%;float:left;">
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/244850.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/250900.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/251570.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/252490.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+        </div>
+        <div id="content6" style="background-color:#708090;height:10%;width:100%;float:left;">
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/255710.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/261550.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/264710.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/359550.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+        </div>
+        <div id="content7" style="background-color:#708090;height:10%;width:100%;float:left;">
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/268910.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/270880.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/275850.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/281990.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+        </div>
+        <div id="content8" style="background-color:#708090;height:10%;width:100%;float:left;">
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/282070.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/284160.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/286160.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/287700.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+        </div>
+        <div id="content9" style="background-color:#708090;height:10%;width:100%;float:left;">
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/288470.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/289070.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/292030.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/294100.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+        </div>
+        <div id="content10" style="background-color:#708090;height:5%;width:100%;float:left;">
+            <div style="height:95%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/305620.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
+            <div style="height:95%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/311210.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
         </div>
         <!--footer-->
         <div id="footer" style="background-color:#696969;clear:both;text-align:center;">
         author: Practice Team</div>
     </div>
 {%endblock%}
+
