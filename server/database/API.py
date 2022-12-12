@@ -164,7 +164,65 @@ def game_select(id):
         "WHERE id = {}"
     ).format(id)
     return script
+
+
+'''
+
+    meta table
+
+'''
+
+@handler('super')
+def meta_select():
+    script = (
+        "SELECT * FROM meta "
+    )
+    return script
+
+
+@handler('super')
+def meta_update(con_cnt, pub_cnt):
+    script = (
+        "UPDATE meta "
+        "SET `con_cnt` = {} "
+        "    `pub_cnt` = {}"
+        "WHERE `stub` = 0")
+    return script
+
+
+
+'''
+    consumer table
+
+'''
+
+@handler('super')
+def consumer_select(**kwargs):
+    k, v = list(kwargs.items())[0]
+    script = (
+        "SELECT * FROM consumer "
+        "WHERE {} = \"{}\""
+    ).format(k, v)
     
+    return script
+
+@handler('super')
+def consumer_insert(id, username, pwd):
+    script = (
+        "INSERT INTO consumer (`id`, `name`, `password`)"
+        "VALUES ("
+        "'{}',"
+        "\"{}\","
+        "\"{}\")"
+    ).format(id, username, pwd)
+    
+    return script
+
+
+def duplicate_name(username):
+    res = consumer_select(name=username)
+    return len(res) != 0
+
 
 
 

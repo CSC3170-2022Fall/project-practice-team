@@ -43,6 +43,7 @@ TABLES['consumer'] = (
     "CREATE TABLE `consumer` ("
     "`ID`       int(7) not null,"
     "`name`     varchar(70) not null,"
+    "`password` varchar(20) not null," 
     "primary key (ID))"
 )
 
@@ -144,8 +145,12 @@ TABLES['promote'] = (
 )
 
 
-
-
+TABLES['meta'] = (
+    "CREATE TABLE `meta` ("
+    "`stub`    int(1),"
+    "`con_cnt` int(7),"
+    "`pub_cnt` int(7))"
+)
 
 
 db = mysql.connector.connect(
@@ -316,7 +321,24 @@ db.commit()
 
 
 
+# init meta table
+cursor.execute("DROP TABLE IF EXISTS `meta`;")
+db.commit()
+cursor.execute(TABLES["meta"])
+cursor.execute((
+    "INSERT INTO meta (`stub`, `con_cnt`, `pub_cnt`)"
+    "VALUES ("
+    "'{}',"
+    "'{}',"
+    "'{}')"
+).format(0,0,0))
+
 # init other empty tables
+
+cursor.execute("DROP TABLE IF EXISTS `consumer`;")
+db.commit()
+cursor.execute(TABLES["consumer"])
+
 cursor.execute("DROP TABLE IF EXISTS `purchase`;")
 db.commit()
 cursor.execute(TABLES["purchase"])
@@ -341,8 +363,8 @@ cursor.execute(TABLES["promote"])
 cursor.execute("DROP TABLE IF EXISTS `rate`")
 db.commit()
 cursor.execute(TABLES["rate"])
-
 db.commit()
+
 
 
 
@@ -407,5 +429,7 @@ cursor.execute(super_grant)
 db.commit()
 
 cursor.close()
+
+
 
 
