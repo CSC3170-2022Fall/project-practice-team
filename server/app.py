@@ -23,19 +23,19 @@ def login():
             if duplicate_name(username):
                 pass
             else:
-                consumer_insert(meta['con_cnt'], username, password)
                 meta['con_cnt'] += 1;
                 meta_update(meta['con_cnt'], meta['pub_cnt'])
+                consumer_insert(meta['con_cnt'], username, password)
+                return render_template('index.html')
         
         
         elif form_type == 'login':
             res = consumer_select(name=username)[0]
-            
-            
             # if password is correct
             if password == res[2]:
-                redirect('/consumer?id={}'.format(res[0]))
-            
+                print('password correct')
+                # redirect('/consumer?id={}'.format(res[0]))
+                return render_template('index.html')
             # in correct password
             else:
                 pass

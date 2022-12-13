@@ -44,11 +44,11 @@ $('button[name="register"]').click(function(){
 
 });
 
-$('button[name="login"]').click(function(){
-  var username = $('#username').val();
-  var password = $('#password').val();
+// $('button[name="login"]').click(function(){
+//   var username = $('#username').val();
+//   var password = $('#password').val();
 
-  if (username.length < 1 || password.length < 1){
-    alert("Form Incomplete");
-  }
-});
+//   if (username.length < 1 || password.length < 1){
+//     alert("Form Incomplete");
+//   }
+// });

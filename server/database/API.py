@@ -74,6 +74,7 @@ def record():
     with open(LOG_FILE, 'w') as log_file:
         pass
 
+
 def handler_init(mode):
     def handler():
         wait_cond = interrupt_vector[mode]
@@ -129,11 +130,16 @@ def handler(mode):
             wait_cond.release()
             
             __query.interrupt.acquire()
-            while len(__query.res_buffer) == 0:
+            if len(__query.res_buffer) == 0:
                 __query.interrupt.wait()
             __query.interrupt.release()
             
-            return __query.res_buffer[0]
+            
+            if __query.op_type == 'retrieve':
+                return __query.res_buffer[0]
+            else:
+                pass
+            
                      
         return wrapper
     
@@ -184,9 +190,9 @@ def meta_select():
 def meta_update(con_cnt, pub_cnt):
     script = (
         "UPDATE meta "
-        "SET `con_cnt` = {} "
-        "    `pub_cnt` = {}"
-        "WHERE `stub` = 0")
+        "SET `con_cnt` = {}, "
+        "    `pub_cnt` = {} "
+        "WHERE `stub` = 0").format(con_cnt, pub_cnt)
     return script
 
 
