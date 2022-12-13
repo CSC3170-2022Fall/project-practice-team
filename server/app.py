@@ -47,9 +47,18 @@ def login():
 
 
 
+@app.route('/consumer')
+def consumer():
+    # id = request.args.get('id')
+    
+    
+    return render_template('consumer.html', games=None, username=None, purchase_date=None)
+
+
+
 @app.route('/game')
 def game():
-    id = request.args.get('game_id')
+    id = request.args.get('id')
     game_info = game_select(id)
     return render_template('game.html', id=id, info=game_info)
 

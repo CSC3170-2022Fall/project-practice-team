@@ -119,6 +119,7 @@ TABLES['purchase'] = (
     "primary key (con_id, game_id))"
 )
 
+
 TABLES['barter'] = (
     "CREATE TABLE `barter` ("
     "`con_id`     int(7) not null,"
