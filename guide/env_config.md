@@ -29,7 +29,7 @@ $ conda activate csc3170
 $\bullet$ Whenever you try to run the project code, you need to switch to the "csc3170" environment
 
 If you try to run the codes in command line, do
-
+(Windows users could use anaconda prompt with priviledged rights)
 ```
 $ conda activate csc3170
 ```
