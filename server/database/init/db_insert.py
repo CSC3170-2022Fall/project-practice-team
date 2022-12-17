@@ -401,6 +401,7 @@ db.commit()
 
     
 consumer_grant = (
+    "GRANT SELECT ON AGDP.game TO `consumer`@`localhost`", 
     "GRANT SELECT ON AGDP.barter TO `consumer`@`localhost`",
     "GRANT INSERT ON AGDP.purchase TO `consumer`@`localhost`",
     "GRANT INSERT ON AGDP.rate TO `consumer`@`localhost`",

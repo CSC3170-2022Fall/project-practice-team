@@ -2,8 +2,8 @@ from database.API import handler_pool
 
 from database.API import *
 
-from flask import Flask, render_template, request
-from flask import redirect
+from flask import Flask, render_template, request, redirect
+from flask import jsonify
 
 
 app = Flask(__name__)
@@ -61,6 +61,23 @@ def game():
     id = request.args.get('id')
     game_info = game_select(id)
     return render_template('game.html', id=id, info=game_info)
+
+
+@app.route('/game/search/by_name')
+def game_search_id_by_name():
+    name = request.args.get('name')
+    print(name)
+    res = game_select_id_by_name(name)
+
+    
+    return jsonify(res)
+
+@app.route('/game/search/name_contain')
+def game_search_name_contain():
+    substr = request.args.get('substr')
+    res = [i[0] for i in matched_game_name(substr)]
+    return jsonify(res)
+    
 
 
 if __name__ == '__main__':

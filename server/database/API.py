@@ -231,6 +231,27 @@ def duplicate_name(username):
 
 
 
+@handler('consumer')
+def matched_game_name(substr):
+    script = (
+        "SELECT name "
+        "FROM game "
+        "WHERE name LIKE '%{}%'"
+    ).format(substr)
+    
+    return script
+
+
+@handler('consumer')
+def game_select_id_by_name(name):
+    script = (
+        "SELECT ID FROM game "
+        "WHERE name = \"{}\""
+    ).format(name)
+    return script
+
+
+
 
 
 
