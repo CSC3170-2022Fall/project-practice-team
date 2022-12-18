@@ -26,6 +26,7 @@ $('.show-modal').on('click', function(){
     $('.pop-up').css('display', 'none');
     $('.modal-background').css('display', 'none');
     $('.pop-up .pop-up-left .image-holder img').remove();
+    $('.wish-list-gallery .wish-list-item').remove();
     $('.overlay').css('display', 'none');
   });
   

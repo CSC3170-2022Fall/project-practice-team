@@ -146,64 +146,61 @@ def handler(mode):
     return decorator
 
 
-@handler('consumer')
-def consumer_purchase(id,game_id,date):
-    script = (
-        "INSERT INTO purchase (`con_id`,`game_id`,date)"
-        "VALUES ("
-        "'{}',"
-        "\"{}\","
-        "\"{}\")"
-    ).format(id, game_id, date)
-    return script
+# @handler('consumer')
+# def consumer_purchase(id,game_id,date):
+#     script = (
+#         "INSERT INTO purchase (`con_id`,`game_id`,date)"
+#         "VALUES ("
+#         "'{}',"
+#         "\"{}\","
+#         "\"{}\")"
+#     ).format(id, game_id, date)
+#     return script
 
-def consumer_barter(id,sell_id,wish_id):
-    script = (
-        "INSERT INTO barter (`con_id`,`sell_id`,`wish_id`)"
-        "VALUES ("
-        "'{}',"
-        "\"{}\","
-        "\"{}\")"
-    ).format(id,sell_id,wish_id)
-    return script
+# @handler('consumer')
+# def consumer_barter(id,sell_id,wish_id):
+#     script = (
+#         "INSERT INTO barter (`con_id`,`sell_id`,`wish_id`)"
+#         "VALUES ("
+#         "'{}',"
+#         "\"{}\","
+#         "\"{}\")"
+#     ).format(id,sell_id,wish_id)
+#     return script
 
-def consumer_rate(id,game_id,score):
-    script = (
-        "INSERT INTO rate (`con_id`,`game_id`,`score`)"
-        "VALUES ("
-        "'{}',"
-        "\"{}\","
-        "\"{}\")"
-    ).format(id,game_id,score)
-    return script
+# @handler('consumer')
+# def consumer_rate(id,game_id,score):
+#     script = (
+#         "INSERT INTO rate (`con_id`,`game_id`,`score`)"
+#         "VALUES ("
+#         "'{}',"
+#         "\"{}\","
+#         "\"{}\")"
+#     ).format(id,game_id,score)
+#     return script
 
-def consumer_library(id):
-    script = (
-        "SELECT 'game_id' AS game from purchase "
-        "WHERE id = {}"
-        "UNION"
-        "SELECT 'wish_id' from barter "
-        "WHERE id = {}"
-        "MINUS"
-        "SELECT 'sell_id' from barter "
-        "WHERE id = {}"
-    ).format(id)
-    return script
+# @handler('consumer')
+# def consumer_library(id):
+#     script = (
+#         "SELECT 'game_id' AS game from purchase "
+#         "WHERE id = {}"
+#         "UNION"
+#         "SELECT 'wish_id' from barter "
+#         "WHERE id = {}"
+#         "MINUS"
+#         "SELECT 'sell_id' from barter "
+#         "WHERE id = {}"
+#     ).format(id)
+#     return script
 
 
 
-@handler('super')
-def game_type_insert():
-    # script = (
-    #     "INSERT INTO prefer (`con_id`, `cate_id`)"
-    #     "VALUES ("
-    #     "'10',"
-    #     "'20')"
-    # )
-    script = (
-        "SELECT * from publisher"
-    )
-    return script
+# @handler('super')
+# def game_type_insert():
+#     script = (
+#         "SELECT * from publisher"
+#     )
+#     return script
 
 @handler('super')
 def game_select(id):

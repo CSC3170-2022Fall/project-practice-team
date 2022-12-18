@@ -19,12 +19,6 @@
             height: auto;
             padding: 6rem;
             z-index: 6;
-            /* background: linear-gradient(
-                90deg,
-                rgba(246, 150, 130, 1) 0%,
-                rgba(206, 163, 204, 1) 41%,
-                rgba(248, 205, 190, 1) 100%
-            ); */
             background-image: linear-gradient(to right, #8360c3, #2ebf91);
             filter: blur(50px);
             opacity: 0.5;
@@ -59,12 +53,6 @@
             width: 80%;
             height: 80%;
             padding: 1rem;
-            /* background: linear-gradient(
-                90deg,
-                rgba(246, 150, 130, 1) 0%,
-                rgba(206, 163, 204, 1) 41%,
-                rgba(248, 205, 190, 1) 100%
-            ); */
             background-image: linear-gradient(to right, #8360c3, #2ebf91);
             border: white 5px solid;
             border-radius: 10px;
@@ -243,25 +231,20 @@
             /* -ms-transform: translate(-50%, -50%); */
             transform: translate(-50%, -50%);
         }
+
+
     </style>
     <link rel="stylesheet" href="/static/consumer/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/consumer/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="/static/consumer/css/templatemo-style.css">
+    <link rel="stylesheet" href="/static/confirm-pop-up/style.css">
 
-
-
-
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>  
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>  
-    
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css">   -->
 
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-    <!-- <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script> -->
+
 
 </head>
 <body>
@@ -386,6 +369,27 @@
     
             </div>
         </div>
+        
+
+        <div class="modal-confirm" style="display: none">
+            <button class="close-button">&times;</button>
+
+            <div class="check" style="position: absolute; top:50%">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+            <circle style="fill:#25AE88;" cx="25" cy="25" r="25"/>
+            <polyline style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+	        38,15 22,33 12,25 "/>
+        </svg>
+        
+        
+        </div>
+        <div class="prompt">
+            Barter Successful!
+        </div>
+            <!-- <span> Testing !!!!</span> -->
+        </div>
+
 
 
 
@@ -431,8 +435,14 @@
                 alert('You can at most add two games to your wish list!!');
                 return;
             }
+            
             var name = $(this).parent().children('input').eq(0).val();
             var search_url = '/game/search/by_name?name=' + name;
+            if ($('#wish-item-name:contains(' + name +')').length >=1){
+                alert('You\'ve already added to your wish list!!!');
+                return;
+            }
+
             $.ajax({
                 type: 'GET',
                 url: search_url,
@@ -442,7 +452,7 @@
                         <figure class="effect-ming tm-video-item">
                             <img src=/static/pics/${data}.jpg alt="Image" class="img-fluid">
                             <figcaption class="d-flex align-items-center justify-content-center">
-                                <h2>${name}</h2>
+                                <h2 id="wish-item-name">${name}</h2>
                                 <a href="/game?id=${data}.html>View more</a>
                             </figcaption>                    
                         </figure>
@@ -454,5 +464,24 @@
 
         })
     </script>
+
+
+    <script>
+        $('.wish-list-button').on('click', function(){
+            var wishList = $('.wish-list-item');
+            if (wishList.length < 1){
+                alert('You need to at least add one game!');
+                return;
+            }
+
+            $('.modal-confirm').css('display', 'block');
+            var barter_url = '/barter/insert';
+        });
+
+        $('.modal-confirm .close-button').on('click', function(){
+            $('.modal-confirm').css('display', 'none');
+        });
+    </script>
 </body>
 </html>
+
