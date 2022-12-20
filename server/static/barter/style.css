@@ -1,0 +1,56 @@
+.barter-tut-pop-up h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px black;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.barter-tut-pop-up {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 70%;
+    padding: 1rem;
+    /* background: linear-gradient(
+        90deg,
+        rgba(246, 150, 130, 1) 0%,
+        rgba(206, 163, 204, 1) 41%,
+        rgba(248, 205, 190, 1) 100%
+    ); */
+    background-image: linear-gradient(to right, #8360c3, #2ebf91);
+    border: white 5px solid;
+    border-radius: 10px;
+    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    color: white;
+    display: table-cell;
+}
+
+
+.barter-tut-pop-up .pop-up-left{
+    width: 60%;
+    
+}
+
+/* .barter-tut-pop-up .pop-up-right{
+
+} */
+
+.barter-tut-pop-up img{
+    margin: 0 0 0;
+}
+
+.barter-tut-pop-up .sell-list{
+    position: absolute;
+    width: 90%;
+}
+
+.barter-tut-pop-up .wish-list-display{
+    position: absolute;
+    width: 90%;
+}

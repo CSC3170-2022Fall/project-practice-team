@@ -300,7 +300,48 @@ def game_select_id_by_name(name):
 
 
 
+'''
+    pub table operation
+'''
+@handler('super')
+def pub_select(id):
+    script = (
+        "SELECT * FROM publisher "
+        "WHERE ID = {}"
+    ).format(id)
+    
+    return script
+
+'''
+    cate table operation
+'''
+@handler('super')
+def cate_id_select(id):
+    script = (
+        "SELECT cate_id FROM game_type "
+        "WHERE game_id = {}"
+    ).format(id)
+    
+    return script
+
+@handler('super')
+def cate_recommand_select(cate_id, game_id):
+    script = (
+        "SELECT DISTINCT game_id FROM game_type "
+        "WHERE cate_id = {} and game_id != {}"
+    ).format(cate_id, game_id)
+    return script
 
 
+def cate_select(id):
+    res = []
+    cate_id = cate_id_select(id)
+    print(cate_id)
+    for cate in cate_id:
+        res.extend(
+            [i[0] for i in cate_recommand_select(cate[0], id)]
+        )
+    return res[:3]
 
+    
 

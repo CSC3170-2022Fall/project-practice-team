@@ -1,0 +1,5 @@
+.table-bordered{
+    border-radius: 6px;
+    /* border-color: var;*/
+    border: 1px solid;
+}

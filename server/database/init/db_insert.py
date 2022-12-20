@@ -413,7 +413,8 @@ consumer_grant = (
 
 saler_grant = (
     "GRANT INSERT ON AGDP.promote TO `saler`@`localhost` ",
-    "GRANT INSERT ON AGDP.game TO `saler`@`localhost` "
+    "GRANT INSERT ON AGDP.game TO `saler`@`localhost` ",
+    "GRANT SELECT ON AGDP.publisher TO `saler`@`localhost`"
 )
 
 super_grant= (

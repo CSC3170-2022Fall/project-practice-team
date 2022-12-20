@@ -26,7 +26,8 @@ def login():
                 meta['con_cnt'] += 1;
                 meta_update(meta['con_cnt'], meta['pub_cnt'])
                 consumer_insert(meta['con_cnt'], username, password)
-                return render_template('index.html')
+                
+                return redirect(f'/market?con_id={meta["con_cnt"]}')
         
         
         elif form_type == 'login':
@@ -35,7 +36,7 @@ def login():
             if password == res[2]:
                 print('password correct')
                 # redirect('/consumer?id={}'.format(res[0]))
-                return render_template('index.html')
+                return redirect(f'/market?con_id={res[0]}')
             # in correct password
             else:
                 pass
@@ -44,6 +45,11 @@ def login():
 
     
     return render_template('login.html')
+
+
+@app.route('/market')
+def market():
+    return render_template('index.html')
 
 
 
@@ -58,9 +64,40 @@ def consumer():
 
 @app.route('/game')
 def game():
-    id = request.args.get('id')
-    game_info = game_select(id)
-    return render_template('game.html', id=id, info=game_info)
+    ID = 0; NAME = 1; PRICE = 2; PUB_ID = 3; R_DATE = 4
+    id = request.args.get('game_id')
+    
+    '''
+        retrieve game basic info from game table, including:
+        name; price; publisher id; release data
+    '''
+    game_info = game_select(id)[0]
+    
+    '''
+        retrieve publisher name from publisher table using pub_id
+    '''
+    pub_id = game_info[PUB_ID]
+    pub_info = pub_select(pub_id)[0]
+    
+    
+    '''
+        retrieve game category from cate table
+    '''
+    recommand_ids = cate_select(game_info[ID])
+    recommands = []
+    for recommand_id in recommand_ids:
+        recommands.append(game_select(recommand_id)[0])
+    print(recommands)
+        
+
+    
+
+    return render_template('gamepage.html',
+                           id=game_info[ID], name=game_info[NAME],
+                           release_date=game_info[R_DATE], price=game_info[PRICE],
+                           pub_name=pub_info[NAME],
+                           recommands=recommands
+                        )
 
 
 @app.route('/game/search/by_name')
@@ -77,6 +114,10 @@ def game_search_name_contain():
     substr = request.args.get('substr')
     res = [i[0] for i in matched_game_name(substr)]
     return jsonify(res)
+
+@app.route('/barter')
+def barter():
+    return render_template('barter.html')
     
 
 

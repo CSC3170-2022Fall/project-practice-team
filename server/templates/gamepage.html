@@ -44,20 +44,20 @@
             <article class="post has-post-thumbnail">
 
   		        <span class="post-image">
-                    <img width="916" height="611" src="../static/pics/3590.jpg" alt="">
+                    <img width="916" height="611" src="/static/pics/{{id}}.jpg" alt="">
                     <!--更换这里的图片可以改主页面最大的那个图片-->
   		        </span>
 
 
                 <div class="inner">
 
-                    <h1 class="entry-title">zhiwudazhanjiangshi</h1> <!--这个地方改成游戏名-->
+                    <h1 class="entry-title">{{name}}</h1> <!--这个地方改成游戏名-->
                     <ul class="meta top">
                         <li class="time">
-                            <time class="post-date updated" datetime="2015-02-02">faxingshijian </time><!--这里改成发行的时间-->
+                            <time class="post-date updated" datetime="2015-02-02">{{release_date}}</time><!--这里改成发行的时间-->
                         </li>
                         <li class="author-m">
-                            Publisher: <span class="vcard author"><span class="fn">faxinggongsi</a></span></span>
+                            Publisher: <span class="vcard author"><span class="fn">{{pub_name}}</a></span></span>
                         </li><!--这里改成发行公司的名字-->
                         <li class="author-m">
                             Developer: <span class="vcard author"><span class="fn">kaifashang</a></span></span>
@@ -65,7 +65,7 @@
 
                     </ul>
                     <div class="post-content">
-                        <blockquote><p>“You are lucky!!!This fun game is on sale at a lower price!!!”<cite>Price: $28</cite></p></blockquote><!--这里换成price-->
+                        <blockquote><p>“You are lucky!!! This fun game is on sale at a lower price!!!”<cite>Price: ${{price}}</cite></p></blockquote><!--这里换成price-->
                     </div>
 
 
@@ -92,11 +92,13 @@
 
                 <div class="posts">
 
+                    
+                    {% for recommand in recommands %}
                     <aside class="related post has-post-thumbnail">
 
   		                <span class="post-image">
-                            <a href="#" title="The Apothecary">
-                                <img width="468" height="468" src="../static/pics/1000360.jpg" alt=""></a><!--更换成正确的图片-->
+                            <a href="/game?game_id={{recommand[0]}}" title="The Apothecary">
+                                <img width="468" height="468" src="/static/pics/{{recommand[0]}}.jpg" alt=""></a><!--更换成正确的图片-->
                         </span>
 
 
@@ -104,13 +106,12 @@
 
                             <h6 class="entry-title">
 
-                                <a href="#" title="The Apothecary">
-
-                                    game_name  <!--这里改成游戏的名字和对应的游戏链接-->
+                                <a href="/game?game_id={{recommand[0]}}" title="The Apothecary">
+                                    {{recommand[1]}}  <!--这里改成游戏的名字和对应的游戏链接-->
                                 </a>
                                 <ul class="meta top">
                                     <li class="time">
-                                        <time class="price">Price: $28</time> <!--这里改成游戏对应的价钱-->
+                                        <time class="price">Price: {{recommand[2]}}$</time> <!--这里改成游戏对应的价钱-->
                                     </li>
                                 </ul>
 
@@ -118,13 +119,14 @@
 
                         </div>
                     </aside>
+                    {% endfor %}
 
                     <!--该部分和上面一模一样-->
-                    <aside class="related post has-post-thumbnail">
+                    <!-- <aside class="related post has-post-thumbnail">
 
                         <span class="post-image">
                             <a href="#" title="The Flowers">
-                                <img width="468" height="468" src="../static/pics/1029690.jpg" alt="" ></a>
+                                <img width="468" height="468" src="/static/pics/1029690.jpg" alt="" ></a>
                         </span>
 
 
@@ -142,13 +144,15 @@
                             </h6>
 
                         </div>
-                    </aside>
+                    </aside> -->
+
                     <!--该部分和上面一模一样-->
-                    <aside class="related post has-post-thumbnail">
+
+                    <!-- <aside class="related post has-post-thumbnail">
 
                         <span class="post-image">
                             <a href="#" title="The Sunny Day">
-                                <img width="468" height="468" src="../static/pics/1062520.jpg" alt="">
+                                <img width="468" height="468" src="/static/pics/1062520.jpg" alt="">
                             </a>
                         </span>
 
@@ -167,7 +171,7 @@
                             </h6>
 
                         </div>
-                    </aside>
+                    </aside> -->
 
 
                 </div></div>
