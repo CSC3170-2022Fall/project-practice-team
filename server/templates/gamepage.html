@@ -2,7 +2,27 @@
 <html lang="en-US">
 <head>
     <title>AGDP</title>
-
+    <style>
+        body {
+            background-image: url('../static/pics/bg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .modal-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: auto;
+            padding: 6rem;
+            z-index: 6;
+            background-image: linear-gradient(to right, #8360c3, #2ebf91);
+            filter: blur(50px);
+            opacity: 0.5;
+            overflow: hidden;
+        }
+    </style>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           type="text/css" media="all"/>
@@ -68,7 +88,11 @@
 
                     </ul>
                     <div class="post-content">
-                        <blockquote><p>“You are lucky!!! This fun game is on sale at a lower price!!!”<cite>Price: ${{price}}</cite></p></blockquote><!--这里换成price-->
+                        <blockquote><p>“You are lucky!!!This fun game is on sale at a lower price!!!”<cite>Price: $28</cite></p>
+                            <div class="btn">
+                                <button type="submit">Purchase</button>
+                            </div>
+                        </blockquote><!--这里换成price-->
                     </div>
 
                     <ul class="meta bottom">
