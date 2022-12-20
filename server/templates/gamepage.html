@@ -60,7 +60,10 @@
                             Publisher: <span class="vcard author"><span class="fn">{{pub_name}}</a></span></span>
                         </li><!--这里改成发行公司的名字-->
                         <li class="author-m">
-                            Developer: <span class="vcard author"><span class="fn">kaifashang</a></span></span>
+                            Developer:
+                            {% for dev in dev_name%}
+                            <span class="vcard author"><span class="fn">{{dev}}</a></span></span>
+                            {% endfor %}
                         </li><!--这里改成开发公司的名字-->
 
                     </ul>
@@ -70,7 +73,9 @@
 
 
                     <ul class="meta bottom">
-                        <li class="cat">TAGS: several game types </li> <!--这里换成游戏的tags-->
+                        {% for tag in tags%}
+                        <li class="cat">{{tag}}</li> <!--这里换成游戏的tags-->
+                        {% endfor %}
                     </ul>
 
                     <div class="post-content">

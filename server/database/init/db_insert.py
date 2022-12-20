@@ -242,6 +242,7 @@ for (name, id) in dev_name2id.items():
         id,
         name.replace("'", r"\'")
     )
+    cursor.execute(script)
 
 db.commit()
 

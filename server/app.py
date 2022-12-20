@@ -73,6 +73,12 @@ def game():
     '''
     game_info = game_select(id)[0]
     
+    
+    '''
+        retrieve developer name
+    '''
+    dev_name = [i[0] for i in developer_select(game_info[ID])]
+    
     '''
         retrieve publisher name from publisher table using pub_id
     '''
@@ -81,14 +87,20 @@ def game():
     
     
     '''
-        retrieve game category from cate table
+        retrieve game category from category table
     '''
     recommand_ids = cate_select(game_info[ID])
     recommands = []
     for recommand_id in recommand_ids:
         recommands.append(game_select(recommand_id)[0])
-    print(recommands)
-        
+
+    
+    '''
+        retrieve tag from game_type and category table
+    '''
+    
+    tags = tags_select(game_info[ID])
+    tags = [tag[0] for tag in tags][:10]
 
     
 
@@ -96,6 +108,8 @@ def game():
                            id=game_info[ID], name=game_info[NAME],
                            release_date=game_info[R_DATE], price=game_info[PRICE],
                            pub_name=pub_info[NAME],
+                           dev_name=dev_name,
+                           tags=tags,
                            recommands=recommands
                         )
 

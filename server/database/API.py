@@ -301,7 +301,7 @@ def game_select_id_by_name(name):
 
 
 '''
-    pub table operation
+    publisher table operation
 '''
 @handler('super')
 def pub_select(id):
@@ -311,6 +311,22 @@ def pub_select(id):
     ).format(id)
     
     return script
+
+'''
+    developer table operation
+'''
+@handler('super')
+def developer_select(id):
+    script = (
+        "SELECT D.name "
+        "FROM develop as DEV INNER JOIN developer as D "
+        "on DEV.dev_id = D.ID "
+        "WHERE DEV.game_id = {}"      
+    ).format(id)
+    return script
+
+
+
 
 '''
     cate table operation
@@ -336,12 +352,26 @@ def cate_recommand_select(cate_id, game_id):
 def cate_select(id):
     res = []
     cate_id = cate_id_select(id)
-    print(cate_id)
     for cate in cate_id:
         res.extend(
             [i[0] for i in cate_recommand_select(cate[0], id)]
         )
     return res[:3]
 
+
+    
+
+@handler('super')
+def tags_select(id):
+    script = (
+        "SELECT C.name "
+        "FROM game_type as G INNER JOIN category as C "
+        "on G.cate_id = C.ID "
+        "WHERE G.game_id = {}"        
+    ).format(id)
+    
+    return script      
+
+    
     
 
