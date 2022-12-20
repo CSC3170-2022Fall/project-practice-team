@@ -27,7 +27,7 @@
 
         <div class="logo plain logo-left">
             <div class="site-title">
-                <a href="index.html" title="Go to Home">ADGP</a> <!--这里把链接换成返回主菜单的-->
+                <a href="index.html" title="Go to Home">AGDP</a> <!--这里把链接换成返回主菜单的-->
             </div>
         </div><!-- /logo -->
 
@@ -71,18 +71,38 @@
                         <blockquote><p>“You are lucky!!! This fun game is on sale at a lower price!!!”<cite>Price: ${{price}}</cite></p></blockquote><!--这里换成price-->
                     </div>
 
-
+                    <ul class="meta bottom">
+                        
+                        <li class="cat">TAGS of this game:</li> <!--这里换成游戏的tags-->
+                        
+                    </ul>
                     <ul class="meta bottom">
                         {% for tag in tags%}
                         <li class="cat">{{tag}}</li> <!--这里换成游戏的tags-->
                         {% endfor %}
                     </ul>
-
                     <div class="post-content">
                         <blockquote><p>Rating this game:
-                            <div class="quotemark "><div class="quote-rating-3"></div></div>
+                            <div class="container">
+                                <div class="star-widget">
+                                    <input type="radio" name="rate" id="rate-5">
+                                    <label for="rate-5">terrible</label>
+                                    <input type="radio" name="rate" id="rate-4">
+                                    <label for="rate-4">bad</label>
+                                    <input type="radio" name="rate" id="rate-3">
+                                    <label for="rate-3">average</label>
+                                    <input type="radio" name="rate" id="rate-2">
+                                    <label for="rate-2">good</label>
+                                    <input type="radio" name="rate" id="rate-1">
+                                    <label for="rate-1">excellent</label>
+                                    <form action="#">
+                                        <div class="btn">
+                                            <button type="submit">Post</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </blockquote>
-                        <!--这部分是rating系统，可以给lzh实现-->
                     </div>
 
                 </div>
@@ -227,7 +247,7 @@
 <!--[if lte IE 9 ]>
 <script> var ie9 = true; </script>
 <![endif]-->
-<script src="js/global-plugins.min.js"></script>
-<script src="js/main.js"></script>
+<script src="../static/gamepage/js/global-plugins.min.js"></script>
+<script src="../static/gamepage/js/main.js"></script>
 </body>
 </html>
