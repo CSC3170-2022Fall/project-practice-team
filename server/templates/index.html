@@ -1,108 +1,354 @@
-{%extends 'layout.html'%}
-{%block body%}
-        <!-- <input type="text" name="name" autocomplete="off" autofocus>
-            <select id="" name="sports">
-                <option disabled selected value="sports">Sports</option>
-                {% for sport in sports%}
-                <option value="{{sport}}">{{sport}}</option>
-                {%endfor%}
-            </select> -->
-    <!--define the function-->
-    <script>
-        function startLogin(){
-            
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGDP</title>
+    <style>
+        body {
+            background-image: url('/static/pics/homebg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover
         }
-    </script>
-    <!--the rendered page-->
-    <div id="container" style="height:700%; width:100%; position:absolute; margin:0; padding: 0; ">
-        <!--header-->
-        <div id="menu" style="background-color:#2f4f4f;height:0.3%;width:97%;float:left;">
-            <!--button in menu-->
-            <button type="button" style="height:100%; width:10%;background-color: #2f4f4f; border:0; "><a href="#" target="_top" style="text-decoration:none; font-size: 15px;"><b>menu</b></a></button>
-            <button type="button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="game.html" target="_top" style="text-decoration:none; font-size: 15px;">game</a></button>
-            <button type="button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="developer.html" target="_top" style="text-decoration:none; font-size: 15px;">developer</a></button>
-            <button type="button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="publisher.html" target="_top" style="text-decoration:none; font-size: 15px;">publisher</a></button>
-            <button type="button" style="height:100%; width:10%;background-color: #2f4f4f; border:0;"><a href="consumer.html" target="_top" style="text-decoration:none; font-size: 15px;">consumer</a></button>
-        </div>
-        <div id="account" style="background-color:#2f4f4f;height:0.3%;width:3%;float:left;">
-            <button type="button" style="background-color: #2f4f4f; border:0;color: bisque;" target="_top"><a href="/login">login</a></button>
-        </div>
-        <div id="header" style="width:100%;height:5%;background-image: url('static/pics/background.png');background-repeat: no-repeat;background-size:cover;background-attachment: fixed;background-color: #131822;background-position: center;">
-            <div style="width:100%;height:10%; visibility: hidden;"></div>
-            <h1 style="text-align:center;color:#FFffFF;letter-spacing: 2px; font-size: 70px;">Advanced Game Distribution Platform</h1>
-            <!--block for search-->
-            <div style="width:100%;height:20%; visibility: hidden;"></div>
-            <div style="width:40%;height:10%;float:left; visibility:hidden;"></div>
-            <div style="height:10%; width:20%;float:left;backface-visibility: hidden;border:0;">
-                <form action="/game">
-                    <input  type="text" name="game_id" autocomplete="off" placeholder="    search game by name" style="width:75%;height:40px;font-size: 15px; border: 0;padding: 0;margin: 0;">
-                    <input type="submit" value="Search" style="height: 42px; width:20%;padding: 0;margin:0;">
-                    <!--button onclick="startSearch()" style="width:20%;background-color:#2f4f4f;border:0;">Search</button-->
-                </form>
+    </style>
+    <link rel="stylesheet" href="/static/consumer/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/consumer/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/consumer/css/templatemo-style.css">
+
+</head>
+<body>
+    <!-- Page Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+
+    </div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-gamepad" style="color:beige"></i>
+                <span style="color: beige">AGDP</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-1 active" aria-current="page" href="/market.html" style="color: beige">Market</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-2" href="/consumer" style="color:beige">Library</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-3" href="/barter" style="color:beige">Barter</a>
+                </li>
+            </ul>
             </div>
         </div>
-        <!--image in content-->
-        <div id="content1" style="background-color:#708090;height:10%;width:100%;float:left;">
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/3590.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/4000.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/4500.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/12210.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-        </div>
-        <div id="content2" style="background-color:#708090;height:10%;width:100%;float:left;">
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/24010.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/33230.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/39210.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/105600.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-        </div>
-        <div id="content3" style="background-color:#708090;height:10%;width:100%;float:left;">
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/107410.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/218620.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/219990.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/220200.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-        </div>
-        <div id="content4" style="background-color:#708090;height:10%;width:100%;float:left;">
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/221100.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/238090.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/242760.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/244210.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-        </div>
-        <div id="content5" style="background-color:#708090;height:10%;width:100%;float:left;">
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/244850.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/250900.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/251570.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/252490.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-        </div>
-        <div id="content6" style="background-color:#708090;height:10%;width:100%;float:left;">
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/255710.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/261550.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/264710.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/359550.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-        </div>
-        <div id="content7" style="background-color:#708090;height:10%;width:100%;float:left;">
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/268910.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/270880.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/275850.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/281990.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-        </div>
-        <div id="content8" style="background-color:#708090;height:10%;width:100%;float:left;">
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/282070.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/284160.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/286160.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/287700.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-        </div>
-        <div id="content9" style="background-color:#708090;height:10%;width:100%;float:left;">
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/288470.jpg" alt="Image Error!!!" width="100%" height="100%" ></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/289070.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/292030.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:48%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/294100.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-        </div>
-        <div id="content10" style="background-color:#708090;height:5%;width:100%;float:left;">
-            <div style="height:95%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/305620.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-            <div style="height:95%; width:49%;float:left; margin:0.5%;"><a href="game.html"><img src="/static/pics/311210.jpg" alt="Image Error!!!" width="100%" height="100%"></a></div>
-        </div>
-        <!--footer-->
-        <div id="footer" style="background-color:#696969;clear:both;text-align:center;">
-        author: Practice Team</div>
-    </div>
-{%endblock%}
+    </nav>
 
+    <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll">
+        <form class="d-flex tm-search-form">
+            <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success tm-search-btn" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary" style="color:beige">
+                Featured & Recommended
+            </h2>
+            <!-- <div class="col-6 d-flex justify-content-end align-items-center">
+                <form action="" class="tm-text-primary">
+                    Page <input type="text" value="1" size="1" class="tm-input-paging tm-text-primary"> of 200
+                </form>
+            </div> -->
+        </div>
+        
+        <div class="row tm-mb-90 tm-gallery">
+
+        	<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/3590.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <!--游戏标题-->
+                        <h2>Plants V.S Zombies</h2>
+                        <a href="/game?game_id=3590">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <!--发售时间-->
+                    <span class="tm-text-gray-light">18 Oct 2020</span>
+                    <!--价格-->
+                    <span class="tm-text-gray-light">24.99$</span>
+                    <!--购买按钮-->
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/1091500.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Cyberpunk 2077</h2>
+                        <a href="/game?game_id=1091500">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">10 Dec 2020</span>
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/1144200.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Ready Or Not</h2>
+                        <a href="/game?game_id=1144200">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">10 Dec 2020</span>
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/1174180.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Red Dead Redemption 2</h2>
+                        <a href="/game?game_id=1174180">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">10 Dec 2020</span>
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                </div>
+            </div>
+
+            
+        </div> <!-- row -->
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary" style="color:beige">
+                Browse by category
+            </h2>
+        </div>
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary" style="color:beige">
+                Strategy
+            </h2>
+        </div>
+
+        <!-- 做一个根据类别展示不同游戏的gallery栏 -->
+
+        <div class="row tm-mb-90 tm-gallery">
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/394360.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <!--游戏标题-->
+                        <h2>Hearts of Iron 4</h2>
+                        <a href="/game?game_id=394360">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <!--发售时间-->
+                    <span class="tm-text-gray-light">6 June 2016</span>
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    
+                </div>
+            </div>
+    
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/1687950.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Persona 5 Royal</h2>
+                        <a href="/game?game_id=1687950">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">21 Oct 2022</span>
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                </div>
+            </div>
+    
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/281990.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Stellaris</h2>
+                        <a href="/game?game_id=281990">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">9 May 2016</span>
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                </div>
+            </div>
+    
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/529340.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Victoria 3</h2>
+                        <a href="/game?game_id=529340">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">25 Oct 2022</span>
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary" style="color:beige">
+                Action
+            </h2>
+        </div>
+
+        <div class="row tm-mb-90 tm-gallery">
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/1462040.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <!--游戏标题-->
+                        <h2>Final Fantasy VII Remake Integrade</h2>
+                        <a href="/game?game_id=1462040">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <!--发售时间-->
+                    <span class="tm-text-gray-light">17 June 2022</span>
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    
+                </div>
+            </div>
+    
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/1593500.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>God Of War</h2>
+                        <a href="/game?game_id=1593500">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">14 Jan 2022</span>
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                </div>
+            </div>
+    
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/1817070.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Marvel's Spider-Man Remastered</h2>
+                        <a href="/game?game_id=1817070">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">12 Aug 2022</span>
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                </div>
+            </div>
+    
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/1237320.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Sonic Frontiers</h2>
+                        <a href="/game?game_id=1237320">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">8 Nov 2022</span>
+                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                </div>
+            </div>
+        </div>
+        <!-- jinja template version -->
+        <!-- TODO -->
+        
+        <!-- row -->
+    </div>
+
+    
+
+
+        <!-- page button -->
+
+        <!-- <div class="row tm-mb-90">
+            <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
+                <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Previous</a>
+                <div class="tm-paging d-flex">
+                    <a href="javascript:void(0);" class="active tm-paging-link">1</a>
+                    <a href="javascript:void(0);" class="tm-paging-link">2</a>
+                    <a href="javascript:void(0);" class="tm-paging-link">3</a>
+                    <a href="javascript:void(0);" class="tm-paging-link">4</a>
+                </div>
+                <a href="javascript:void(0);" class="btn btn-primary tm-btn-next">Next Page</a>
+            </div>            
+        </div> -->
+    
+    <!-- container-fluid, tm-container-content -->
+
+    <!-- <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
+        <div class="container-fluid tm-container-small">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-12 px-5 mb-5">
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">About Catalog-Z</h3>
+                    <p>Catalog-Z is free <a rel="sponsored" href="https://v5.getbootstrap.com/">Bootstrap 5</a> Alpha 2 HTML Template for video and photo websites. You can freely use this TemplateMo layout for a front-end integration with any kind of CMS website.</p>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">Our Links</h3>
+                    <ul class="tm-footer-links pl-0">
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Our Company</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
+                    <ul class="tm-social-links d-flex justify-content-end pl-0 mb-5">
+                        <li class="mb-2"><a href="https://facebook.com"><i class="fab fa-facebook"></i></a></li>
+                        <li class="mb-2"><a href="https://twitter.com"><i class="fab fa-twitter"></i></a></li>
+                        <li class="mb-2"><a href="https://instagram.com"><i class="fab fa-instagram"></i></a></li>
+                        <li class="mb-2"><a href="https://pinterest.com"><i class="fab fa-pinterest"></i></a></li>
+                    </ul>
+                    <a href="#" class="tm-text-gray text-right d-block mb-2">Terms of Use</a>
+                    <a href="#" class="tm-text-gray text-right d-block">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-7 col-12 px-5 mb-3">
+                    Copyright 2020 Catalog-Z Company. All rights reserved.
+                </div>
+                <div class="col-lg-4 col-md-5 col-12 px-5 text-right">
+                    Designed by <a href="https://templatemo.com" class="tm-text-gray" rel="sponsored" target="_parent">TemplateMo</a>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+    
+    <script src="/static/consumer/js/plugins.js"></script>
+    <script>
+        $(window).on("load", function() {
+            $('body').addClass('loaded');
+        });
+    </script>
+</body>
+</html>
