@@ -111,7 +111,8 @@ def consumer():
 def game():
     ID = 0; NAME = 1; PRICE = 2; PUB_ID = 3; R_DATE = 4
     id = request.args.get('game_id')
-    
+    con_id = request.args.get('con_id')
+
     '''
         retrieve game basic info from game table, including:
         name; price; publisher id; release data
@@ -150,6 +151,7 @@ def game():
     
 
     return render_template('gamepage.html',
+                            con_id=con_id,
                            id=game_info[ID], name=game_info[NAME],
                            release_date=game_info[R_DATE], price=game_info[PRICE],
                            pub_name=pub_info[NAME],
