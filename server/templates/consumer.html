@@ -269,13 +269,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link nav-link-1" aria-current="page" href="/market" style="color: beige">Market</a>
+                    <a class="nav-link nav-link-1" aria-current="page" href="/market?con_id={{con_id}}" style="color: beige">Market</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-2 active" href="/consumer" style="color:beige">Library</a>
+                    <a class="nav-link nav-link-2 active" href="/consumer?con_id={{con_id}}" style="color:beige">Library</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-3" href="/barter" style="color:beige">Barter</a>
+                    <a class="nav-link nav-link-3" href="/barter?con_id={{con_id}}" style="color:beige">Barter</a>
                 </li>
             </ul>
             </div>
@@ -304,20 +304,21 @@
         </div>
         
         <div class="row tm-mb-90 tm-gallery">
+            {% for game in game_list%}
         	<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="/static/pics/3590.jpg" alt="Image" class="img-fluid">
+                    <img src="/static/pics/{{game[0]}}.jpg" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Plants V.S Zombies</h2>
-                        <a href="/game?game_id=3590">View more</a>
+                        <h2>{{game[1]}}</h2>
+                        <a href="/game?game_id={{game[0]}}">View more</a>
                     </figcaption>                    
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">18 Oct 2020</span>
+                    <!--span class="tm-text-gray-light">18 Oct 2020</span-->
                     <button class="btn btn-secondary btn-sm show-modal" type="submit">Barter</button>
                 </div>
             </div>
-            
+            {%endfor%}
         </div> <!-- row -->
 
         <!-- jinja template version -->

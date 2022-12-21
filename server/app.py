@@ -95,13 +95,15 @@ def market():
         game_info.append(
             res[:4]
         )
-    return render_template('index.html',cate_list=cate_list,game_info=game_info,order_list=order_list,name=name)
+    return render_template('index.html', con_id=con_id, cate_list=cate_list, game_info=game_info, order_list=order_list, name=name)
 
 
 
 @app.route('/consumer')
 def consumer():
-    return render_template('consumer.html', games=None, username=None, purchase_date=None)
+    con_id = request.args.get('con_id')
+    game_num, game_list = get_lib_info(con_id)
+    return render_template('consumer.html', con_id=con_id, game_num=game_num, game_list=game_list, games=None, username=None, purchase_date=None)
 
 
 
@@ -173,7 +175,8 @@ def game_search_name_contain():
 
 @app.route('/barter')
 def barter():
-    return render_template('barter.html')
+    con_id = request.args.get('con_id')
+    return render_template('barter.html', con_id=con_id)
 
 
 
