@@ -248,8 +248,14 @@ def get_lib_info(con_id):
     res = purchase_select(con_id)
     
     return len(res), res
-    
-
+@handler('super')
+def get_con_name(con_id):
+    script=(
+        "SELECT name "
+        "FROM consumer "
+        "WHERE ID='{}'"
+    ).format(con_id)
+    return script
 
 '''
 

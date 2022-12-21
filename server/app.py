@@ -80,11 +80,13 @@ from random import shuffle
 
 @app.route('/market')
 def market():
+    con_id  = request.args.get('con_id')
     game_info = []
     cate_list = [
         'strategy', 'action', 'card game', 'first-person', 'open world', 'adventure'
     ]
     order_list=[]
+    name=get_con_name(con_id)
     for i in range(6):
         order_list.append(i)
     for cate in cate_list:
@@ -93,7 +95,7 @@ def market():
         game_info.append(
             res[:4]
         )
-    return render_template('index.html',cate_list=cate_list,game_info=game_info,order_list=order_list)
+    return render_template('index.html',cate_list=cate_list,game_info=game_info,order_list=order_list,name=name)
 
 
 
@@ -231,7 +233,7 @@ def purchase():
 @app.route('/library', methods = ['GET'])
 def library():
     con_id = request.args.get('con_id')
-    
+    name=get_con_name(con_id)
     num, lib_info = get_lib_info(con_id)
     
     return render_template('consumer.html')
