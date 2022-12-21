@@ -413,7 +413,7 @@
         $('#wish-list-search').autocomplete({
             source: function(request, response){
                 var substr = $('#wish-list-search').val();
-                var search_url = "/game/search/name_contain?substr=" + substr;
+                var search_url = "/game/search/name-contain?substr=" + substr;
                 $.ajax({
                     url: search_url,
                     success: function(data, status, xhr){
@@ -437,7 +437,7 @@
             }
             
             var name = $(this).parent().children('input').eq(0).val();
-            var search_url = '/game/search/by_name?name=' + name;
+            var search_url = '/game/search/by-name?name=' + name;
             if ($('#wish-item-name:contains(' + name +')').length >=1){
                 alert('You\'ve already added to your wish list!!!');
                 return;

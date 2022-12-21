@@ -29,20 +29,20 @@ $('.ex_checkbox').click(function(){
 
 
 /* form validation */
-$('button[name="register"]').click(function(){
-  var username = $('#username').val();
-  var password = $('#password').val();
-  var confirmPassword = $('#confirmPassword').val();
+// $('button[name="register"]').click(function(){
+//   var username = $('#username').val();
+//   var password = $('#password').val();
+//   var confirmPassword = $('#confirmPassword').val();
 
-  if (username.length < 1 || password.length < 1 || confirmPassword.length < 1){
-    alert("Form Incomplete");
-  }
+//   if (username.length < 1 || password.length < 1 || confirmPassword.length < 1){
+//     alert("Form Incomplete");
+//   }
 
-  if ($('#password').val() != $('#confirmPassword').val()){
-    alert("Wrong Confirm Password");
-  };
+//   if ($('#password').val() != $('#confirmPassword').val()){
+//     alert("Wrong Confirm Password");
+//   };
 
-});
+// });
 
 // $('button[name="login"]').click(function(){
 //   var username = $('#username').val();

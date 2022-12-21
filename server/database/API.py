@@ -349,6 +349,8 @@ def cate_recommand_select(cate_id, game_id):
     return script
 
 
+from random import shuffle
+
 def cate_select(id):
     res = []
     cate_id = cate_id_select(id)
@@ -356,6 +358,7 @@ def cate_select(id):
         res.extend(
             [i[0] for i in cate_recommand_select(cate[0], id)]
         )
+    shuffle(res)
     return res[:3]
 
 

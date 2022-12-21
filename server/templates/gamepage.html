@@ -2,6 +2,12 @@
 <html lang="en-US">
 <head>
     <title>AGDP</title>
+    <style>
+        body{
+            background-image: url('/static/pics/homebg.jpg');
+            background-size: cover;
+        }
+    </style>
 
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -15,6 +21,9 @@
     <![endif]-->
     <script src='../static/gamepage/js/jquery-3.0.0.min.js'></script>
     <script src='../static/gamepage/js/jquery-migrate-3.0.1.min.js'></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -146,58 +155,6 @@
                     </aside>
                     {% endfor %}
 
-                    <!--该部分和上面一模一样-->
-                    <!-- <aside class="related post has-post-thumbnail">
-
-                        <span class="post-image">
-                            <a href="#" title="The Flowers">
-                                <img width="468" height="468" src="/static/pics/1029690.jpg" alt="" ></a>
-                        </span>
-
-
-                        <div class="inner">
-
-                            <h6 class="entry-title">
-
-                                <a href="#" title="The Flowers">game_name</a>
-                                <ul class="meta top">
-                                    <li class="time">
-                                        <time class="post-date updated" datetime="2015-01-25">January 25, 2015</time>
-                                    </li>
-                                </ul>
-
-                            </h6>
-
-                        </div>
-                    </aside> -->
-
-                    <!--该部分和上面一模一样-->
-
-                    <!-- <aside class="related post has-post-thumbnail">
-
-                        <span class="post-image">
-                            <a href="#" title="The Sunny Day">
-                                <img width="468" height="468" src="/static/pics/1062520.jpg" alt="">
-                            </a>
-                        </span>
-
-
-                        <div class="inner">
-
-                            <h6 class="post-title entry-title">
-
-                                <a href="#" title="The Sunny Day">The Sunny Day</a>
-                                <ul class="meta top">
-                                    <li class="time">
-                                        <time class="post-date updated" datetime="2015-01-21">January 21, 2015</time>
-                                    </li>
-                                </ul>
-
-                            </h6>
-
-                        </div>
-                    </aside> -->
-
 
                 </div></div>
 
@@ -221,9 +178,17 @@
                                 <p><label for="url">TAGS</label><input id="url" name="url" type="text" value="" size="30" placeholder="TAGS"></p>
                                 <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="join us"></p>
                             </form>
+
                             <h4 id="reply-title" class="comment-reply-title">You need to offer one game photo: <small><a rel="nofollow" id="cancel-comment-reply-link" href="#respond" style="display:none;">Cancel reply</a></small></h4>
-                            <form>
-                                <p><label for="url">photo</label><input id="url" name="url" type="file" value="" size="30" placeholder="photo"></p> 
+                            
+
+                            <form class="img-upload" onsubmit="return false" enctype="multipart/form-data">
+                                <p>
+                                <label for="url">photo</label>
+                                <input id="url" name="url" type="file" value="" size="30" placeholder="photo">
+                                <button>Upload Picture</button>
+                                </p> 
+                            </form>
 
                         </div><!-- #respond -->
     
@@ -249,5 +214,30 @@
 <![endif]-->
 <script src="../static/gamepage/js/global-plugins.min.js"></script>
 <script src="../static/gamepage/js/main.js"></script>
+
+<script>
+    $('.img-upload button').on('click', function(){
+        var formData = new FormData();
+        // formData.append('file', $('.img-upload')[0].files[0]);
+
+        $.ajax({
+            url : '/publisher/add-game',
+            type : 'POST',
+            dataType: 'json',
+            data: formData,
+            processData: false,
+            success: function(){
+                alert('success');
+            },
+            error: function(){
+                alert('failed');
+            }
+        })
+    });
+
+</script>
+
+
 </body>
 </html>
+

@@ -5,46 +5,76 @@ from database.API import *
 from flask import Flask, render_template, request, redirect
 from flask import jsonify
 
+import os
+from io import BytesIO
+
+
+
 
 app = Flask(__name__)
 meta = dict()
 
+# path where the uploaded game pictures are stored on the server
+UPLOAD_FOLDER = '/static/tmp'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
+    return render_template('login.html')
 
-    if request.method == 'POST':
-        form_type = request.form['form_type']
-        username  = request.form['username']
-        password  = request.form['password']
-        
-        
-        if form_type == 'register':
-            if duplicate_name(username):
-                pass
-            else:
-                meta['con_cnt'] += 1;
-                meta_update(meta['con_cnt'], meta['pub_cnt'])
-                consumer_insert(meta['con_cnt'], username, password)
-                
-                return redirect(f'/market?con_id={meta["con_cnt"]}')
-        
-        
-        elif form_type == 'login':
-            res = consumer_select(name=username)[0]
-            # if password is correct
-            if password == res[2]:
-                print('password correct')
-                # redirect('/consumer?id={}'.format(res[0]))
-                return redirect(f'/market?con_id={res[0]}')
-            # in correct password
-            else:
-                pass
-        
+@app.route('/validate', methods=['POST'])
+def validate():
+    form_type = request.form['form_type']
+    username  = request.form['username']
+    password  = request.form['password']
+    
+    
+    if form_type == 'register':
+        if duplicate_name(username):
+            return jsonify({
+                'state' : 'duplicate_name'
+            })
+
+        else:
+            meta['con_cnt'] += 1;
+            
+            meta_update(meta['con_cnt'], meta['pub_cnt'])
+            consumer_insert(meta['con_cnt'], username, password)
+            
+            print(username, password)
+            
+            
+            return jsonify({
+                'state' : 'successful'
+            })
             
 
     
-    return render_template('login.html')
+    elif form_type == 'login':
+        res = consumer_select(name=username)
+        
+        if len(res) == 0:
+            return jsonify({
+                'state' : 'wrong_username'
+            })
+        
+        res = res[0]
+        print(password, res[2])
+        print(type(password), type(res[2]))
+        
+        # if password is correct
+        if password == res[2]:
+            return jsonify({
+                'state' : 'successful',
+                'id' : res[0]
+            })
+        
+        # incorrect password
+        else:
+            return jsonify({
+                'state' : 'wrong_password'
+            })
+    
 
 
 @app.route('/market')
@@ -55,9 +85,6 @@ def market():
 
 @app.route('/consumer')
 def consumer():
-    # id = request.args.get('id')
-    
-    
     return render_template('consumer.html', games=None, username=None, purchase_date=None)
 
 
@@ -114,16 +141,15 @@ def game():
                         )
 
 
-@app.route('/game/search/by_name')
+@app.route('/game/search/by-name')
 def game_search_id_by_name():
     name = request.args.get('name')
-    print(name)
     res = game_select_id_by_name(name)
 
     
     return jsonify(res)
 
-@app.route('/game/search/name_contain')
+@app.route('/game/search/name-contain')
 def game_search_name_contain():
     substr = request.args.get('substr')
     res = [i[0] for i in matched_game_name(substr)]
@@ -132,6 +158,34 @@ def game_search_name_contain():
 @app.route('/barter')
 def barter():
     return render_template('barter.html')
+
+
+
+'''
+   handle uploaded game picture
+'''
+
+def valid_filename(filename):
+    extension = filename.rsplit('.')[0]
+    return extension.lower() == '.jpg'
+
+@app.route('/publisher/add-game', methods=['POST'])
+def pub_add_game():
+    print('hello')
+    file = request.files['file']
+    print(file.filename)
+    if valid_filename(file.filename):
+        file.save(
+            os.path.join(app.config['UPLOAD_FOLDER'], 'test.jpg')
+        )     
+        return jsonify({
+            'state' : 'successful'
+        })
+        
+    else:
+        return jsonify({
+            'state' : 'wrong_extension'
+        })
     
 
 
@@ -141,7 +195,8 @@ if __name__ == '__main__':
     
     
     init_meta = meta_select()
-    meta['con_cnt'] = init_meta[0][1]
-    meta['pub_cnt'] = init_meta[0][2]
+    meta['con_cnt']  = init_meta[0][1]
+    meta['pub_cnt']  = init_meta[0][2]
+    meta['game_cnt'] = init_meta[0][3]
     
     app.run()

@@ -148,9 +148,10 @@ TABLES['promote'] = (
 
 TABLES['meta'] = (
     "CREATE TABLE `meta` ("
-    "`stub`    int(1),"
-    "`con_cnt` int(7),"
-    "`pub_cnt` int(7))"
+    "`stub`     int(1),"
+    "`con_cnt`  int(7),"
+    "`pub_cnt`  int(7),"
+    "`game_cnt` int(7))"
 )
 
 
@@ -328,12 +329,13 @@ cursor.execute("DROP TABLE IF EXISTS `meta`;")
 db.commit()
 cursor.execute(TABLES["meta"])
 cursor.execute((
-    "INSERT INTO meta (`stub`, `con_cnt`, `pub_cnt`)"
+    "INSERT INTO meta (`stub`, `con_cnt`, `pub_cnt`, `game_cnt`)"
     "VALUES ("
     "'{}',"
     "'{}',"
+    "'{}',"
     "'{}')"
-).format(0,0,0))
+).format(0,0,0, 2300000))
 
 # init other empty tables
 
