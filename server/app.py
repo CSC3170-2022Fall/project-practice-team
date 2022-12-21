@@ -82,15 +82,18 @@ from random import shuffle
 def market():
     game_info = []
     cate_list = [
-        'strategy', 'action', 'card game', 'first-person', 'open world', 'rhythm'
+        'strategy', 'action', 'card game', 'first-person', 'open world', 'adventure'
     ]
+    order_list=[]
+    for i in range(6):
+        order_list.append(i)
     for cate in cate_list:
         res = select_game_by_cate_name(cate)
         shuffle(res)
         game_info.append(
             res[:4]
         )
-    return render_template('index.html')
+    return render_template('index.html',cate_list=cate_list,game_info=game_info,order_list=order_list)
 
 
 

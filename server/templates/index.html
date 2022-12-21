@@ -149,144 +149,35 @@
                 Browse by category
             </h2>
         </div>
+        {% for order in order_list %}
         <div class="row mb-4">
             <h2 class="col-6 tm-text-primary" style="color:beige">
-                Strategy
+                {{cate_list[order]}}
             </h2>
         </div>
-
         <!-- 做一个根据类别展示不同游戏的gallery栏 -->
-
         <div class="row tm-mb-90 tm-gallery">
-
+            {% for game in game_info[order] %}
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="/static/pics/394360.jpg" alt="Image" class="img-fluid">
+                    <img src="/static/pics/{{game[0]}}.jpg" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <!--游戏标题-->
-                        <h2>Hearts of Iron 4</h2>
-                        <a href="/game?game_id=394360">View more</a>
+                        <h2>{{game[1]}}</h2>
+                        <a href="/game?game_id={{game[0]}}">View more</a>
                     </figcaption>                    
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <!--发售时间-->
-                    <span class="tm-text-gray-light">6 June 2016</span>
-                    <button class="btn btn-secondary btn-sm" type="submit" id="394360">Purchase</button>
+                    <span class="tm-text-gray-light">{{game[2]}}</span>
+                    <span class="tm-text-gray-light">{{game[3]}}$</span>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="{{game[0]}}">Purchase</button>
                     
                 </div>
             </div>
-    
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="/static/pics/1687950.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Persona 5 Royal</h2>
-                        <a href="/game?game_id=1687950">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">21 Oct 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit" id="1687950">Purchase</button>
-                </div>
-            </div>
-    
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="/static/pics/281990.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Stellaris</h2>
-                        <a href="/game?game_id=281990">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">9 May 2016</span>
-                    <button class="btn btn-secondary btn-sm" type="submit" id="281990">Purchase</button>
-                </div>
-            </div>
-    
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="/static/pics/529340.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Victoria 3</h2>
-                        <a href="/game?game_id=529340">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">25 Oct 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit" id="529340">Purchase</button>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-        
-
-        <div class="row mb-4">
-            <h2 class="col-6 tm-text-primary" style="color:beige">
-                Action
-            </h2>
-        </div>
-
-        <div class="row tm-mb-90 tm-gallery">
-
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="/static/pics/1462040.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <!--游戏标题-->
-                        <h2>Final Fantasy VII Remake Integrade</h2>
-                        <a href="/game?game_id=1462040">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <!--发售时间-->
-                    <span class="tm-text-gray-light">17 June 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit" id="1462040">Purchase</button>
-                    
-                </div>
-            </div>
-    
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="/static/pics/1593500.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>God Of War</h2>
-                        <a href="/game?game_id=1593500">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">14 Jan 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit" id="1593500">Purchase</button>
-                </div>
-            </div>
-    
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="/static/pics/1817070.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Marvel's Spider-Man Remastered</h2>
-                        <a href="/game?game_id=1817070">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">12 Aug 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit" id="1817070">Purchase</button>
-                </div>
-            </div>
-    
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="/static/pics/1237320.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Sonic Frontiers</h2>
-                        <a href="/game?game_id=1237320">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">8 Nov 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit" id="1237320">Purchase</button>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
         <!-- jinja template version -->
         <!-- TODO -->
         
