@@ -202,6 +202,9 @@ def handler(mode):
 #     )
 #     return script
 
+'''
+    game table
+'''
 @handler('super')
 def game_select(id):
     script = (
@@ -210,13 +213,42 @@ def game_select(id):
     ).format(id)
     return script
 
-def game_rate(id):
+# def game_rate(id):
+#     script = (
+#         "SELECT AVG(score)"
+#         "FROM rate"
+#         "WHERE id = {}"
+#     ).format(id)
+#     return script
+
+'''
+    purchase table
+'''
+@handler('consumer')
+def purchase_insert(con_id, game_id, date):
     script = (
-        "SELECT AVG(score)"
-        "FROM rate"
-        "WHERE id = {}"
-    ).format(id)
+        "INSERT INTO purchase (`con_id`, `game_id`, `date`) "
+        "VALUES ("
+        "'{}',"
+        "'{}',"
+        "\"{}\")").format(con_id, game_id, date)
+    return script    
+
+@handler('consumer')
+def purchase_select(con_id):
+    script = (
+        "SELECT game.ID, game.name "
+        "FROM purchase INNER JOIN game "
+        "ON purchase.game_id = game.ID "
+        "WHERE purchase.con_id = '{}'"
+    ).format(con_id)
     return script
+
+def get_lib_info(con_id):
+    res = purchase_select(con_id)
+    
+    return len(res), res
+    
 
 
 '''
@@ -376,5 +408,19 @@ def tags_select(id):
     return script      
 
     
-    
+'''
+    API required by market
+'''
+@handler('saler')
+def select_game_by_cate_name(cate_name):
+    script = (
+        "SELECT game.ID, game.name, game.release_date, game.price "
+        "       FROM category INNER JOIN( "
+        "           (game INNER JOIN game_type"
+        "            ON game.ID = game_type.game_id)"
+        "       )"
+        "       ON category.ID = game_type.cate_id"
+        "       WHERE category.name = \"{}\""
+    ).format(cate_name)
 
+    return script

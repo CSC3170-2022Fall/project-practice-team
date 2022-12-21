@@ -76,9 +76,20 @@ def validate():
             })
     
 
+from random import shuffle
 
 @app.route('/market')
 def market():
+    game_info = []
+    cate_list = [
+        'strategy', 'action', 'card game', 'first-person', 'open world', 'rhythm'
+    ]
+    for cate in cate_list:
+        res = select_game_by_cate_name(cate)
+        shuffle(res)
+        game_info.append(
+            res[:4]
+        )
     return render_template('index.html')
 
 
@@ -187,6 +198,41 @@ def pub_add_game():
             'state' : 'wrong_extension'
         })
     
+    
+@app.route('/consumer/purchase', methods=['POST'])
+def purchase():
+    con_id  = request.form['con_id']
+    game_id = request.form['game_id']
+    date    = request.form['date']
+    
+    from calendar import month_name
+    name2mon_name = {
+        str(k) : v for (k, v) in enumerate(month_name) if k != 0
+    }
+    
+    # parse date
+    mm, dd, yyyy = date.split(' ')
+    mm = name2mon_name[mm]
+    
+    date = dd + ' ' + mm + ' ' + yyyy
+    
+    purchase_insert(
+        con_id=con_id, game_id=game_id, date=date
+    )
+    
+    return jsonify({
+        'state' : 'successful'
+    })
+
+
+@app.route('/library', methods = ['GET'])
+def library():
+    con_id = request.args.get('con_id')
+    
+    num, lib_info = get_lib_info(con_id)
+    
+    return render_template('consumer.html')
+
 
 
 if __name__ == '__main__':

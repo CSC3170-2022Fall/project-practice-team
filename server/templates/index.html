@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="/static/consumer/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="/static/consumer/css/templatemo-style.css">
 
+    <link rel="stylesheet" href="/static/confirm-pop-up/style.css">
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
 </head>
 <body>
     <!-- Page Loader -->
@@ -88,7 +95,7 @@
                     <!--价格-->
                     <span class="tm-text-gray-light">24.99$</span>
                     <!--购买按钮-->
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="3590">Purchase</button>
                     
                 </div>
             </div>
@@ -103,7 +110,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">10 Dec 2020</span>
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="1091500">Purchase</button>
                 </div>
             </div>
 
@@ -117,7 +124,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">10 Dec 2020</span>
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="1144200">Purchase</button>
                 </div>
             </div>
 
@@ -131,7 +138,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">10 Dec 2020</span>
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="1174180">Purchase</button>
                 </div>
             </div>
 
@@ -164,7 +171,7 @@
                 <div class="d-flex justify-content-between tm-text-gray">
                     <!--发售时间-->
                     <span class="tm-text-gray-light">6 June 2016</span>
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="394360">Purchase</button>
                     
                 </div>
             </div>
@@ -179,7 +186,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">21 Oct 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="1687950">Purchase</button>
                 </div>
             </div>
     
@@ -193,7 +200,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">9 May 2016</span>
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="281990">Purchase</button>
                 </div>
             </div>
     
@@ -207,7 +214,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">25 Oct 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="529340">Purchase</button>
                 </div>
             </div>
         </div>
@@ -233,7 +240,7 @@
                 <div class="d-flex justify-content-between tm-text-gray">
                     <!--发售时间-->
                     <span class="tm-text-gray-light">17 June 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="1462040">Purchase</button>
                     
                 </div>
             </div>
@@ -248,7 +255,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">14 Jan 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="1593500">Purchase</button>
                 </div>
             </div>
     
@@ -262,7 +269,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">12 Aug 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="1817070">Purchase</button>
                 </div>
             </div>
     
@@ -276,7 +283,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">8 Nov 2022</span>
-                    <button class="btn btn-secondary btn-sm" type="submit">Purchase</button>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="1237320">Purchase</button>
                 </div>
             </div>
         </div>
@@ -284,6 +291,26 @@
         <!-- TODO -->
         
         <!-- row -->
+    </div>
+
+
+    <!-- pop up window -->
+    <div class="modal-confirm" style="display: none" id="success">
+        <button class="close-button">&times;</button>
+
+        <div class="check" style="position: absolute; top:50%">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+        <circle style="fill:#25AE88;" cx="25" cy="25" r="25"/>
+        <polyline style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+        38,15 22,33 12,25 "/>
+    </svg>
+
+
+    </div>
+    <div class="prompt">
+        Purchase Completed!
+    </div>
     </div>
 
     
@@ -350,5 +377,48 @@
             $('body').addClass('loaded');
         });
     </script>
+
+    <script>
+        $('button:contains("Purchase")').on('click', function(){
+            var game_id = $(this).attr('id');
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            var con_id = urlParams.get('con_id');
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth()+1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+
+            today = mm + ' ' + dd + ' ' + yyyy;
+            
+            $.ajax({
+                url : '/consumer/purchase',
+                type: 'POST',
+                dataType: 'json',
+                data: jQuery.param({
+                    game_id : game_id,
+                    con_id : con_id, 
+                    date: today
+                }),
+                success: function(response){
+                    var state = response.state;
+
+                    if(state == 'successful'){
+                    $('#success .prompt').empty().append('Purchase Completed!');
+                    $('#success').css('display', 'block');
+                    }
+                }
+            })
+        });
+    </script>
+
+<script>
+    $('.modal-confirm .close-button').on('click', function(){
+      $('.modal-confirm').css('display', 'none');
+    });
+
+</script>
 </body>
 </html>
