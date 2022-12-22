@@ -311,10 +311,8 @@ def purchase():
 @app.route('/library', methods = ['GET'])
 def library():
     con_id = request.args.get('con_id')
-    name=get_con_name(con_id)
-    num, lib_info = get_lib_info(con_id)
     
-    return render_template('consumer.html')
+    return render_template(f'consumer.html?con_id={con_id}')
 
 
 

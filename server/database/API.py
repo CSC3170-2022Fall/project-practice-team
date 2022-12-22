@@ -528,3 +528,17 @@ def select_game_by_cate_name(cate_name):
     ).format(cate_name)
 
     return script
+
+
+@handler('super')
+def get_con_name(con_id):
+    script = (
+        "SELECT name "
+        "FROM consumer "
+        "WHERE ID = {}"
+    ).format(con_id)
+    
+    return script
+
+# def get_con_name(con_id):
+#     return __get_con_name(con_id)[0][0]
