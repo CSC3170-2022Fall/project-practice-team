@@ -10,7 +10,7 @@
 }
 
 .modal-confirm .check{
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 0%;
     height: 25%;
@@ -19,14 +19,14 @@
 }
 
 .modal-confirm .prompt{
-    position: absolute;
+    position: fixed;
     left: 50%;
     width: 80%;
     transform: translate(-50%, 0%);
 }
 
 .modal-confirm .close-button{
-    position: absolute;
+    position: fixed;
     top: -10px;
     right: 0;
     font-size: 2rem;
@@ -38,7 +38,7 @@
 }
 
 .prompt{
-    position: absolute;
+    position: fixed;
     display: inline-block;
     top: 60%;
     left: 50%;

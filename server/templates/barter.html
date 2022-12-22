@@ -335,13 +335,13 @@ https://templatemo.com/tm-556-catalog-z
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link nav-link-1" aria-current="page" href="/market" style="color: beige">Market</a>
+                    <a class="nav-link nav-link-1" aria-current="page" href="/market?con_id={{con_id}}" style="color: beige">Market</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-2" href="/consumer" style="color:beige">Library</a>
+                    <a class="nav-link nav-link-2" href="/consumer?con_id={{con_id}}" style="color:beige">Library</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-3 active" href="/barter" style="color:beige">Barter</a>
+                    <a class="nav-link nav-link-3 active" href="/barter?con_id={{con_id}}" style="color:beige">Barter</a>
                 </li>
             </ul>
             </div>
@@ -368,6 +368,7 @@ https://templatemo.com/tm-556-catalog-z
                 </form>
             </div> -->
         </div>
+
         <div class="row tm-mb-90 tm-gallery">
 
             {% for tuple in barter_tuples %}
@@ -407,7 +408,7 @@ https://templatemo.com/tm-556-catalog-z
                     </table>
                 </div>
                 <div class="d-flex justify-content-between tm-text-gray" style="position: relative">
-                    <button class="show-modal deal-button">DEAL</button>
+                    <button class="btn btn-secondary show-modal deal-button">DEAL</button>
                 </div>
             </div>
             {% endfor %}

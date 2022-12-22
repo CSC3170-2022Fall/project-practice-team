@@ -85,23 +85,30 @@ from random import shuffle
 
 @app.route('/market')
 def market():
+    con_id  = request.args.get('con_id')
     game_info = []
     cate_list = [
-        'strategy', 'action', 'card game', 'first-person', 'open world', 'rhythm'
+        'strategy', 'action', 'card game', 'first-person', 'open world', 'adventure'
     ]
+    order_list=[]
+    name=get_con_name(con_id)
+    for i in range(6):
+        order_list.append(i)
     for cate in cate_list:
         res = select_game_by_cate_name(cate)
         shuffle(res)
         game_info.append(
             res[:4]
         )
-    return render_template('index.html')
+    return render_template('index.html', con_id=con_id, cate_list=cate_list, game_info=game_info, order_list=order_list, name=name)
 
 
 
 @app.route('/consumer')
 def consumer():
-    return render_template('consumer.html', games=None, username=None, purchase_date=None)
+    con_id = request.args.get('con_id')
+    game_num, game_list = get_lib_info(con_id)
+    return render_template('consumer.html', con_id=con_id, game_num=game_num, game_list=game_list, games=None, username=None, purchase_date=None)
 
 
 
@@ -109,7 +116,8 @@ def consumer():
 def game():
     ID = 0; NAME = 1; PRICE = 2; PUB_ID = 3; R_DATE = 4
     id = request.args.get('game_id')
-    
+    con_id = request.args.get('con_id')
+
     '''
         retrieve game basic info from game table, including:
         name; price; publisher id; release data
@@ -148,6 +156,7 @@ def game():
     
 
     return render_template('gamepage.html',
+                            con_id=con_id,
                            id=game_info[ID], name=game_info[NAME],
                            release_date=game_info[R_DATE], price=game_info[PRICE],
                            pub_name=pub_info[NAME],
@@ -302,7 +311,7 @@ def purchase():
 @app.route('/library', methods = ['GET'])
 def library():
     con_id = request.args.get('con_id')
-    
+    name=get_con_name(con_id)
     num, lib_info = get_lib_info(con_id)
     
     return render_template('consumer.html')
