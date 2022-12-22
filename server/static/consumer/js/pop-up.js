@@ -8,7 +8,8 @@ $('.show-modal').on('click', function(){
   
     $('.pop-up .pop-up-left .image-holder').append(
       $("<img>", {
-        src : img_sell_url
+        src : img_sell_url,
+        id : $(this).attr('id')
       }).css({
         "border": "white 3px solid",
         "max-width": "100%",

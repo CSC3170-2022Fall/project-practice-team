@@ -314,7 +314,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">18 Oct 2020</span>
-                    <button class="btn btn-secondary btn-sm show-modal" type="submit">Barter</button>
+                    <button class="btn btn-secondary btn-sm show-modal" type="submit" id="3590">Barter</button>
                 </div>
             </div>
             
@@ -452,7 +452,7 @@
                 url: search_url,
                 dataType: 'json',
                 success: function (data, status, xhr){
-                    let wishListItem = `<div class="wish-list-item mb-5">
+                    let wishListItem = `<div class="wish-list-item mb-5" id=${data}>
                         <figure class="effect-ming tm-video-item">
                             <img src=/static/pics/${data}.jpg alt="Image" class="img-fluid">
                             <figcaption class="d-flex align-items-center justify-content-center">
@@ -471,20 +471,45 @@
 
 
     <script>
-        $('.wish-list-button').on('click', function(){
+        $('.modal-confirm .close-button').on('click', function(){
+            $('.modal-confirm').css('display', 'none');
+        });
+    </script>
+
+    <!-- barter insert request handler -->
+    <script>
+        $('.wish-list-button').click(function(){
+
             var wishList = $('.wish-list-item');
             if (wishList.length < 1){
                 alert('You need to at least add one game!');
                 return;
             }
 
+            
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            var con_id = urlParams.get('con_id');
+            
+            var sell_id = $('.pop-up-left img').attr('id');
+            
+            var toBarter = $('.wish-list-item');
+            for(let i=0; i < toBarter.length; i++){
+                var wish_id = toBarter.eq(i).attr('id');
+                $.ajax({
+                    url : '/consumer/barter-issue',
+                    type: 'POST',
+                    data: jQuery.param({
+                        con_id : con_id,
+                        sell_id : sell_id,
+                        wish_id : wish_id
+                    })
+                })
+            }
             $('.modal-confirm').css('display', 'block');
-            var barter_url = '/barter/insert';
+
         });
 
-        $('.modal-confirm .close-button').on('click', function(){
-            $('.modal-confirm').css('display', 'none');
-        });
     </script>
 </body>
 </html>

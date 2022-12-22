@@ -125,6 +125,7 @@ TABLES['barter'] = (
     "`con_id`     int(7) not null,"
     "`sell_id`    int(7) not null,"
     "`wish_id`    int(7) not null,"
+    "`status`     varchar(6) not null,"
     "primary key (con_id, sell_id, wish_id))"
 )
 
@@ -406,6 +407,7 @@ db.commit()
 consumer_grant = (
     "GRANT SELECT ON AGDP.game TO `consumer`@`localhost`", 
     "GRANT SELECT ON AGDP.barter TO `consumer`@`localhost`",
+    "GRANT UPDATE ON AGDP.barter TO `consumer`@`localhost`",
     "GRANT INSERT ON AGDP.purchase TO `consumer`@`localhost`",
     "GRANT INSERT ON AGDP.rate TO `consumer`@`localhost`",
     "GRANT INSERT ON AGDP.barter TO `consumer`@`localhost`",

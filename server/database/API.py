@@ -244,11 +244,115 @@ def purchase_select(con_id):
     ).format(con_id)
     return script
 
+@handler('super')
+def purchase_delete(con_id, game_id):
+    script = (
+        "DELETE FROM purchase "
+        "WHERE con_id = {} and game_id = {}"
+    ).format(con_id, game_id)
+    
+    return script
+    
 def get_lib_info(con_id):
     res = purchase_select(con_id)
     
     return len(res), res
+
+
+'''
+    barter table
+'''
+@handler('consumer')
+def barter_insert(con_id, sell_id, wish_id, status):
+    script = (
+        "INSERT INTO barter (`con_id`, `sell_id`, `wish_id`, `status`) "
+        "VALUES ("
+        "'{}',"
+        "'{}',"
+        "'{}',"
+        "\"{}\")").format(con_id, sell_id, wish_id, status)
+    return script
+
+
+
+@handler('consumer')
+def __barter_update_deal(con_id, sell_id, wish_id):
+    deal_update_script = (
+       "UPDATE barter "
+       "SET `status` = \"deal\" "
+       "WHERE con_id  = {} and sell_id = {} and wish_id = {}" 
+    ).format(con_id, sell_id, wish_id)
     
+    return deal_update_script
+
+@handler('consumer')
+def __barter_update_closed(con_id, sell_id, wish_id):
+    closed_update_script = (
+        "UPDATE barter "
+        "SET `status` = \"closed\" "
+        "WHERE con_id = {} and sell_id = {} and wish_id != {}"
+    ).format(con_id, sell_id, wish_id)
+    
+    return closed_update_script
+    
+
+def barter_update(seller_con_id, buyer_con_id, sell_id, wish_id, date):
+    __barter_update_deal(seller_con_id, sell_id, wish_id)
+    __barter_update_closed(seller_con_id, sell_id, wish_id)
+    
+    # exchange game
+    purchase_insert(con_id=buyer_con_id,  game_id=sell_id, date=date)
+    purchase_insert(con_id=seller_con_id, game_id=wish_id, date=date)
+    
+    purchase_delete(con_id=seller_con_id, game_id=sell_id)
+    purchase_delete(con_id=buyer_con_id,  game_id=wish_id)
+    
+
+
+
+
+@handler('super')
+def __barter_select_con():
+    
+    # script = (
+    #     "SELECT con_id, sell_id, game.name, game.price, purchase.date" 
+    #     "FROM barter INNER JOIN game "
+    #     "ON barter.sell_id = game.ID "
+    #     "WHERE status = \"open\" "
+    #     "GROUP BY `con_id`, `sell_id` " 
+    # )
+    
+    script = (
+        "SELECT barter.con_id, sell_id, game.name, game.price, purchase.date " 
+        "FROM barter INNER JOIN ("
+        "     game INNER JOIN purchase "
+        "     ON game.ID = purchase.game_id "
+        ") ON barter.sell_id = game.ID "
+        "WHERE status = \"open\" "
+        "GROUP BY barter.con_id, sell_id, purchase.date"
+    )
+    return script
+
+@handler('super')
+def __barter_select_wish_by_con(con_id, sell_id):
+    script = (
+        "SELECT wish_id, game.name "
+        "FROM barter INNER JOIN game "
+        "ON barter.wish_id = game.ID "
+        "WHERE con_id = {} and sell_id = {} and status = \"open\""
+    ).format(con_id, sell_id)
+    
+    return script
+    
+def barter_select():
+    res = []
+    con_sell_list = __barter_select_con()
+    for (con_id, sell_id, sell_name, price, date) in con_sell_list:
+        wish_list = __barter_select_wish_by_con(con_id, sell_id)
+        res.append(
+            [con_id, [sell_id, sell_name, price, date] , wish_list]
+        )
+    return res
 
 
 '''

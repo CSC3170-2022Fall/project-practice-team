@@ -7,7 +7,13 @@ from flask import jsonify
 
 import os
 from io import BytesIO
+from PIL import Image
 
+
+from calendar import month_name
+name2mon_name = {
+    str(k) : v for (k, v) in enumerate(month_name) if k != 0
+}
 
 
 
@@ -15,8 +21,9 @@ app = Flask(__name__)
 meta = dict()
 
 # path where the uploaded game pictures are stored on the server
-UPLOAD_FOLDER = '/static/tmp'
+UPLOAD_FOLDER = 'static/tmp'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+DEFAULT_IMAGE_SIZE = (460, 215)
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -59,8 +66,6 @@ def validate():
             })
         
         res = res[0]
-        print(password, res[2])
-        print(type(password), type(res[2]))
         
         # if password is correct
         if password == res[2]:
@@ -168,8 +173,66 @@ def game_search_name_contain():
 
 @app.route('/barter')
 def barter():
-    return render_template('barter.html')
+    barter_tuples = barter_select()
+    print(barter_tuples)
+    return render_template('barter.html', barter_tuples=barter_tuples)
 
+
+@app.route('/consumer/barter-issue', methods=['POST'])
+def barter_issue():
+    con_id = request.form['con_id']
+    sell_id = request.form['sell_id']
+    wish_id = request.form['wish_id']
+    status = 'open'
+    
+    barter_insert(
+        con_id=con_id, sell_id=sell_id, wish_id=wish_id, status=status
+    )
+    
+    return jsonify({
+        'state' : 'successful'
+    })
+
+
+@app.route('/consumer/barter-deal', methods=['POST'])
+def barter_deal():
+    buyer_id  = request.form['buyer_id']
+    seller_id = request.form['seller_id']
+    sell_id   = request.form['sell_id']
+    wish_id   = request.form['wish_id']
+    date      = request.form['date']
+    
+    mm, dd, yyyy = date.replace('/', ' ').split(' ')
+    mm = name2mon_name[mm]
+    
+    date = dd + ' ' + mm + ' ' + yyyy
+    
+    _, owned_games = get_lib_info(buyer_id)
+    owned_games = [int(i[0]) for i in owned_games]
+    
+    if buyer_id == seller_id:
+        return jsonify({
+            'state' : 'recursive'
+        })
+        
+    if int(wish_id) not in owned_games:
+        return jsonify({
+            'state' : 'not_own'
+        })
+        
+
+    print(date)
+    print(buyer_id, seller_id, sell_id, wish_id)
+    
+    barter_update(
+        seller_con_id=seller_id, buyer_con_id=buyer_id,
+        sell_id=sell_id, wish_id=wish_id,
+        date=date
+    )
+    
+    return jsonify({
+        'state' : 'successful'
+    })
 
 
 '''
@@ -177,17 +240,23 @@ def barter():
 '''
 
 def valid_filename(filename):
-    extension = filename.rsplit('.')[0]
-    return extension.lower() == '.jpg'
+    extension = filename.split('.')[1]
+    print(extension)
+    return extension.lower() == 'jpeg' or extension.lower() == 'jpg'
 
 @app.route('/publisher/add-game', methods=['POST'])
 def pub_add_game():
-    print('hello')
     file = request.files['file']
     print(file.filename)
     if valid_filename(file.filename):
-        file.save(
-            os.path.join(app.config['UPLOAD_FOLDER'], 'test.jpg')
+        
+        buffer = BytesIO(file.read())
+        image = Image.open(buffer)
+        resized_img = image.resize(DEFAULT_IMAGE_SIZE)
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        resized_img.save(
+            os.path.join(basedir, app.config['UPLOAD_FOLDER'], 'ttttt.jpg'),
+            format='jpeg'
         )     
         return jsonify({
             'state' : 'successful'
@@ -205,13 +274,18 @@ def purchase():
     game_id = request.form['game_id']
     date    = request.form['date']
     
-    from calendar import month_name
-    name2mon_name = {
-        str(k) : v for (k, v) in enumerate(month_name) if k != 0
-    }
+    _, owned_games = get_lib_info(con_id)
+    owned_games = [int(i[0]) for i in owned_games]
+    
+    if int(game_id) in owned_games:
+        return jsonify({
+            'state' : 'duplicate'
+        })
+    
+    
     
     # parse date
-    mm, dd, yyyy = date.split(' ')
+    mm, dd, yyyy = date.replace('/', ' ').split(' ')
     mm = name2mon_name[mm]
     
     date = dd + ' ' + mm + ' ' + yyyy
@@ -232,6 +306,7 @@ def library():
     num, lib_info = get_lib_info(con_id)
     
     return render_template('consumer.html')
+
 
 
 

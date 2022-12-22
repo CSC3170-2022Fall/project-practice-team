@@ -69,7 +69,7 @@
             border: white 5px solid;
             border-radius: 10px;
             box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
-            z-index: 10;
+            z-index: 9999;
             color: white;
         }
 
@@ -205,6 +205,7 @@
         .wish-list-item img{
             cursor: pointer;
             border: white 3px solid;
+            z-index: 99999;
         }
 
         .wish-list-button{
@@ -297,6 +298,7 @@
     <link rel="stylesheet" href="/static/barter/style.css">
 
 
+
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -367,27 +369,32 @@ https://templatemo.com/tm-556-catalog-z
             </div> -->
         </div>
         <div class="row tm-mb-90 tm-gallery">
+
+            {% for tuple in barter_tuples %}
         	<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item" style="margin: 0 0 0">
-                    <img src="/static/pics/3590.jpg" alt="Image" class="img-fluid">
+                    <img src="/static/pics/{{tuple[1][0]}}.jpg" alt="Image" class="img-fluid" id="{{tuple[1][0]}}" con-id="{{tuple[0]}}" price="{{tuple[1][2]}}" date="{{tuple[1][3]}}">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Plants V.S Zombies</h2>
-                        <a href="/game?id=3590.html">View more</a>
+                        <h2>{{tuple[1][1]}}</h2>
+                        <a href="/game?game_id={{tuple[1][0]}}">View more</a>
                     </figcaption>                    
                 </figure>
                 <div class="wish-list-display">
                     <table>
-                        <tr>
+                        <tr class="asdfasdfads">
+
+                        {% for item in tuple[2] %}
                         <td>
                             <figure class="effect-ming tm-video-item" style="margin: 0 0 0">
-                                <img src="/static/pics/3590.jpg" alt="Image" class="img-fluid">
+                                <img src="/static/pics/{{item[0]}}.jpg" alt="Image" class="img-fluid" id="{{item[0]}}">
                                 <figcaption class="d-flex align-items-center justify-content-center">
-                                    <h2 style="font-size: 20px;">Plants V.S Zombies</h2>
-                                    <a href="/game?id=3590.html">View more</a>
+                                    <h2 style="font-size: 20px;">{{item[1]}}</h2>
+                                    <a href="/game?game_id={{item[0]}}">View more</a>
                                 </figcaption>                    
                             </figure>
                         </td>
-                        <td>
+                        {% endfor %}
+                        <!-- <td>
                             <figure class="effect-ming tm-video-item" style="margin: 0 0 0">
                                 <img src="/static/pics/3590.jpg" alt="Image" class="img-fluid">
                                 <figcaption class="d-flex align-items-center justify-content-center">
@@ -395,7 +402,7 @@ https://templatemo.com/tm-556-catalog-z
                                     <a href="/game?id=3590.html">View more</a>
                                 </figcaption>                    
                             </figure>
-                        </td>
+                        </td> -->
                         </tr>
                     </table>
                 </div>
@@ -403,6 +410,7 @@ https://templatemo.com/tm-556-catalog-z
                     <button class="show-modal deal-button">DEAL</button>
                 </div>
             </div>
+            {% endfor %}
         </div> <!-- row -->
 
 
@@ -412,13 +420,13 @@ https://templatemo.com/tm-556-catalog-z
 
 
 
-
+<!-- 
         <div class="row tm-mb-90">
             <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
                 <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Previous</a>
                 <a href="javascript:void(0);" class="btn btn-primary tm-btn-next">Next Page</a>
             </div>            
-        </div>
+        </div> -->
     </div> <!-- container-fluid, tm-container-content -->
 
 
@@ -434,21 +442,21 @@ https://templatemo.com/tm-556-catalog-z
 
             </div>
             <div class="prompt">
-                <span>Price: 28.8$</span>
-                <span>Time: 11/28/2022</span>
+                <span id="price"></span>
+                <span id="date"></span>
             </div>
         </div>
         <div class="pop-up-right">
             <h1>Click One Game Below to Exchange</h1>
 
             <div class="wish-list-gallery">
-                <div class="wish-list-item mb-5">
+                <!-- <div class="wish-list-item mb-5">
                     <img src="/static/pics/3590.jpg" alt="Image" class="img-fluid">
                 </div>
 
                 <div class="wish-list-item mb-5">
                     <img src="/static/pics/3590.jpg" alt="Image" class="img-fluid">
-                </div>
+                </div> -->
             </div> <!-- row -->
         
             <button class="wish-list-button" style="position: absolute; top:90%; left: 50%; width: 25%; transform: translate(-50%, -50%)">DEAL✔️</button>
@@ -476,6 +484,26 @@ https://templatemo.com/tm-556-catalog-z
     </div>
     <div class="prompt">
         Deal Completed!
+    </div>
+    </div>
+
+    <div class="modal-confirm" style="display: none" id="failure">
+        <button class="close-button">&times;</button>
+
+        <div class="check" style="position: absolute; top:50%">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+       <path style="fill:#FF6465;" d="M384.955,256l120.28-120.28c9.019-9.019,9.019-23.642,0-32.66L408.94,6.765
+         c-9.019-9.019-23.642-9.019-32.66,0l-120.28,120.28L135.718,6.765c-9.019-9.019-23.642-9.019-32.66,0L6.764,103.058
+         c-9.019,9.019-9.019,23.642,0,32.66l120.28,120.28L6.764,376.28c-9.019,9.019-9.019,23.642,0,32.66l96.295,96.294
+         c9.019,9.019,23.642,9.019,32.66,0l120.28-120.28l120.28,120.28c9.019,9.019,23.642,9.019,32.66,0l96.295-96.294
+         c9.019-9.019,9.019-23.642,0-32.66L384.955,256z"/>
+       </svg>       
+
+
+    </div>
+    <div class="prompt">
+
     </div>
     </div>
 
@@ -520,14 +548,32 @@ https://templatemo.com/tm-556-catalog-z
             $('body').addClass('loaded');
         });
     </script>
-    <script>
-        $('.basicAutoComplete').autoComplete({
-            resolverSettings: {
-                url : '/game/search/by-name'
-            }
-        })
     </script>
     <!-- pop up window -->
     <script src="/static/barter/script.js"></script>
+    <script>
+        $('.pop-up-right button').click(function(){
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            var con_id = urlParams.get('con_id');
+
+            var soldGame    = $('.pop-up-right img').attr('id');
+            var seletedGame = $('.selected').attr('id');
+
+            $.ajax({
+                url : '/consumer/barter-deal',
+                type : 'POST',
+                data : jQuery.param({
+                    con_id : con_id,
+                    sell_id : soldGame,
+                    wish_id : selectedGame
+                })
+            })
+
+        });
+
+    </script>
+
+
 </body>
 </html>

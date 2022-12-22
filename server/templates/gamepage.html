@@ -187,24 +187,22 @@
     
                         <div id="respond" class="comment-respond">
                             <h3 id="reply-title" class="comment-reply-title">Leave the information of your game <small><a rel="nofollow" id="cancel-comment-reply-link" href="#respond" style="display:none;">Cancel reply</a></small></h3>
-                            <form>
-                                <p><label for="url">Game Name</label><input id="url" name="url" type="text" value="" size="30" placeholder="Game Name"></p>    
-                                <p><label for="url">Developer</label><input id="url" name="url" type="text" value="" size="30" placeholder="Developer"></p>
-                                <p><label for="url">Publisher</label><input id="url" name="url" type="text" value="" size="30" placeholder="Publisher"></p>
-                                <p><label for="url">Price</label><input id="url" name="url" type="text" value="" size="30" placeholder="Price"></p>
-                                <p><label for="url">Release time</label><input id="url" name="url" type="text" value="" size="30" placeholder="Release time"></p>
-                                <p><label for="url">TAGS</label><input id="url" name="url" type="text" value="" size="30" placeholder="TAGS"></p>
-                                <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="join us"></p>
-                            </form>
+                            <form class="game-upload"  action="/publisher/add-game" enctype="multipart/form-data" method="post" onsubmit="return validate()">
+                                <p><label for="url">Game Name</label><input id="game_name" name="game_name" type="text" value="" size="30" placeholder="Game Name"></p>    
+                                <p><label for="url">Developer</label><input id="dev_name" name="dev_name" type="text" value="" size="30" placeholder="Developer"></p>
+                                <p><label for="url">Publisher</label><input id="pub_name" name="pub_name" type="text" value="" size="30" placeholder="Publisher"></p>
+                                <p><label for="url">Price</label><input id="price" name="price" type="text" value="" size="30" placeholder="Price"></p>
+                                <p><label for="url">Release time</label><input id="date" name="date" type="text" value="" size="30" placeholder="Release time"></p>
+                                <p><label for="url">TAGS</label><input id="tags" name="tags" type="text" value="" size="30" placeholder="TAGS"></p>
+                                <!-- <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="join us"></p> -->
 
                             <h4 id="reply-title" class="comment-reply-title">You need to offer one game photo: <small><a rel="nofollow" id="cancel-comment-reply-link" href="#respond" style="display:none;">Cancel reply</a></small></h4>
                             
 
-                            <form class="img-upload" onsubmit="return false" enctype="multipart/form-data">
                                 <p>
                                 <label for="url">photo</label>
-                                <input id="url" name="url" type="file" value="" size="30" placeholder="photo">
-                                <button>Upload Picture</button>
+                                <input id="file" name="file" type="file" value="" size="30" placeholder="photo"/>
+                                <button type="submit">Join Us</button>
                                 </p> 
                             </form>
 
@@ -233,26 +231,39 @@
 <script src="../static/gamepage/js/global-plugins.min.js"></script>
 <script src="../static/gamepage/js/main.js"></script>
 
+
+<!-- game upload form validation -->
 <script>
-    $('.img-upload button').on('click', function(){
-        var formData = new FormData();
-        // formData.append('file', $('.img-upload')[0].files[0]);
+    function validate(){
+        var game_name = $('#game_name').val().length;
+        var dev_name = $('#dev_name').val().length;
+        var pub_name = $('#pub_name').val().length;
+        var price = $('#price').val().length;
+        var tags = $('#tags').length;
 
-        $.ajax({
-            url : '/publisher/add-game',
-            type : 'POST',
-            dataType: 'json',
-            data: formData,
-            processData: false,
-            success: function(){
-                alert('success');
-            },
-            error: function(){
-                alert('failed');
-            }
-        })
-    });
+        if (game_name == 0 | dev_name == 0 | pub_name == 0 | price == 0 | tags == 0){
+            alert('Form Incompete!');
+            return false;
+        }
+        if ($('#file')[0].files.length == 0){
+            alert('You should upload a picture of the game to be uploaded!');
+            return false;
+        }
+        return true;
+    };
+</script>
 
+<script>
+    $('#date').ready(function(){
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth()+1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        $('#date').val(today);
+        $('#date').attr('disabled', true);
+    })
 </script>
 
 

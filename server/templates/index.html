@@ -57,14 +57,12 @@
         </div>
     </nav>
 
-    <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll">
-        <form class="d-flex tm-search-form">
-            <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success tm-search-btn" type="submit">
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
-    </div>
+    <!-- <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll">
+        <input class="form-control tm-search-input" type="text" placeholder="Search" id="game-search" autocomplete="off" name="name">
+        <button class="btn btn-outline-success tm-search-btn" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+    </div> -->
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
@@ -313,6 +311,34 @@
     </div>
     </div>
 
+    <div class="modal-confirm" style="display: none" id="failure">
+        <button class="close-button">&times;</button>
+
+        <div class="check" style="position: absolute; top:50%">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+       <path style="fill:#FF6465;" d="M384.955,256l120.28-120.28c9.019-9.019,9.019-23.642,0-32.66L408.94,6.765
+         c-9.019-9.019-23.642-9.019-32.66,0l-120.28,120.28L135.718,6.765c-9.019-9.019-23.642-9.019-32.66,0L6.764,103.058
+         c-9.019,9.019-9.019,23.642,0,32.66l120.28,120.28L6.764,376.28c-9.019,9.019-9.019,23.642,0,32.66l96.295,96.294
+         c9.019,9.019,23.642,9.019,32.66,0l120.28-120.28l120.28,120.28c9.019,9.019,23.642,9.019,32.66,0l96.295-96.294
+         c9.019-9.019,9.019-23.642,0-32.66L384.955,256z"/>
+       </svg>       
+
+
+    </div>
+    <div class="prompt">
+
+    </div>
+    </div>
+
+
+    <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll">
+        <input class="form-control tm-search-input" type="text" placeholder="Search" id="game-search" autocomplete="off" name="name">
+        <button class="btn btn-outline-success tm-search-btn" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+
     
 
 
@@ -406,8 +432,13 @@
                     var state = response.state;
 
                     if(state == 'successful'){
-                    $('#success .prompt').empty().append('Purchase Completed!');
-                    $('#success').css('display', 'block');
+                        $('#success .prompt').empty().append('Purchase Completed!');
+                        $('#success').css('display', 'block');
+                    }
+                    else if(state == 'duplicate'){
+                        $('#failure .prompt').empty().append('You\' Owned This Game!');
+                        $('#failure').css('display', 'block');
+
                     }
                 }
             })
@@ -415,10 +446,62 @@
     </script>
 
 <script>
-    $('.modal-confirm .close-button').on('click', function(){
+    $('.modal-confirm .close-button').click(function(e){
+      e.stopPropagation();
       $('.modal-confirm').css('display', 'none');
     });
+</script>
+
+<script>
+    $('#game-search').autocomplete({
+        source: function(request, response){
+            var substr = $('#game-search').val();
+            var search_url = "/game/search/name-contain?substr=" + substr;
+            $.ajax({
+                url: search_url,
+                success: function(data, status, xhr){
+                    response(data);
+                },
+                error: function(){
+                    response([]);
+                }
+            });
+        }
+    });
+</script>
+
+<script>
+  $( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#wish-list-search" ).autocomplete({
+      source: availableTags
+    });
+  } );
 
 </script>
+
 </body>
 </html>
