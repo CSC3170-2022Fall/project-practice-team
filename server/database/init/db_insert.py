@@ -126,7 +126,7 @@ TABLES['barter'] = (
     "`sell_id`    int(7) not null,"
     "`wish_id`    int(7) not null,"
     "`status`     varchar(6) not null,"
-    "primary key (con_id, sell_id, wish_id))"
+    "primary key (con_id, sell_id, wish_id, status))"
 )
 
 TABLES['purchase'] = (
@@ -152,6 +152,8 @@ TABLES['meta'] = (
     "`stub`     int(1),"
     "`con_cnt`  int(7),"
     "`pub_cnt`  int(7),"
+    "`dev_cnt`  int(7),"
+    "`cate_cnt`  int(7),"
     "`game_cnt` int(7))"
 )
 
@@ -330,13 +332,15 @@ cursor.execute("DROP TABLE IF EXISTS `meta`;")
 db.commit()
 cursor.execute(TABLES["meta"])
 cursor.execute((
-    "INSERT INTO meta (`stub`, `con_cnt`, `pub_cnt`, `game_cnt`)"
+    "INSERT INTO meta (`stub`, `con_cnt`, `pub_cnt`, `dev_cnt`, `cate_cnt`, `game_cnt`)"
     "VALUES ("
     "'{}',"
     "'{}',"
     "'{}',"
+    "'{}',"
+    "'{}',"
     "'{}')"
-).format(0,0,0, 2300000))
+).format(0,0,149,290,362,2300000))
 
 # init other empty tables
 
@@ -411,7 +415,8 @@ consumer_grant = (
     "GRANT INSERT ON AGDP.purchase TO `consumer`@`localhost`",
     "GRANT INSERT ON AGDP.rate TO `consumer`@`localhost`",
     "GRANT INSERT ON AGDP.barter TO `consumer`@`localhost`",
-    "GRANT SELECT ON AGDP.purchase TO `consumer`@`localhost`"
+    "GRANT SELECT ON AGDP.purchase TO `consumer`@`localhost`",
+    "GRANT DELETE ON AGDP.purchase TO `consumer`@`localhost`"
 )
 
 

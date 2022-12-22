@@ -11,7 +11,7 @@
             background-size: cover;
         }
         .modal-background {
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -26,7 +26,7 @@
         }
 
         .overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -44,7 +44,7 @@
 
 
         .pop-up {
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
 
@@ -57,7 +57,7 @@
             border: white 5px solid;
             border-radius: 10px;
             box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
-            z-index: 10;
+            z-index: 9999;
             color: white;
         }
 
@@ -232,6 +232,8 @@
             transform: translate(-50%, -50%);
         }
 
+        .ui-autocomplete{z-index: 99999 !important;}
+
 
     </style>
     <link rel="stylesheet" href="/static/consumer/css/bootstrap.min.css">
@@ -283,9 +285,9 @@
     </nav>
 
     <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll">
-        <form class="d-flex tm-search-form">
-            <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success tm-search-btn" type="submit">
+        <form class="d-flex tm-search-form" onsubmit="return false">
+            <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search" id="game-search" autocomplete="off">
+            <button class="btn btn-outline-success tm-search-btn" type="submit" id="redirect-search">
                 <i class="fas fa-search"></i>
             </button>
         </form>
@@ -307,7 +309,7 @@
             {% for game in game_list%}
         	<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="/static/pics/{{game[0]}}.jpg" alt="Image" class="img-fluid">
+                    <img src="/static/pics/{{game[0]}}.jpg" alt="Image" class="img-fluid" date="{{game[2]}}" price="{{game[3]}}">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>{{game[1]}}</h2>
                         <a href="/game?game_id={{game[0]}}&con_id={{con_id}}">View more</a>
@@ -315,7 +317,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">{{game[2]}}</span>
-                    <button class="btn btn-secondary btn-sm show-modal" type="submit" id="3590">Barter</button>
+                    <button class="btn btn-secondary btn-sm show-modal" type="submit" id="{{game[0]}}">Barter</button>
                 </div>
             </div>
             {%endfor%}
@@ -335,8 +337,7 @@
     
                 </div>
                 <div class="prompt">
-                    <span>Price: 28.8$</span>
-                    <span>Time: 11/28/2022</span>
+                    <span id="price"></span>
                 </div>
             </div>
             <div class="pop-up-right">
@@ -512,6 +513,54 @@
         });
 
     </script>
+
+    <script>
+        $('#game-search').autocomplete({
+            source: function(request, response){
+                var substr = $('#game-search').val();
+                var search_url = "/game/search/name-contain?substr=" + substr;
+                $.ajax({
+                    url: search_url,
+                    success: function(data, status, xhr){
+                        response(data);
+                    },
+                    error: function(){
+                        response([]);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        $('#redirect-search').click(function(){
+            var name = $(this).siblings('input').eq(0).val();
+
+            var search_url = '/game/search/by-name?name=' + name;
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            var con_id = urlParams.get('con_id');
+
+
+
+            $.ajax({
+                type: 'GET',
+                url: search_url,
+                dataType: 'json',
+                success: function (data, status, xhr){
+                    var redirected = '/game?game_id=' + data + '&con_id=' + con_id;
+                    window.location.href = redirected;
+                },
+                error: function (){
+                    alert('error!');
+                }
+            })
+
+        });
+    </script>
+
+    
 </body>
 </html>
 

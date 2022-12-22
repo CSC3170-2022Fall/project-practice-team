@@ -112,6 +112,7 @@ $('.pop-up-right button').on('click', function(){
     }),
     success: function(response){
       var state = response.state;
+      alert(state);
       if (state == 'successful'){
         $('#success').css('display', 'block');
       }

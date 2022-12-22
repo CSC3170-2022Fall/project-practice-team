@@ -146,61 +146,6 @@ def handler(mode):
     return decorator
 
 
-# @handler('consumer')
-# def consumer_purchase(id,game_id,date):
-#     script = (
-#         "INSERT INTO purchase (`con_id`,`game_id`,date)"
-#         "VALUES ("
-#         "'{}',"
-#         "\"{}\","
-#         "\"{}\")"
-#     ).format(id, game_id, date)
-#     return script
-
-# @handler('consumer')
-# def consumer_barter(id,sell_id,wish_id):
-#     script = (
-#         "INSERT INTO barter (`con_id`,`sell_id`,`wish_id`)"
-#         "VALUES ("
-#         "'{}',"
-#         "\"{}\","
-#         "\"{}\")"
-#     ).format(id,sell_id,wish_id)
-#     return script
-
-# @handler('consumer')
-# def consumer_rate(id,game_id,score):
-#     script = (
-#         "INSERT INTO rate (`con_id`,`game_id`,`score`)"
-#         "VALUES ("
-#         "'{}',"
-#         "\"{}\","
-#         "\"{}\")"
-#     ).format(id,game_id,score)
-#     return script
-
-# @handler('consumer')
-# def consumer_library(id):
-#     script = (
-#         "SELECT 'game_id' AS game from purchase "
-#         "WHERE id = {}"
-#         "UNION"
-#         "SELECT 'wish_id' from barter "
-#         "WHERE id = {}"
-#         "MINUS"
-#         "SELECT 'sell_id' from barter "
-#         "WHERE id = {}"
-#     ).format(id)
-#     return script
-
-
-
-# @handler('super')
-# def game_type_insert():
-#     script = (
-#         "SELECT * from publisher"
-#     )
-#     return script
 
 '''
     game table
@@ -213,13 +158,38 @@ def game_select(id):
     ).format(id)
     return script
 
-# def game_rate(id):
-#     script = (
-#         "SELECT AVG(score)"
-#         "FROM rate"
-#         "WHERE id = {}"
-#     ).format(id)
-#     return script
+@handler('super')
+def __get_game_info():
+    script = (
+        "SELECT * FROM game "
+    ).format(id)
+    return script
+
+def get_game_info():
+    res = dict()
+    for (id, name) in __get_game_info():
+        res[name] = str(id)
+    return res
+    
+    
+    
+
+
+@handler('super')
+def game_insert(id, name, price, pub_id, release_date):
+    script = (
+        "INSERT INTO game (`ID`, `name`, `price`, `pub_id`, `release_date`) "
+        "VALUES ("
+        "'{}', "
+        "\"{}\","
+        "'{}', "
+        "'{}', "
+        "\"{}\")"
+    ).format(
+        id, name, price, pub_id, release_date
+    )
+    return script
+
 
 '''
     purchase table
@@ -237,14 +207,14 @@ def purchase_insert(con_id, game_id, date):
 @handler('consumer')
 def purchase_select(con_id):
     script = (
-        "SELECT game.ID, game.name, purchase.date "
+        "SELECT game.ID, game.name, purchase.date, game.price "
         "FROM purchase INNER JOIN game "
         "ON purchase.game_id = game.ID "
         "WHERE purchase.con_id = '{}'"
     ).format(con_id)
     return script
 
-@handler('super')
+@handler('consumer')
 def purchase_delete(con_id, game_id):
     script = (
         "DELETE FROM purchase "
@@ -311,16 +281,9 @@ def barter_update(seller_con_id, buyer_con_id, sell_id, wish_id, date):
 
 
 
-@handler('super')
+@handler('consumer')
 def __barter_select_con():
     
-    # script = (
-    #     "SELECT con_id, sell_id, game.name, game.price, purchase.date" 
-    #     "FROM barter INNER JOIN game "
-    #     "ON barter.sell_id = game.ID "
-    #     "WHERE status = \"open\" "
-    #     "GROUP BY `con_id`, `sell_id` " 
-    # )
     
     script = (
         "SELECT barter.con_id, sell_id, game.name, game.price, purchase.date " 
@@ -333,7 +296,7 @@ def __barter_select_con():
     )
     return script
 
-@handler('super')
+@handler('consumer')
 def __barter_select_wish_by_con(con_id, sell_id):
     script = (
         "SELECT wish_id, game.name "
@@ -370,13 +333,31 @@ def meta_select():
 
 
 @handler('super')
-def meta_update(con_cnt, pub_cnt):
+def meta_con_update(con_cnt, pub_cnt):
+    script = (
+        "UPDATE meta "
+        "SET `con_cnt` = {} "
+        "WHERE `stub` = 0").format(con_cnt, pub_cnt)
+    return script
+
+@handler('super')
+def meta_all_update(**kwargs):
     script = (
         "UPDATE meta "
         "SET `con_cnt` = {}, "
-        "    `pub_cnt` = {} "
-        "WHERE `stub` = 0").format(con_cnt, pub_cnt)
+        "    `pub_cnt` = {}, "
+        "    `dev_cnt` = {}, "
+        "    `cate_cnt` = {}, "
+        "    `game_cnt` = {} "
+        "WHERE `stub` = 0").format(
+            kwargs['con_cnt'],
+            kwargs['pub_cnt'],
+            kwargs['dev_cnt'],
+            kwargs['cate_cnt'],
+            kwargs['game_cnt']
+        )
     return script
+    
 
 
 
@@ -448,6 +429,32 @@ def pub_select(id):
     
     return script
 
+# get publisher dict
+@handler('super')
+def __get_pub_info():
+    script = (
+        "SELECT * FROM publisher "
+    )
+    return script
+
+def get_pub_info():
+    res = dict()
+    for (id, name) in __get_pub_info():
+        res[name] = str(id)
+    return res
+
+
+@handler('super')
+def pub_insert(id, name):
+    script = (
+        "INSERT INTO publisher (`ID`, `name`) "
+        "VALUES ("
+        "'{}',"
+        "\"{}\")"
+    ).format(id, name)
+    return script
+    
+
 '''
     developer table operation
 '''
@@ -462,11 +469,66 @@ def developer_select(id):
     return script
 
 
+# get publisher dict
+@handler('super')
+def __get_dev_info():
+    script = (
+        "SELECT * FROM developer "
+    )
+    return script
+
+def get_dev_info():
+    res = dict()
+    for (id, name) in __get_dev_info():
+        res[name] = str(id)
+    return res
+
+
+@handler('super')
+def developer_insert(id, name):
+    script = (
+        "INSERT INTO developer (`ID`, `name`) "
+        "VALUES ("
+        "'{}',"
+        "\"{}\")"
+    ).format(id, name)
+    return script
+    
+
+
+
+
 
 
 '''
     cate table operation
 '''
+# get cate dict
+@handler('super')
+def __get_cate_info():
+    script = (
+        "SELECT * FROM category "
+    )
+    return script
+
+def get_cate_info():
+    res = dict()
+    for (id, name) in __get_cate_info():
+        res[name] = str(id)
+    return res
+
+@handler('super')
+def cate_insert(id, name):
+    script = (
+        "INSERT INTO category (`ID`, `name`) "
+        "VALUES ("
+        "'{}',"
+        "\"{}\")"
+    ).format(id, name)
+    return script
+    
+
+
 @handler('super')
 def cate_id_select(id):
     script = (
@@ -542,3 +604,33 @@ def get_con_name(con_id):
 
 # def get_con_name(con_id):
 #     return __get_con_name(con_id)[0][0]
+
+
+'''
+    game_type operation
+'''
+
+@handler('super')
+def game_type_insert(game_id, cate_id):
+    script = (
+        "INSERT INTO game_type (`game_id`, `cate_id`) "
+        "VALUES ("
+        "'{}',"
+        "'{}')"
+    ).format(game_id, cate_id)
+    return script
+    
+
+
+''' develop operation '''
+
+@handler('super')
+def develop_insert(dev_id, game_id):
+    script = (
+        "INSERT INTO develop (`dev_id`, `game_id`) "
+        "VALUES ("
+        "'{}',"
+        "'{}')"
+    ).format(dev_id, game_id)
+    return script
+    

@@ -21,7 +21,7 @@ app = Flask(__name__)
 meta = dict()
 
 # path where the uploaded game pictures are stored on the server
-UPLOAD_FOLDER = 'static/tmp'
+UPLOAD_FOLDER = 'static/pics'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 DEFAULT_IMAGE_SIZE = (460, 215)
 
@@ -45,10 +45,9 @@ def validate():
         else:
             meta['con_cnt'] += 1;
             
-            meta_update(meta['con_cnt'], meta['pub_cnt'])
+            meta_con_update(meta['con_cnt'], meta['pub_cnt'])
             consumer_insert(meta['con_cnt'], username, password)
             
-            print(username, password)
             
             
             return jsonify({
@@ -171,7 +170,6 @@ def game():
 def game_search_id_by_name():
     name = request.args.get('name')
     res = game_select_id_by_name(name)
-
     
     return jsonify(res)
 
@@ -185,6 +183,7 @@ def game_search_name_contain():
 def barter():
     con_id = request.args.get('con_id')
     barter_tuples = barter_select()
+    print(barter_tuples)
     return render_template('barter.html', con_id=con_id, barter_tuples=barter_tuples)
 
 
@@ -219,6 +218,7 @@ def barter_deal():
     
     _, owned_games = get_lib_info(buyer_id)
     owned_games = [int(i[0]) for i in owned_games]
+    
     
     if buyer_id == seller_id:
         return jsonify({
@@ -257,6 +257,63 @@ def valid_filename(filename):
 @app.route('/publisher/add-game', methods=['POST'])
 def pub_add_game():
     file = request.files['file']
+    
+    upload_form = request.form.to_dict()
+    
+    meta['game_cnt'] += 1
+    game_id = meta['game_cnt']
+    game_name = upload_form['game_name']
+    dev_name  = upload_form['dev_name']
+    pub_name  = upload_form['pub_name']
+    price     = upload_form['price']
+    
+    date      = upload_form['date']
+    mm, dd, yyyy = date.replace('/', ' ').split(' ')
+    mm = name2mon_name[mm]
+    
+    date = dd + ' ' + mm + ' ' + yyyy
+    
+    tag       = upload_form['tags']
+    
+    exist_pub = get_pub_info()
+    if pub_name in exist_pub.keys():
+        pub_id = exist_pub[pub_name]
+    else:
+        meta['pub_cnt'] += 1
+        pub_id = meta['pub_cnt']
+        pub_insert(id=pub_id, name=pub_name)
+        
+    exist_dev = get_dev_info()
+    if dev_name in exist_dev.keys():
+        dev_id = exist_dev[dev_name]
+    else:
+        meta['dev_cnt'] += 1
+        dev_id = meta['dev_cnt']
+        developer_insert(id=dev_id, name=dev_name)
+        
+    exist_cate = get_cate_info()
+    if tag in exist_cate.keys():
+        cate_id = exist_cate[tag]
+    else:
+        meta['cate_cnt'] += 1
+        cate_id = meta['cate_cnt']
+        cate_insert(id=cate_id, name=tag)
+    
+
+    
+    develop_insert(dev_id=dev_id, game_id=game_id)
+    game_type_insert(game_id=game_id, cate_id=cate_id)
+    
+    
+    game_insert(
+        id=game_id, name=game_name,
+        price=price, pub_id=pub_id,
+        release_date=date
+    )
+    
+    meta_all_update(**meta)
+    
+    
     print(file.filename)
     if valid_filename(file.filename):
         
@@ -264,18 +321,16 @@ def pub_add_game():
         image = Image.open(buffer)
         resized_img = image.resize(DEFAULT_IMAGE_SIZE)
         basedir = os.path.abspath(os.path.dirname(__file__))
+        
         resized_img.save(
-            os.path.join(basedir, app.config['UPLOAD_FOLDER'], 'ttttt.jpg'),
+            os.path.join(basedir, app.config['UPLOAD_FOLDER'], f'{game_id}.jpg'),
             format='jpeg'
         )     
-        return jsonify({
-            'state' : 'successful'
-        })
+        return 'Successful!'
         
     else:
-        return jsonify({
-            'state' : 'wrong_extension'
-        })
+        return 'Invalid Upload!'
+    
     
     
 @app.route('/consumer/purchase', methods=['POST'])
@@ -326,6 +381,8 @@ if __name__ == '__main__':
     init_meta = meta_select()
     meta['con_cnt']  = init_meta[0][1]
     meta['pub_cnt']  = init_meta[0][2]
-    meta['game_cnt'] = init_meta[0][3]
+    meta['dev_cnt']  = init_meta[0][3]
+    meta['cate_cnt']  = init_meta[0][4]
+    meta['game_cnt'] = init_meta[0][5]
     
     app.run()

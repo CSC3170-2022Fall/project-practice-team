@@ -1,5 +1,8 @@
 $('.show-modal').on('click', function(){
-    let img_sell_url = $(this).parents('div').eq(1).children('figure').eq(0).children('img').eq(0).attr('src');
+    var $img = $(this).parents('div').eq(1).children('figure').eq(0).children('img').eq(0);
+    let img_sell_url = $img.attr('src');
+
+    let price = $img.attr('price');
   
     $('.pop-up').css('display', 'initial');
     $('.modal-background').css('display', 'block');
@@ -16,6 +19,7 @@ $('.show-modal').on('click', function(){
         "max-height": "100%"
       })
     );
+    $('#price').empty().append('Price: ' + price + '$');
   
   });
   

@@ -30,6 +30,7 @@
           type="text/css" media="screen"/>
     <link rel="stylesheet" href="../static/gamepage/style.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="../static/gamepage/print.css" type="text/css" media="print"/>
+    <link rel="stylesheet" href="/static/confirm-pop-up/style.css">
     <!--[if (lt IE 9) & (!IEMobile)]>
     <link rel="stylesheet" id="lt-ie9-css" href="ie.css" type="text/css" media="screen"/>
     <![endif]-->
@@ -93,7 +94,7 @@
                     <div class="post-content">
                         <blockquote><p>“You are lucky!!!This fun game is on sale at a lower price!!!”<cite>Price: {{price}}$</cite></p>
                             <div class="btn">
-                                <button type="submit">Purchase</button>
+                                <button type="submit" id="purchase">Purchase</button>
                             </div>
                         </blockquote><!--这里换成price-->
                     </div>
@@ -188,10 +189,11 @@
                         <div id="respond" class="comment-respond">
                             <h3 id="reply-title" class="comment-reply-title">Leave the information of your game <small><a rel="nofollow" id="cancel-comment-reply-link" href="#respond" style="display:none;">Cancel reply</a></small></h3>
                             <form class="game-upload"  action="/publisher/add-game" enctype="multipart/form-data" method="post" onsubmit="return validate()">
+                            <!-- <form class="game-upload"  action="/publisher/add-game" method="post" onsubmit="return validate()"> -->
                                 <p><label for="url">Game Name</label><input id="game_name" name="game_name" type="text" value="" size="30" placeholder="Game Name"></p>    
                                 <p><label for="url">Developer</label><input id="dev_name" name="dev_name" type="text" value="" size="30" placeholder="Developer"></p>
                                 <p><label for="url">Publisher</label><input id="pub_name" name="pub_name" type="text" value="" size="30" placeholder="Publisher"></p>
-                                <p><label for="url">Price</label><input id="price" name="price" type="text" value="" size="30" placeholder="Price"></p>
+                                <p><label for="url">Price($)</label><input id="price" name="price" type="text" value="" size="30" placeholder="Price"></p>
                                 <p><label for="url">Release time</label><input id="date" name="date" type="text" value="" size="30" placeholder="Release time"></p>
                                 <p><label for="url">TAGS</label><input id="tags" name="tags" type="text" value="" size="30" placeholder="TAGS"></p>
                                 <!-- <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="join us"></p> -->
@@ -203,7 +205,7 @@
                                 <label for="url">photo</label>
                                 <input id="file" name="file" type="file" value="" size="30" placeholder="photo"/>
                                 <button type="submit">Join Us</button>
-                                </p> 
+                            </p> 
                             </form>
 
                         </div><!-- #respond -->
@@ -218,6 +220,44 @@
 
 
     </div><!-- /main-wrap -->
+        <!-- pop up window -->
+        <div class="modal-confirm" style="display: none" id="success">
+            <a class="close-button">&times;</a>
+    
+            <div class="check" style="position: absolute; top:50%">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+            <circle style="fill:#25AE88;" cx="25" cy="25" r="25"/>
+            <polyline style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+            38,15 22,33 12,25 "/>
+        </svg>
+    
+    
+        </div>
+        <div class="prompt">
+            Purchase Completed!
+        </div>
+        </div>
+    
+        <div class="modal-confirm" style="display: none" id="failure">
+            <button class="close-button">&times;</button>
+    
+            <div class="check" style="position: absolute; top:50%">
+              <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+           <path style="fill:#FF6465;" d="M384.955,256l120.28-120.28c9.019-9.019,9.019-23.642,0-32.66L408.94,6.765
+             c-9.019-9.019-23.642-9.019-32.66,0l-120.28,120.28L135.718,6.765c-9.019-9.019-23.642-9.019-32.66,0L6.764,103.058
+             c-9.019,9.019-9.019,23.642,0,32.66l120.28,120.28L6.764,376.28c-9.019,9.019-9.019,23.642,0,32.66l96.295,96.294
+             c9.019,9.019,23.642,9.019,32.66,0l120.28-120.28l120.28,120.28c9.019,9.019,23.642,9.019,32.66,0l96.295-96.294
+             c9.019-9.019,9.019-23.642,0-32.66L384.955,256z"/>
+           </svg>       
+    
+    
+        </div>
+        <div class="prompt">
+    
+        </div>
+        </div>
 
 
 </div><!-- /wrap -->
@@ -249,6 +289,7 @@
             alert('You should upload a picture of the game to be uploaded!');
             return false;
         }
+        $('#date').attr('disabled', false);
         return true;
     };
 </script>
@@ -264,6 +305,57 @@
         $('#date').val(today);
         $('#date').attr('disabled', true);
     })
+</script>
+
+
+<!-- listen on purchase button -->
+<script>
+    $('#purchase').click(function(){
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        var con_id  = urlParams.get('con_id');
+        var game_id = urlParams.get('game_id');
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth()+1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+
+        $.ajax({
+                url : '/consumer/purchase',
+                type: 'POST',
+                dataType: 'json',
+                data: jQuery.param({
+                    game_id : game_id,
+                    con_id : con_id, 
+                    date: today
+                }),
+                success: function(response){
+                    var state = response.state;
+
+                    if(state == 'successful'){
+                        $('#success .prompt').empty().append('Purchase Completed!');
+                        $('#success').css('display', 'block');
+                    }
+                    else if(state == 'duplicate'){
+                        $('#failure .prompt').empty().append('You\'ve Owned This Game!');
+                        $('#failure').css('display', 'block');
+
+                    }
+                }
+            })
+
+    });
+</script>
+
+<script>
+    $('.modal-confirm .close-button').click(function(e){
+      e.stopPropagation();
+      $('.modal-confirm').css('display', 'none');
+    });
 </script>
 
 

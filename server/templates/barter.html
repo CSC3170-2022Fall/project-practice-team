@@ -11,7 +11,7 @@
             background-repeat: no-repeat;
         }
         .modal-background {
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -32,7 +32,7 @@
         }
 
         .overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -50,7 +50,7 @@
 
 
         .pop-up {
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
 
@@ -129,7 +129,7 @@
             width: 300px; */
         }
 
-        .prompt{
+        .pop-up-left .prompt{
             position: absolute;
             display: inline-block;
             top: 60%;
@@ -377,7 +377,7 @@ https://templatemo.com/tm-556-catalog-z
                     <img src="/static/pics/{{tuple[1][0]}}.jpg" alt="Image" class="img-fluid" id="{{tuple[1][0]}}" con-id="{{tuple[0]}}" price="{{tuple[1][2]}}" date="{{tuple[1][3]}}">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>{{tuple[1][1]}}</h2>
-                        <a href="/game?game_id={{tuple[1][0]}}">View more</a>
+                        <a href="/game?game_id={{tuple[1][0]}}&con_id={{con_id}}">View more</a>
                     </figcaption>                    
                 </figure>
                 <div class="wish-list-display">
@@ -390,7 +390,7 @@ https://templatemo.com/tm-556-catalog-z
                                 <img src="/static/pics/{{item[0]}}.jpg" alt="Image" class="img-fluid" id="{{item[0]}}">
                                 <figcaption class="d-flex align-items-center justify-content-center">
                                     <h2 style="font-size: 20px;">{{item[1]}}</h2>
-                                    <a href="/game?game_id={{item[0]}}">View more</a>
+                                    <a href="/game?game_id={{item[0]}}&con_id={{con_id}}">View more</a>
                                 </figcaption>                    
                             </figure>
                         </td>
@@ -470,7 +470,7 @@ https://templatemo.com/tm-556-catalog-z
 
 
 
-    <div class="modal-confirm" style="display: none">
+    <div class="modal-confirm" style="display: none" id="success">
         <button class="close-button">&times;</button>
 
         <div class="check" style="position: absolute; top:50%">
@@ -552,7 +552,8 @@ https://templatemo.com/tm-556-catalog-z
     </script>
     <!-- pop up window -->
     <script src="/static/barter/script.js"></script>
-    <script>
+
+    <!-- <script>
         $('.pop-up-right button').click(function(){
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
@@ -573,7 +574,7 @@ https://templatemo.com/tm-556-catalog-z
 
         });
 
-    </script>
+    </script> -->
 
 
 </body>
