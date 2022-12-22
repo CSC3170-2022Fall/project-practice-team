@@ -117,7 +117,7 @@
             width: 300px; */
         }
 
-        .prompt{
+        .pop-up-left .prompt{
             position: absolute;
             display: inline-block;
             top: 60%;
@@ -261,7 +261,7 @@
             <a class="navbar-brand" href="#">
                 <i class="fas fa-gamepad" style="color:beige"></i>
                 <!--这里换成用户名-->
-                <span style="color: beige">USERNAME</span>
+                <span style="color: beige">{{username}} 👋</span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
@@ -314,7 +314,7 @@
                     </figcaption>                    
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">18 Oct 2020</span>
+                    <span class="tm-text-gray-light">{{game[2]}}</span>
                     <button class="btn btn-secondary btn-sm show-modal" type="submit" id="3590">Barter</button>
                 </div>
             </div>

@@ -36,7 +36,7 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <i class="fas fa-gamepad" style="color:beige"></i>
-                <span style="color: beige">AGDP {{name[0][0]}}</span>
+                <span style="color: beige">{{name[0][0]}} 👋</span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
@@ -339,7 +339,7 @@
                         $('#success').css('display', 'block');
                     }
                     else if(state == 'duplicate'){
-                        $('#failure .prompt').empty().append('You\' Owned This Game!');
+                        $('#failure .prompt').empty().append('You\'ve Owned This Game!');
                         $('#failure').css('display', 'block');
 
                     }

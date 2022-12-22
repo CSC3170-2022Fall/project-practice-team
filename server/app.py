@@ -107,8 +107,9 @@ def market():
 @app.route('/consumer')
 def consumer():
     con_id = request.args.get('con_id')
+    username = get_con_name(con_id)[0][0]
     game_num, game_list = get_lib_info(con_id)
-    return render_template('consumer.html', con_id=con_id, game_num=game_num, game_list=game_list, games=None, username=None, purchase_date=None)
+    return render_template('consumer.html', con_id=con_id, game_num=game_num, game_list=game_list, games=None, username=username, purchase_date=None)
 
 
 
@@ -182,9 +183,9 @@ def game_search_name_contain():
 
 @app.route('/barter')
 def barter():
+    con_id = request.args.get('con_id')
     barter_tuples = barter_select()
-    print(barter_tuples)
-    return render_template('barter.html', barter_tuples=barter_tuples)
+    return render_template('barter.html', con_id=con_id, barter_tuples=barter_tuples)
 
 
 @app.route('/consumer/barter-issue', methods=['POST'])
@@ -312,7 +313,7 @@ def purchase():
 def library():
     con_id = request.args.get('con_id')
     
-    return render_template(f'consumer.html?con_id={con_id}')
+    return redirect(f'/consumer?con_id={con_id}')
 
 
 

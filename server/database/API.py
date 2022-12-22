@@ -237,7 +237,7 @@ def purchase_insert(con_id, game_id, date):
 @handler('consumer')
 def purchase_select(con_id):
     script = (
-        "SELECT game.ID, game.name "
+        "SELECT game.ID, game.name, purchase.date "
         "FROM purchase INNER JOIN game "
         "ON purchase.game_id = game.ID "
         "WHERE purchase.con_id = '{}'"
