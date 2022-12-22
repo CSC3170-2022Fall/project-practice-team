@@ -101,7 +101,17 @@ def market():
         )
     return render_template('index.html', con_id=con_id, cate_list=cate_list, game_info=game_info, order_list=order_list, name=name)
 
-
+@app.route('/tag')
+def tag():
+    con_id=request.args.get('con_id')
+    cate=request.args.get('cate')
+    name=get_con_name(con_id)
+    game_info=select_game_by_cate_name(cate)
+    l=len(game_info)
+    if(l>40):
+        l=40
+    game_info=game_info[:l]
+    return render_template('tag.html',con_id=con_id,game_info=game_info,name=name,cate=cate)
 
 @app.route('/consumer')
 def consumer():

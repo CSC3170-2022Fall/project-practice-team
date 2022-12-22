@@ -209,15 +209,14 @@
                 </div>
             </div>
         </nav>
-        {% for order in order_list %}
         <div class="row mb-4">
             <h2 class="col-6 tm-text-primary" style="color:beige">
-                {{cate_list[order]}}
+                {{cate}}
             </h2>
         </div>
         <!-- 做一个根据类别展示不同游戏的gallery栏 -->
         <div class="row tm-mb-90 tm-gallery">
-            {% for game in game_info[order] %}
+            {% for game in game_info%}
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
                     <img src="/static/pics/{{game[0]}}.jpg" alt="Image" class="img-fluid">
@@ -237,7 +236,6 @@
             </div>
             {% endfor %}
         </div>
-        {% endfor %}
         <!-- jinja template version -->
         <!-- TODO -->
         
@@ -339,24 +337,6 @@
     $('.modal-confirm .close-button').click(function(e){
       e.stopPropagation();
       $('.modal-confirm').css('display', 'none');
-    });
-</script>
-
-<script>
-    $('#game-search').autocomplete({
-        source: function(request, response){
-            var substr = $('#game-search').val();
-            var search_url = "/game/search/name-contain?substr=" + substr;
-            $.ajax({
-                url: search_url,
-                success: function(data, status, xhr){
-                    response(data);
-                },
-                error: function(){
-                    response([]);
-                }
-            });
-        }
     });
 </script>
 
