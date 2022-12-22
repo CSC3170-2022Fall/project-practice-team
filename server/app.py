@@ -90,7 +90,7 @@ def market():
         'strategy', 'action', 'card game', 'first-person', 'open world', 'adventure'
     ]
     order_list=[]
-    name=get_con_name(con_id)
+    name=get_con_name(con_id) 
     for i in range(6):
         order_list.append(i)
     for cate in cate_list:
