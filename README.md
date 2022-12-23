@@ -187,3 +187,13 @@ When a consumer clicks the  Purchase button, if the game is not in his(or her) l
 The library also provide search for game function. If the consumer wants to search one game to purchase, he(or her) just need to type the name of the game into search box, then go to the game detail page and purchase, the name of wanting game can be search by parts of the whole name. 
 
 ![lib_shot3](pics/library_shot3.png)
+
+### Gamepage
+
+On the gamepage page, users can browse game information such as game cover, game name, release date, developer, producer, purchase price, game type, and related game recommendations. 
+
+![gamepage](pics/gamepage.png)
+
+At the end of the page, an input port is reserved for developers to input information, and a file upload interface is provided.
+
+![upload](pics/upload.png)
