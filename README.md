@@ -199,3 +199,4 @@ At the end of the page, an input port is reserved for developers to input inform
 ![upload](pics/upload.png)
 
 Note that the upload format of upload only supports .jpg format.
+The rating function is not yet perfect, and this will be the direction of our future efforts.
