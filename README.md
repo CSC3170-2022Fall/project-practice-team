@@ -162,6 +162,8 @@ The navigating bar has a index button (the game console logo), a **Market button
 
 In Market page, our Advanced Game Distribution Platform will show you several **Featured & Recommended** game at the top side. You are able to browse these **featured games** or you can also **browse games by category**. Each item in this page will provide you with its **name**, **release date** and **price**. You can hover on the game to find its name. You have two choices of games you are interested, add it to your library of games immediately by clicking the 'Purchase' button at the bottom right corner, or, click the image of the game to access the game detail to double check your order. Once your purchase is made, you can check the game you owned in Library page.
 
+![browseByCate](pics/browse_cate.png)
+
 If you would like to have multiple accounts, it is possible for sure. We provide a 'log out' button at the top right corner in the market page to let you log out the current account so that you can use other account(s).
 
 For a game developer or publisher, you need to access the game detail page to upload your game.
