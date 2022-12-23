@@ -60,12 +60,41 @@ In this project, we hope to incorporate as many aspects of database as possible,
 
 ## Report
 
+presentation video link: 
+
+presentation slides link:
+
+To configure the environment ,run the app and resolve possible issues may occur , see [guide](/guide) for details.
 
 
 
+### Program Design
 
-
-
+```
+.
+├── docs								... supporting details for README.md
+├── guide								... guideline for environment setup and running the app
+├── pics								... pictures for README.md
+├── scrap 							... web scrap implementation
+│   ├── dict 						... ID corresponds to category/publisher/developer name, generated mannually
+│   │   └── *.pickle 
+│   ├── game_scrap.py		     ... main function for scrapping
+│   ├── schema.py/utils.py   ... utils used in game_scrap.py
+│   ├── random_gen.py				 ... post-processing scrapped raw data
+│   └── game.pickle					 ... games stored for database initailization
+│
+├── server
+│   ├── database 
+│   │   ├── init         
+│   │   │   └── db_insert.py/schema.py		... initialize database
+│   │   └── API.py			... mysql query function used by the server 
+│   ├── static 					... flask reserved folder, storing static data, such as pictures, js, css files
+│   ├── templates				... flask reserved folder, storing html templates to be rendered
+│   └── app.py					... app implementation
+│
+├── dump.sql						... dumped database at initial state for reference
+└── requirements.txt		... environment requirements for conda     
+```
 
 
 

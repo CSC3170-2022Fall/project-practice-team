@@ -14,6 +14,8 @@ or, you can install anaconda https://docs.anaconda.com/anaconda/install/, which 
 
 
 
+**For MacOs User**
+
 $\bullet$ After completing conda installation, create a new enviroment and download the necessary dependencies, do
 
 You need to pull the git repo first to get the "requirements.txt" file for this project
@@ -22,6 +24,14 @@ You need to pull the git repo first to get the "requirements.txt" file for this 
 cd to the repo folder in your computer
 $ conda create -n csc3170 --file requirements.txt
 $ conda activate csc3170
+```
+
+**For Windows User**
+
+We didn't provide conda requirements file for easy installation for Windows, you may need to manually install the packages with conda install. Necessary packages are listed here
+
+```
+flask[version 2.2.*], pillow, mysql-connector-python
 ```
 
 
@@ -37,4 +47,6 @@ $ conda activate csc3170
 In VSC, you can achieve this by selecting python interpreter, do
 
 Shift+Command+p (for Win, Shift+Control+p) $\rightarrow$ Type "Python: Select Interpreter" $\rightarrow$ Select "csc3170"
+
+
 
