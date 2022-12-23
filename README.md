@@ -197,3 +197,5 @@ On the gamepage page, users can browse game information such as game cover, game
 At the end of the page, an input port is reserved for developers to input information, and a file upload interface is provided.
 
 ![upload](pics/upload.png)
+
+Note that the upload format of upload only supports .jpg format.
