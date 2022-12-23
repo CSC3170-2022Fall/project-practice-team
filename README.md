@@ -147,3 +147,21 @@ In this example, when the function <b><font face="courier">job()</font></b> is i
 c. Specific API Functions(**/server/database/API.py**)
 
 Functions used by the server is implemented in **/server/database/API.py**, which will then be imported in **/server/app.py**. As we previously suggested, each of the functions are paired with a handler thread.
+
+### Account
+
+To store the needed information such as games that you owned or you want to barter, customer are required to log in before entering the market, library or barter page. If you haven't been one of us, you need to register an account first.
+
+### Market
+
+Once you registered and log in our platform, you will enter the market page. It is the index page and one of the fundamental page.
+
+The navigating bar has a index button (the game console logo), a **Market button**, a Library button and a **Barter button**. You can switch to the different pages by clicking the navigating button at the top.
+
+![marketShot](pics/market_shot.png)
+
+In Market page, our Advanced Game Distribution Platform will show you several **Featured & Recommended** game at the top side. You are able to browse these **featured games** or you can also **browse games by category**. Each item in this page will provide you with its **name**, **release date** and **price**. You can hover on the game to find its name. You have two choices of games you are interested, add it to your library of games immediately by clicking the 'Purchase' button at the bottom right corner, or, click the image of the game to access the game detail to double check your order. Once your purchase is made, you can check the game you owned in Library page.
+
+If you would like to have multiple accounts, it is possible for sure. We provide a 'log out' button at the top right corner in the market page to let you log out the current account so that you can use other account(s).
+
+For a game developer or publisher, you need to access the game detail page to upload your game.
