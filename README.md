@@ -34,26 +34,6 @@ After thorough discussion, our team made the choice and the specification inform
 
 As for Option 2, our topic background specification can be found in [background-specification.md](background-specification.md).
 
-
-
-#### TODO List
-
-$\bullet$ Frontend
-
-- [ ] TODO
-- [ ] TODO
-- [ ] TODO
-- [ ] TODO
-
-$\bullet$ Backend
-
-- [x] scrap data
-- [ ] create database
-- [ ] sql python api
-- [ ] url routing
-
-
-
 ## Project Abstract
 
 ### Overview
@@ -64,111 +44,13 @@ As a player, you can either purchase a game like you normally do on any game pla
 
 As a publisher, you can upload the game to sell and make purchases with the platform to determine where the sale info will be displayed on the webpage.
 
-In this project, we hope to incorporate as many aspects of database as possible, ranging from normal operations: select, insert, delete to more advanced topics: privilege granting, concurrency, etc. We really try to come up with a real world application instead of a toy model.
-
-
-
-### Database Schema
-
-$\vartriangleright$   **game**: table contains info of any game
-
-​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a game
-
-​      $\bullet$  name: name of the game
-
-​      $\bullet$  price: price of a game in US dollar
-
-​      $\bullet$  pub_id: ID of the game publisher 
-
-​      $\bullet$  release_date: date when a game is offcially distributed, in format "DD MM YYYY"
-
-$\vartriangleright$  **consumer**: table contains info of any consumer/player
-
-​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a consumer
-
-​      $\bullet$  name: account name of a consumer
-
-$\vartriangleright$  **publisher**: table contains info of any seller/game publisher
-
-​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a game publisher
-
-​      $\bullet$  name: account name of a game publisher
-
-$\vartriangleright$   **developer**: table contains info of any game developer
-
-​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a game developer
-
-​      $\bullet$  name: name of a game developer
-
-$\vartriangleright$  **web_section**: table contains info of any section of a webpage, where the selling info of a game will be displayed
-
-​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a website section
-
-​      $\bullet$  position: where the section locates on the webpage
-
-​      $\bullet$  price: price of a section in US dollar
-
-$\vartriangleright$  **category**: table contains info of any category a game might belong to
-
-​      $\bullet$  <ins>ID</ins>: primary key, unique indentifier of a category
-
-​      $\bullet$  name: name of a category, like PVP, MOBA
-
-$\vartriangleright$  **purchase**: table of any purchase of game a consumer ever made
-
-​      $\bullet$  <ins>con_id</ins>: ID of the cosumer who made the purchase
-
-​      $\bullet$ <ins>game_id</ins>: ID of the game the consumer purchased
-
-​      $\bullet$ date: date the purchase was made, in format "DD MM YYYY"
-
-$\vartriangleright$  **rate**: table of rating record of a consumer
-
-​      $\bullet$  <ins>con_id</ins>: ID of the consumer who rates the game
-
-​      $\bullet$ <ins>game_id</ins>: ID of the game rated
-
-​      $\bullet$ score: rating score, ranging from 0 to 5
-
-$\vartriangleright$  **barter**: table of game bartering records
-
-​      $\bullet$  <ins>con_id</ins>: ID of the consumer who wants to barter
-
-​      $\bullet$ <ins>sell_id</ins>: ID of the game the consumer hopes to sell
-
-​      $\bullet$ <ins>wish_id</ins>: ID of the game the consumer hopes to exchange for
-
-$\vartriangleright$  **promote**: table of the way a publisher promotes a game to sell
-
-​      $\bullet$  <ins>pub_id</ins>: ID of the game publisher
-
-​      $\bullet$  <ins>sec_id</ins>: ID of the web section, where the selling advertisment will be displayed
-
-​      $\bullet$  <ins>game_id</ins>: ID of the game to sell
-
-$\vartriangleright$  **develop**: table contains info of the developer(s) of any game, a game may have multiple developer
-
-​      $\bullet$  <ins>dev_id</ins>: ID of the game developer
-
-​      $\bullet$ <ins>game_id</ins>: ID of the game a developer develops
-
-$\vartriangleright$  **prefer**: table of preferences for a consumer, i.e categories of games he/she prefers
-
-​      $\bullet$  <ins>con_id</ins>: ID of the consumer
-
-​      $\bullet$  <ins>cate_id</ins>: ID of the game category
-
-$\vartriangleright$  **game_type**: table of the category a game belongs to, a game may associate with multiple categories
-
-​      $\bullet$  <ins>game_id</ins>: ID of the game
-
-​      $\bullet$  <ins>cate_id</ins>: ID of the category the game belongs to
-
-
+In this project, we hope to incorporate as many aspects of database as possible, ranging from normal operations: select, insert, delete to more advanced topics: privilege granting, concurrency, etc.
 
 ### ER Diagram
 
 <img src="./pics/ER_diagram.png" alt="ER_diagram" style="zoom: 50%;" />
+
+[Schema Details](/docs/database/schema.md)
 
 ### Application Workflow
 
@@ -176,6 +58,7 @@ $\vartriangleright$  **game_type**: table of the category a game belongs to, a g
 
 
 
+## Report
 
 
 
@@ -184,4 +67,54 @@ $\vartriangleright$  **game_type**: table of the category a game belongs to, a g
 
 
 
-- [ ] 
+
+
+### Database
+
+$\bullet$ Static Data Acquisition (**/scrap**)
+
+Static real-life data of the database to start with is obtained by scraping the top seller games webpage provided by [SteamDB](https://steamdb.info/stats/globaltopsellers/). Key components scrapped are listed below,
+
+<font face="courier" style="text-align: center">ID, name, developer, publisher, price($), image</font>
+
+Note that we modify the raw data a little bit for the sake of simplicity, for example we restrict the number of publisher of a game can only be one.
+
+Scrapped games are stored in form of *.pickle file(/scrap/game.pickle) as <b><font face="courier">class Game</font></b>, the prototype of which can be found in **/scrap/schema.py**. Scrapped images are stored in **/server/static** folder. 
+
+
+$\bullet$ Schema ([Details](/docs/database/schema.md))
+
+1. Not all the tables designed initially are used in this project, such as **web_section**, **prefer**. In future work, they might be utilized to extend the functionality of our platform.
+2. The usage of the majority of the tables is obvious. Here we only point out the **meta** table, which is used to track the current state of the platform to determine the ID to be assigned to when new user/publisher/developer comes in.
+
+
+
+$\bullet$ Database APIs
+
+<b><font face="courier">mysql-connetor-python</font></b> is the sql package we choose for this project.
+
+a. Database Init(**/server/init/db_insert.py**)
+
+The database is initialized by executing **db_insert.py**, which completes table creation, row insertion, user creation and user privilege granting. Row insertions are completed by reading the python objects stored in *.pickle files, including **/scrap/game.pickle** and **/scrap/dict/\*.pickle**
+
+
+
+b. Multithreaded Database Handler Feature(**/server/database/API.py**, [Details](/docs/database/multithread.md))
+
+Every time the server is booted, three threads are dispatched as the database handler, namely 'super', 'consumer', 'saler'. Each of them is granted with different privileges for safty issue(details can be found in the last several lines in **/server/database/db_insert.py**).  Also, a faster response speed of the server is expected with the concurrency provided by the multithreaded feature. This mechanism is scalable.
+
+A function wrapper <b><font face="courier">@handler()</font></b> is implemented to dispatch the job to a given thread
+
+```
+@handler('super')
+def job():
+	...
+```
+
+In this example, when the function <b><font face="courier">job()</font></b> is invoked, it will be queued to 'super' thread to get executed.
+
+
+
+c. Specific API Functions(**/server/database/API.py**)
+
+Functions used by the server is implemented in **/server/database/API.py**, which will then be imported in **/server/app.py**. As we previously suggested, each of the functions are paired with a handler thread.
