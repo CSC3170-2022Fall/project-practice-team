@@ -173,3 +173,17 @@ In Market page, our Advanced Game Distribution Platform will show you several **
 If you would like to have multiple accounts, it is possible for sure. We provide a 'log out' button at the top right corner in the market page to let you log out the current account so that you can use other account(s).
 
 For a game developer or publisher, you need to access the game detail page to upload your game.
+
+### Library
+
+The Library page stores games the consumer has purchased and show your username. You can switch to the different pages by clicking navigating buttons at the top.
+
+![lib_shot1](pics/libraty_shot1.png)
+
+When a consumer clicks the  Purchase button, if the game is not in his(or her) library, the game will be added to library successfully; but if the game already in his(or her) library, platform will tell him(or her) this game already in the library. Follwing images shows the case a consumer buys GTA5 twice. The consumer can also access the game page by clicking the game in library.
+
+![lib_shot2](pics/library_shot2.png)
+
+The library also provide search for game function. If the consumer wants to search one game to purchase, he(or her) just need to type the name of the game into search box, then go to the game detail page and purchase, the name of wanting game can be search by parts of the whole name. 
+
+![lib_shot3](pics/library_shot3.png)
