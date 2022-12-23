@@ -150,7 +150,7 @@ Functions used by the server is implemented in **/server/database/API.py**, whic
 
 ### Account
 
-To store the needed information such as games that you owned or you want to barter, customer are required to log in before entering the market, library or barter page. If you haven't been one of us, you need to register an account first.
+To store the needed information such as games that you owned or you want to barter, customers are required to log in before entering the market, library or barter page. If you haven't been one of us, you need to register an account first.
 
 You can sign up your account and log in to our website in the following page:
 ![loginShot](pics/login_shot.jpeg)
@@ -162,11 +162,11 @@ When you successfully sign up an account, you will see the following page:
 
 Once you registered and log in our platform, you will enter the market page. It is the index page and one of the fundamental page.
 
-The navigating bar has a index button (the game console logo), a **Market button**, a Library button and a **Barter button**. You can switch to the different pages by clicking the navigating button at the top.
+The navigating bar will show your user name (near the game console logo), a **Market button**, a Library button and a **Barter button**. You can switch to the different pages by clicking navigating buttons at the top.
 
 ![marketShot](pics/market_shot.png)
 
-In Market page, our Advanced Game Distribution Platform will show you several **Featured & Recommended** game at the top side. You are able to browse these **featured games** or you can also **browse games by category**. Each item in this page will provide you with its **name**, **release date** and **price**. You can hover on the game to find its name. You have two choices of games you are interested, add it to your library of games immediately by clicking the 'Purchase' button at the bottom right corner, or, click the image of the game to access the game detail to double check your order. Once your purchase is made, you can check the game you owned in Library page.
+In Market page, our Advanced Game Distribution Platform will show you several **Featured & Recommended** games at the top side. You are able to browse these **featured games** or you can also **browse games by category**. Each item in this page will provide you with its **name**, **release date** and **price**. You can hover on the game to find its name. You have two choices of the game you are interested, add it to your library of games immediately by clicking the 'Purchase' button at the bottom right corner, or, click the image of the game to access the game detail to double check your order. Once your purchase is made, you can check the game you owned in Library page.
 
 ![browseByCate](pics/browse_cate.png)
 
