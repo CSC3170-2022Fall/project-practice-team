@@ -152,6 +152,12 @@ Functions used by the server is implemented in **/server/database/API.py**, whic
 
 To store the needed information such as games that you owned or you want to barter, customer are required to log in before entering the market, library or barter page. If you haven't been one of us, you need to register an account first.
 
+You can sign up your account and log in to our website in the following page:
+![loginShot](pics/login_shot.jpeg)
+
+When you successfully sign up an account, you will see the following page:
+![signup](pics/signup_successful.jpeg)
+
 ### Market
 
 Once you registered and log in our platform, you will enter the market page. It is the index page and one of the fundamental page.
