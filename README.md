@@ -217,5 +217,5 @@ Click "That's it" button then witness the successful sign.
 <img width="947" alt="image" src="https://user-images.githubusercontent.com/59786755/209439050-6450551b-d2a3-4fdd-8024-0565b0ed92fa.png">
 Finally head to barter sub page
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/59786755/209439077-b9712bd0-bf95-48c9-9dd8-14b3c5f1140b.png">
-<img width="960" alt="image" src="https://user-images.githubusercontent.com/59786755/209439078-21795249-ef8c-4d61-8151-3ca5ba4c29f7.png">
+
 
