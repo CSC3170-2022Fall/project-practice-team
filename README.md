@@ -200,3 +200,22 @@ At the end of the page, an input port is reserved for developers to input inform
 
 Note that the upload format of upload only supports .jpg format.
 The rating function is not yet perfect, and this will be the direction of our future efforts.
+
+### barter
+The barter subpage shows the one-to-one or one-to-two relationship of the game owned and the wished game(s).
+However, to add a pairing requires operations not on this subpage. Following part will introduce the completed procedure of adding such one.
+* step 1
+purchase a game which you can refer to formentioned report.
+* step 2
+Go to library and click the barter icon on the right bottom of the game.
+<img width="933" alt="image" src="https://user-images.githubusercontent.com/59786755/209438890-443a66d1-4bbe-4aa2-8def-a1f64a69ae47.png">
+Select the game you would like to trade for from the list.
+<img width="946" alt="image" src="https://user-images.githubusercontent.com/59786755/209438925-f40c2fb8-7dbf-40ce-9ad7-e74e99b743ff.png">
+You can add at most two games.
+<img width="946" alt="image" src="https://user-images.githubusercontent.com/59786755/209438985-3fdc275f-4e7a-42e3-b2e9-cfc2d458ab3f.png">
+Click "That's it" button then witness the successful sign.
+<img width="947" alt="image" src="https://user-images.githubusercontent.com/59786755/209439050-6450551b-d2a3-4fdd-8024-0565b0ed92fa.png">
+Finally head to barter sub page
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/59786755/209439077-b9712bd0-bf95-48c9-9dd8-14b3c5f1140b.png">
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/59786755/209439078-21795249-ef8c-4d61-8151-3ca5ba4c29f7.png">
+
