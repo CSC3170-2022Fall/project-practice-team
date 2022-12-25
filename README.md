@@ -60,9 +60,9 @@ In this project, we hope to incorporate as many aspects of database as possible,
 
 ## Report
 
-presentation video link: 
+presentation video link: [LINK](https://cuhko365-my.sharepoint.com/:v:/g/personal/120090326_link_cuhk_edu_cn/EY_mrp3XCB1GmMbdAR_KpN8BwcdEygtvIZeQkuT2rPYQsQ?e=fTIhyY)
 
-presentation slides link:
+presentation slides link: [LINK](https://cuhko365-my.sharepoint.com/:b:/g/personal/120090326_link_cuhk_edu_cn/EcFnFkzy8whLsqPmT4hsGaQB94oEUOvN5BwJBokViIL-wg?e=EoPzoT)
 
 To configure the environment ,run the app and resolve possible issues may occur , see [guide](/guide) for details.
 
