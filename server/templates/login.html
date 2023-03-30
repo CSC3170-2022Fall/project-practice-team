@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/login/login.css">
+ 
+  <!-- jQuery CDN Link -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Transparent form</title>
+  <style>
+        body {
+            background-image: url('/static/login/bg.jpg');
+            background-size: cover 
+        }
+  </style>
+  <link rel="stylesheet" href="/static/confirm-pop-up/style.css">
+</head>
+ 
+<body>
+  <div class="container">
+    <div class="form">
+      <div class="btn">
+        <button class="signUpBtn">SIGN UP</button>
+        <button class="loginBtn">LOG IN</button>
+      </div>
+      <form class="signUp" onsubmit="return false">
+        <input type="hidden" name="form_type" value="register">
+        <div class="formGroup">
+          <input type="text" class="username" name="username" placeholder="User Name" autocomplete="off">
+        </div>
+        <div class="formGroup">
+          <input type="password" class="password" name="password" placeholder="Password" required autocomplete="off">
+        </div>
+        <div class="formGroup">
+          <input type="password" class="confirmPassword" placeholder="Confirm Password" required autocomplete="off">
+        </div>
+        <div class="formGroup">
+          <button type="button" class="btn2" name="register">REGISTER</button>
+        </div>
+ 
+      </form>
+        
+      <!------ Login Form -------- -->
+      <form class="login" onsubmit="return false">
+        <input type="hidden" name="form_type" value="login">
+        
+        <div class="formGroup">
+          <input type="text" class="username" placeholder="User Name" name="username" required autocomplete="off">
+        </div>
+        <div class="formGroup">
+          <input type="password" class="password" name="password" placeholder="Password" required autocomplete="off">
+         
+        </div>
+
+        <div class="formGroup">
+          <button type="button" class="btn2" name="login">LOG IN</button>
+        </div>
+ 
+      </form>
+ 
+    </div>
+  </div>
+
+      <div class="modal-confirm" style="display: none" id="success">
+        <button class="close-button">&times;</button>
+
+        <div class="check" style="position: absolute; top:50%">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+        <circle style="fill:#25AE88;" cx="25" cy="25" r="25"/>
+        <polyline style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+        38,15 22,33 12,25 "/>
+    </svg>
+
+
+    </div>
+    <div class="prompt">
+
+    </div>
+    </div>
+
+
+      <div class="modal-confirm" style="display: none" id="failure">
+        <button class="close-button">&times;</button>
+
+        <div class="check" style="position: absolute; top:50%">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+       <path style="fill:#FF6465;" d="M384.955,256l120.28-120.28c9.019-9.019,9.019-23.642,0-32.66L408.94,6.765
+         c-9.019-9.019-23.642-9.019-32.66,0l-120.28,120.28L135.718,6.765c-9.019-9.019-23.642-9.019-32.66,0L6.764,103.058
+         c-9.019,9.019-9.019,23.642,0,32.66l120.28,120.28L6.764,376.28c-9.019,9.019-9.019,23.642,0,32.66l96.295,96.294
+         c9.019,9.019,23.642,9.019,32.66,0l120.28-120.28l120.28,120.28c9.019,9.019,23.642,9.019,32.66,0l96.295-96.294
+         c9.019-9.019,9.019-23.642,0-32.66L384.955,256z"/>
+       </svg>       
+
+
+    </div>
+    <div class="prompt">
+
+    </div>
+    </div>
+ 
+  <script src="/static/login/jQuery.js"></script>
+
+  <!-- ajax register/login with pop up window -->
+  <script>
+    $('button[name="register"]').on('click', function(){
+      var username = $('.signUp .username').val();
+      var password = $('.signUp .password').val();
+      var confirmPassword = $('.signUp .confirmPassword').val();
+
+      if (username.length < 1 || password.length < 1 || confirmPassword.length < 1){
+        alert("Form Incomplete");
+        return;
+      }
+
+      if (password != confirmPassword){
+        alert("Wrong Confirm Password");
+        return;
+      }
+
+      $.ajax({
+        url : '/validate',
+        type: 'POST',
+        dataType: 'json',
+        data: jQuery.param({
+          form_type: 'register',
+          username: username,
+          password: password
+        }),
+        success: function(response){
+          var state = response.state;
+
+          if(state == 'successful'){
+            $('#success .prompt').empty().append('Register Successful!');
+            $('#success').css('display', 'block');
+          }
+
+          if(state == 'duplicate_name'){
+            $('#failure .prompt').empty().append('Duplicated User Name!');
+            $('#failure').css('display', 'block');
+          }
+        }
+      })
+
+    });
+  </script>
+
+  <script>
+    $('button[name="login"]').on('click', function(){
+      var username = $('.login .username').val();
+      var password = $('.login .password').val();
+
+      // if (username.length < 1 || password.length < 1 || confirmPassword.length < 1){
+      //   alert("Form Incomplete");
+      //   return;
+      // }
+
+      $.ajax({
+        url : '/validate',
+        type: 'POST',
+        dataType: 'json',
+        data: jQuery.param({
+          form_type: 'login',
+          username: username,
+          password: password
+        }),
+        success: function(response){
+          var state = response.state;
+          var con_id = response.id;
+
+          if(state == 'successful'){
+            var url = "/market?con_id=" + con_id;
+            window.location.href = url;
+          }
+
+          else if(state == 'wrong_password'){
+            $('#failure .prompt').empty().append('Wrong Password!');
+            $('#failure').css('display', 'block');
+          }
+
+          else if(state == 'wrong_username'){
+            $('#failure .prompt').empty().append('User Do Not Exist!');
+            $('#failure').css('display', 'block');
+          }
+
+        }
+      })
+
+    });
+  </script>
+
+  <script>
+    $('.modal-confirm .close-button').on('click', function(){
+      $('.modal-confirm').css('display', 'none');
+    });
+
+  </script>
+</body>
+ 
+</html>

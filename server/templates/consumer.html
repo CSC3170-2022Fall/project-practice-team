@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGDP</title>
+    <style>
+        body {
+            background-image: url('/static/pics/homebg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .modal-background {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: auto;
+            padding: 6rem;
+            z-index: 6;
+            background-image: linear-gradient(to right, #8360c3, #2ebf91);
+            filter: blur(50px);
+            opacity: 0.5;
+            overflow: hidden;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background: linear-gradient(
+                90deg,
+                rgba(246, 150, 130, 1) 0%,
+                rgba(206, 163, 204, 1) 41%,
+                rgba(248, 205, 190, 1) 100%
+            ); */
+            background-image: linear-gradient(to right, #8360c3, #2ebf91);
+            filter: blur(50px);
+            z-index: 5;
+        }
+
+
+        .pop-up {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+
+
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            padding: 1rem;
+            background-image: linear-gradient(to right, #8360c3, #2ebf91);
+            border: white 5px solid;
+            border-radius: 10px;
+            box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            color: white;
+        }
+
+        .pop-up h1 {
+            text-align: center;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px black;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .pop-up p {
+            opacity: 0.9;
+            font-size: 1rem;
+            overflow: hidden;
+            line-height: 1.5rem;
+        }
+
+        .pop-up-close {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            font-size: 4rem;
+            color: white;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .pop-up-left{
+            position: relative;
+            width: 40%;
+            height: 100%;
+            float: left;
+        }
+
+        .pop-up-right{
+            position: relative;
+            width: 60%;
+            height: 100%;
+            float: right;
+        }
+
+        .image-holder{
+            /* display: table-cell;
+            vertical-align: middle; */
+            /* height: 50%; */
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            width: 80%;
+            /* height: 70%; */
+            height: auto;
+            transform: translate(-50%, -50%);
+
+            /* height: 200px;
+            width: 300px; */
+        }
+
+        .pop-up-left .prompt{
+            position: absolute;
+            display: inline-block;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px black;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        div.wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* width: max-content; */
+            width: 50%;
+            /* overflow: hidden;
+            background-color: #FFFFFF;
+            border-radius: 100px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); */
+
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        input {
+        background-color:transparent;
+        outline: none;
+        
+        font-family: 'Product Sans';
+        font-size: 16px;
+        padding: 4px 0px 4px 14px;
+        border: none;
+        width: 80%;
+        }
+
+        input::placeholder {
+        color: #a5a5a5;
+        }
+
+        .search-button {
+        background-color: transparent;
+        outline: none;
+        cursor: pointer;
+        width: 20%;
+
+        font-size: 16px;
+        color: #000;
+        padding: 8px 10px;
+        border: none;
+        border-radius: 0px;
+
+        transition: background-color 0.2s;
+        }
+
+        .search-button:hover {
+        background-color: #dfdfdf;
+        }
+
+        .wish-list-gallery{
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            height: 30%;
+            width: 40%;
+            transform: translate(-50%, -50%);
+        }
+
+        .wish-list-item img{
+            border: white 3px solid;
+        }
+
+        .wish-list-button{
+            -webkit-font-smoothing: antialiased;
+            align-self: center;
+            background-color: #fff;
+            background-image: none;
+            background-position: 0 90%;
+            background-repeat: repeat no-repeat;
+            background-size: 4px 3px;
+            border-style: solid;
+            border-width: 2px;
+            box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+            box-sizing: border-box;
+            color: #41403e;
+            cursor: pointer;
+            display: inline-block;
+            font-family: Neucha, sans-serif;
+            font-size: 1rem;
+            line-height: 23px;
+            outline: none;
+            padding: .75rem;
+            text-decoration: none;
+            transition: all 235ms ease-in-out;
+            border-bottom-left-radius: 15px 255px;
+            border-bottom-right-radius: 225px 15px;
+            border-top-left-radius: 255px 15px;
+            border-top-right-radius: 15px 225px;
+            touch-action: manipulation;
+        }
+
+        .center{
+            /* margin: 0; */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* -ms-transform: translate(-50%, -50%); */
+            transform: translate(-50%, -50%);
+        }
+
+        .ui-autocomplete{z-index: 99999 !important;}
+
+
+    </style>
+    <link rel="stylesheet" href="/static/consumer/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/consumer/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/consumer/css/templatemo-style.css">
+    <link rel="stylesheet" href="/static/confirm-pop-up/style.css">
+
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+
+</head>
+<body>
+    <!-- Page Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+
+    </div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-gamepad" style="color:beige"></i>
+                <!--这里换成用户名-->
+                <span style="color: beige">{{username}} 👋</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-1" aria-current="page" href="/market?con_id={{con_id}}" style="color: beige">Market</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-2 active" href="/consumer?con_id={{con_id}}" style="color:beige">Library</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-3" href="/barter?con_id={{con_id}}" style="color:beige">Barter</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll">
+        <form class="d-flex tm-search-form" onsubmit="return false">
+            <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search" id="game-search" autocomplete="off">
+            <button class="btn btn-outline-success tm-search-btn" type="submit" id="redirect-search">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary" style="color:beige">
+                Games Owned
+            </h2>
+            <!-- <div class="col-6 d-flex justify-content-end align-items-center">
+                <form action="" class="tm-text-primary">
+                    Page <input type="text" value="1" size="1" class="tm-input-paging tm-text-primary"> of 200
+                </form>
+            </div> -->
+        </div>
+        
+        <div class="row tm-mb-90 tm-gallery">
+            {% for game in game_list%}
+        	<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/{{game[0]}}.jpg" alt="Image" class="img-fluid" date="{{game[2]}}" price="{{game[3]}}">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>{{game[1]}}</h2>
+                        <a href="/game?game_id={{game[0]}}&con_id={{con_id}}">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">{{game[2]}}</span>
+                    <button class="btn btn-secondary btn-sm show-modal" type="submit" id="{{game[0]}}">Barter</button>
+                </div>
+            </div>
+            {%endfor%}
+        </div> <!-- row -->
+
+        <!-- jinja template version -->
+        <!-- TODO -->
+        
+        <!-- row -->
+        <div class="pop-up" style="display: none">
+            <button class="pop-up-close">&times;</button>
+            <div class="pop-up-left">
+                <div>
+                    <h1>Game You Want to Sell</h1>
+                </div>
+                <div class="image-holder">
+    
+                </div>
+                <div class="prompt">
+                    <span id="price"></span>
+                </div>
+            </div>
+            <div class="pop-up-right">
+                <h1>Your Wish List</h1>
+                <div class="wrapper">
+                    <input class="form-control" id="wish-list-search" type="text" placeholder="Add to Your Wish List..." autocomplete="off" name="name">
+                    <button type="submit" class="btn btn-outline-success tm-search-btn">
+                      ADD 🛒
+                    </button>
+                </div>
+    
+                <div class="wish-list-gallery">
+                    <!-- <div class="wish-list-item mb-5">
+                        <figure class="effect-ming tm-video-item">
+                            <img src="/static/pics/3590.jpg" alt="Image" class="img-fluid">
+                            <figcaption class="d-flex align-items-center justify-content-center">
+                                <h2>Plants V.S Zombies</h2>
+                                <a href="/game?id=3590.html">View more</a>
+                            </figcaption>                    
+                        </figure>
+                    </div>
+    
+                    <div class="wish-list-item mb-5">
+                        <figure class="effect-ming tm-video-item">
+                            <img src="/static/pics/3590.jpg" alt="Image" class="img-fluid">
+                            <figcaption class="d-flex align-items-center justify-content-center">
+                                <h2>Plants V.S Zombies</h2>
+                                <a href="/game?id=3590.html">View more</a>
+                            </figcaption>                    
+                        </figure>
+                    </div> -->
+                </div> 
+            
+                <button class="wish-list-button" style="position: absolute; top:95%; left: 50%; width: 25%; transform: translate(-50%, -50%)">That's it!</button>
+    
+            </div>
+        </div>
+        
+
+        <div class="modal-confirm" style="display: none">
+            <button class="close-button">&times;</button>
+
+            <div class="check" style="position: absolute; top:50%">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+            <circle style="fill:#25AE88;" cx="25" cy="25" r="25"/>
+            <polyline style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+	        38,15 22,33 12,25 "/>
+        </svg>
+        
+        
+        </div>
+        <div class="prompt">
+            Barter Successful!
+        </div>
+            <!-- <span> Testing !!!!</span> -->
+        </div>
+
+
+
+
+    </div>
+
+    <!-- <script src="/static/consumer/js/plugins.js"></script> -->
+    <script src="/static/consumer/js/pop-up.js"></script>
+    <!-- <script src="/static/consuemr/js/auto-complete.js"></script> -->
+    <script>
+        $(window).on("load", function() {
+            $('body').addClass('loaded');
+        });
+    </script>
+
+    <!-- validation check -->
+
+
+
+    <!-- search drop down menu ajax request -->
+    <script>
+        $('#wish-list-search').autocomplete({
+            source: function(request, response){
+                var substr = $('#wish-list-search').val();
+                var search_url = "/game/search/name-contain?substr=" + substr;
+                $.ajax({
+                    url: search_url,
+                    success: function(data, status, xhr){
+                        response(data);
+                    },
+                    error: function(){
+                        response([]);
+                    }
+                });
+            }
+        });
+    </script>
+
+
+    <!-- create element for wish list gallery -->
+    <script>
+        $('.pop-up-right .wrapper button').on('click', function(){
+            if ($('.wish-list-item').length >= 2){
+                alert('You can at most add two games to your wish list!!');
+                return;
+            }
+            
+            var name = $(this).parent().children('input').eq(0).val();
+            var search_url = '/game/search/by-name?name=' + name;
+            if ($('#wish-item-name:contains(' + name +')').length >=1){
+                alert('You\'ve already added to your wish list!!!');
+                return;
+            }
+
+            $.ajax({
+                type: 'GET',
+                url: search_url,
+                dataType: 'json',
+                success: function (data, status, xhr){
+                    let wishListItem = `<div class="wish-list-item mb-5" id=${data}>
+                        <figure class="effect-ming tm-video-item">
+                            <img src=/static/pics/${data}.jpg alt="Image" class="img-fluid">
+                            <figcaption class="d-flex align-items-center justify-content-center">
+                                <h2 id="wish-item-name">${name}</h2>
+                                <a href="/game?id=${data}.html>View more</a>
+                            </figcaption>                    
+                        </figure>
+                    </div>`;
+                    $('.wish-list-gallery').append(wishListItem);
+                    $('#wish-list-search').val("");
+                }
+            });
+
+        })
+    </script>
+
+
+    <script>
+        $('.modal-confirm .close-button').on('click', function(){
+            $('.modal-confirm').css('display', 'none');
+        });
+    </script>
+
+    <!-- barter insert request handler -->
+    <script>
+        $('.wish-list-button').click(function(){
+
+            var wishList = $('.wish-list-item');
+            if (wishList.length < 1){
+                alert('You need to at least add one game!');
+                return;
+            }
+
+            
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            var con_id = urlParams.get('con_id');
+            
+            var sell_id = $('.pop-up-left img').attr('id');
+            
+            var toBarter = $('.wish-list-item');
+            for(let i=0; i < toBarter.length; i++){
+                var wish_id = toBarter.eq(i).attr('id');
+                $.ajax({
+                    url : '/consumer/barter-issue',
+                    type: 'POST',
+                    data: jQuery.param({
+                        con_id : con_id,
+                        sell_id : sell_id,
+                        wish_id : wish_id
+                    })
+                })
+            }
+            $('.modal-confirm').css('display', 'block');
+
+        });
+
+    </script>
+
+    <script>
+        $('#game-search').autocomplete({
+            source: function(request, response){
+                var substr = $('#game-search').val();
+                var search_url = "/game/search/name-contain?substr=" + substr;
+                $.ajax({
+                    url: search_url,
+                    success: function(data, status, xhr){
+                        response(data);
+                    },
+                    error: function(){
+                        response([]);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        $('#redirect-search').click(function(){
+            var name = $(this).siblings('input').eq(0).val();
+
+            var search_url = '/game/search/by-name?name=' + name;
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            var con_id = urlParams.get('con_id');
+
+
+
+            $.ajax({
+                type: 'GET',
+                url: search_url,
+                dataType: 'json',
+                success: function (data, status, xhr){
+                    var redirected = '/game?game_id=' + data + '&con_id=' + con_id;
+                    window.location.href = redirected;
+                },
+                error: function (){
+                    alert('error!');
+                }
+            })
+
+        });
+    </script>
+
+    
+</body>
+</html>
+

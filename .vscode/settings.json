@@ -11,5 +11,9 @@
         "SPTF",
         "Stackoverflow",
         "unitization"
+    ],
+    "liveServer.settings.port": 5501,
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "main"
     ]
 }

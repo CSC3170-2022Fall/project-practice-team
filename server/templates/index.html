@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGDP</title>
+    <style>
+        body {
+            background-image: url('/static/pics/homebg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover
+        }
+    </style>
+    <link rel="stylesheet" href="/static/consumer/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/consumer/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/consumer/css/templatemo-style.css">
+
+    <link rel="stylesheet" href="/static/confirm-pop-up/style.css">
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+</head>
+<body>
+    <!-- Page Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+
+    </div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-gamepad" style="color:beige"></i>
+                <span style="color: beige">{{name[0][0]}} 👋</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-1 active" aria-current="page" href="/market?con_id={{con_id}}" style="color: beige">Market</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-2" href="/consumer?con_id={{con_id}}" style="color:beige">Library</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-3" href="/barter?con_id={{con_id}}" style="color:beige">Barter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-3"  style="color:beige"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-3"  style="color:beige"></a>
+                </li>
+                <li style="margin-left: 60px;">
+                    <a class="nav-link nav-link-4" href="/" style="color:beige">log out</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll">
+        <input class="form-control tm-search-input" type="text" placeholder="Search" id="game-search" autocomplete="off" name="name">
+        <button class="btn btn-outline-success tm-search-btn" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+    </div> -->
+
+    <div class="container-fluid tm-container-content tm-mt-60">
+
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary" style="color:beige">
+                Featured & Recommended
+            </h2>
+            <!-- <div class="col-6 d-flex justify-content-end align-items-center">
+                <form action="" class="tm-text-primary">
+                    Page <input type="text" value="1" size="1" class="tm-input-paging tm-text-primary"> of 200
+                </form>
+            </div> -->
+        </div>
+        
+        <div class="row tm-mb-90 tm-gallery">
+
+        	<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/3590.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <!--游戏标题-->
+                        <h2>Plants V.S Zombies</h2>
+                        <a href="/game?game_id=3590&con_id={{con_id}}">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <!--发售时间-->
+                    <span class="tm-text-gray-light">6 May 2009</span>
+                    <!--价格-->
+                    <span class="tm-text-gray-light">24.99$</span>
+                    <!--购买按钮-->
+                    <button class="btn btn-secondary btn-sm" type="submit" id="3590">Purchase</button>
+                    
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/1091500.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Cyberpunk 2077</h2>
+                        <a href="/game?game_id=1091500&con_id={{con_id}}">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">10 Dec 2020</span>
+                    <span class="tm-text-gray-light">59.99$</span>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="1091500">Purchase</button>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/1144200.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Ready Or Not</h2>
+                        <a href="/game?game_id=1144200&con_id={{con_id}}">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">17 Dec 2021</span>
+                    <span class="tm-text-gray-light">39.99$</span>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="1144200">Purchase</button>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/1174180.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Red Dead Redemption 2</h2>
+                        <a href="/game?game_id=1174180&con_id={{con_id}}">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">5 Dec 2019</span>
+                    <span class="tm-text-gray-light">19.79$</span>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="1174180">Purchase</button>
+                </div>
+            </div>
+
+            
+        </div> <!-- row -->
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary" style="color:beige">
+                Browse by category
+            </h2> 
+        </div>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <!--button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button-->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1 " aria-current="page" href="/tag?con_id={{con_id}}&cate=strategy" style="color: beige">strategy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=action" style="color:beige">action</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=card game" style="color:beige">card game</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=first-person" style="color:beige">first-person</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=adventure" style="color:beige">adventure</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=rhythm" style="color:beige">rhythm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=sandbox" style="color:beige">sandbox</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=esports" style="color:beige">esports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=war" style="color:beige">war</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=dark fantasy" style="color:beige">dark fantasy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=free to play" style="color:beige">free to play</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=word game" style="color:beige">word game</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/tag?con_id={{con_id}}&cate=vr" style="color:beige">vr</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+        {% for order in order_list %}
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary" style="color:beige">
+                {{cate_list[order]}}
+            </h2>
+        </div>
+        <!-- 做一个根据类别展示不同游戏的gallery栏 -->
+        <div class="row tm-mb-90 tm-gallery">
+            {% for game in game_info[order] %}
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="/static/pics/{{game[0]}}.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <!--游戏标题-->
+                        <h2>{{game[1]}}</h2>
+                        <a href="/game?game_id={{game[0]}}&con_id={{con_id}}">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <!--发售时间-->
+                    <span class="tm-text-gray-light">{{game[2]}}</span>
+                    <span class="tm-text-gray-light">{{game[3]}}$</span>
+                    <button class="btn btn-secondary btn-sm" type="submit" id="{{game[0]}}">Purchase</button>
+                    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <!-- jinja template version -->
+        <!-- TODO -->
+        
+        <!-- row -->
+    </div>
+
+
+    <!-- pop up window -->
+    <div class="modal-confirm" style="display: none" id="success">
+        <button class="close-button">&times;</button>
+
+        <div class="check" style="position: absolute; top:50%">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+        <circle style="fill:#25AE88;" cx="25" cy="25" r="25"/>
+        <polyline style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+        38,15 22,33 12,25 "/>
+    </svg>
+
+
+    </div>
+    <div class="prompt">
+        Purchase Completed!
+    </div>
+    </div>
+
+    <div class="modal-confirm" style="display: none" id="failure">
+        <button class="close-button">&times;</button>
+
+        <div class="check" style="position: absolute; top:50%">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+       <path style="fill:#FF6465;" d="M384.955,256l120.28-120.28c9.019-9.019,9.019-23.642,0-32.66L408.94,6.765
+         c-9.019-9.019-23.642-9.019-32.66,0l-120.28,120.28L135.718,6.765c-9.019-9.019-23.642-9.019-32.66,0L6.764,103.058
+         c-9.019,9.019-9.019,23.642,0,32.66l120.28,120.28L6.764,376.28c-9.019,9.019-9.019,23.642,0,32.66l96.295,96.294
+         c9.019,9.019,23.642,9.019,32.66,0l120.28-120.28l120.28,120.28c9.019,9.019,23.642,9.019,32.66,0l96.295-96.294
+         c9.019-9.019,9.019-23.642,0-32.66L384.955,256z"/>
+       </svg>       
+
+
+    </div>
+    <div class="prompt">
+
+    </div>
+    </div>
+
+
+    
+    
+    <script src="/static/consumer/js/plugins.js"></script>
+    <script>
+        $(window).on("load", function() {
+            $('body').addClass('loaded');
+        });
+    </script>
+
+    <script>
+        $('button:contains("Purchase")').on('click', function(){
+            var game_id = $(this).attr('id');
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            var con_id = urlParams.get('con_id');
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth()+1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+
+            today = mm + ' ' + dd + ' ' + yyyy;
+            
+            $.ajax({
+                url : '/consumer/purchase',
+                type: 'POST',
+                dataType: 'json',
+                data: jQuery.param({
+                    game_id : game_id,
+                    con_id : con_id, 
+                    date: today
+                }),
+                success: function(response){
+                    var state = response.state;
+
+                    if(state == 'successful'){
+                        $('#success .prompt').empty().append('Purchase Completed!');
+                        $('#success').css('display', 'block');
+                    }
+                    else if(state == 'duplicate'){
+                        $('#failure .prompt').empty().append('You\'ve Owned This Game!');
+                        $('#failure').css('display', 'block');
+
+                    }
+                }
+            })
+        });
+    </script>
+
+<script>
+    $('.modal-confirm .close-button').click(function(e){
+      e.stopPropagation();
+      $('.modal-confirm').css('display', 'none');
+    });
+</script>
+
+<script>
+    $('#game-search').autocomplete({
+        source: function(request, response){
+            var substr = $('#game-search').val();
+            var search_url = "/game/search/name-contain?substr=" + substr;
+            $.ajax({
+                url: search_url,
+                success: function(data, status, xhr){
+                    response(data);
+                },
+                error: function(){
+                    response([]);
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
